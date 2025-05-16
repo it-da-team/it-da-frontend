@@ -1,0 +1,61 @@
+/* Grid wrapper: 한 줄에 3개씩 */
+.main-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;      /* 가로 중앙 정렬 */
+    padding: 2rem 0;          /* 위아래 여백 */
+  }
+  
+  /* 제목 스타일 (필요 시) */
+  .main-category h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+.main-category-list-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;               /* 카드 간격 */
+    justify-items: center;   /* 각 칸 안에서 카드 중앙 정렬 */
+    padding: 0;
+    margin: 1rem 0;
+    list-style: none;
+  }
+  
+  /* 카드 스타일: 살짝 키운 정사각형 */
+  .main-category-list {
+    display: flex;
+    flex-direction: column;     /* 이미지 위, 텍스트 아래로 */
+    justify-content: center;    
+    align-items: center;
+    width: 180px;               /* 카드 너비 */
+    height: 180px;              /* 카드 높이 */
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+  }
+  
+  .main-category-list:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  
+  /* 이미지 스타일 */
+  .category-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* 라벨 텍스트 스타일 */
+  .category-label {
+    font-size: 1rem;
+    color: #333;
+  }
+  

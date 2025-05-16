@@ -1,0 +1,47 @@
+my-react-app/
+├ public/
+│  ├ index.html
+│  └ favicon.ico
+├ src/
+│  ├ assets/                # 이미지·아이콘·폰트 등
+│  │  ├ images/
+│  │  └ styles/             # 전역 CSS / SASS / Tailwind 설정
+│  │
+│  ├ components/            # 💎 재사용 가능한 UI 컴포넌트
+│  │  ├ common/             # 버튼, 입력폼, 모달 같은 범용 컴포넌트
+│  │  └ feature/            # 로그인폼, 채팅창 등 특정 기능 그룹
+│  │
+│  ├ pages/                 # 라우팅 단위 페이지 컴포넌트
+│  │  ├ Home/
+│  │  │  ├ index.jsx
+│  │  │  └ Home.css
+│  │  └ Profile/
+│  │     ├ index.jsx
+│  │     └ Profile.css
+│  │
+│  ├ layouts/               # 공통 레이아웃 (Header/Footer 등)
+│  │  └ DefaultLayout.jsx
+│  │
+│  ├ hooks/                 # 커스텀 훅 (useAuth.js 등)
+│  │  └ useAuth.js
+│  │
+│  ├ contexts/              # React Context 관리
+│  │  └ AuthContext.jsx
+│  │
+│  ├ services/              # API 호출 로직 (apiClient.js, userService.js)
+│  │  ├ apiClient.js
+│  │  └ userService.js
+│  │
+│  ├ store/                 # Redux 등 전역 상태 관리
+│  │  └ userSlice.js
+│  │
+│  ├ utils/                 # 공통 유틸 함수 (formatDate.js 등)
+│  │  └ formatDate.js
+│  │
+│  ├ App.jsx
+│  ├ index.jsx              # ReactDOM.render()
+│  └ index.css              # 전역 스타일
+│
+├ .env                      # 환경 변수
+├ package.json
+└ README.md
