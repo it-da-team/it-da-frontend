@@ -1,0 +1,41 @@
+/* 1) 카드들을 감싸는 컨테이너에 flex-wrap 추가 */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;          /* 카드들 사이 간격 */
+  }
+  
+  /* 2) 각 카드(.main-jop-list)에 50% 너비 및 기존 스타일 병합 */
+  .main-jop-list {
+    /* 한 줄에 2개씩 배치할 수 있도록 */
+    flex: 0 0 50%;      /* flex-grow:0, flex-shrink:0, flex-basis:50% */
+    max-width: 100%;     /* 절대 50% 넘지 않도록 */
+    box-sizing: border-box; /* padding 포함해서 계산 */
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+  }
+  
+  .jop-list {
+    display: flex;
+    flex-wrap: wrap;     /* 공간이 모자라면 다음 줄로 */
+    gap: 1rem;           /* 카드 간격 */
+  }
+  
+  .jop-list-item {
+    flex: 0 0 calc((100% - 1rem) / 2);
+    /* └─ 1rem 간격을 제외한 나머지 공간을 반으로 나눕니다 */
+  
+    box-sizing: border-box;  /* padding 포함해서 크기 계산 */
+  }
+  

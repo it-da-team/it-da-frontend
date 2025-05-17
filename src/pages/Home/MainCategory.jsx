@@ -1,5 +1,6 @@
 import React from "react";
 import MainCategoryList from "./MainCategoryList";
+import { useNavigate } from "react-router-dom";
 import iconKindergarten   from "../../assets/images/icon/iconScc-removebg-preview.png";
 import iconPreschool      from "../../assets/images/icon/iconDay-removebg-preview.png";
 import iconCompany        from "../../assets/images/icon/iconBook-removebg-preview.png";
@@ -8,6 +9,8 @@ import iconActivityCenter from "../../assets/images/icon/iconMusic-removebg-prev
 import iconCenter         from "../../assets/images/icon/iconPuz-removebg-preview.png";
 
 function MainCategory() {
+  const navigate = useNavigate();
+
   const categories = [
     { label: "유치원",          image: iconKindergarten },
     { label: "어린이집",        image: iconPreschool    },
@@ -17,20 +20,29 @@ function MainCategory() {
     { label: "특별활동 센터",   image: iconActivityCenter },
   ];
 
-    return(
-        <section className="main-category">
-        <h2>어떤 기관의 공고를 찾으시나요?</h2>
-        <ul className="main-category-list-wrapper">
-          {categories.map((cat, i) => (
-            <MainCategoryList 
-              key={i} 
-              label={cat.label} 
-              image={cat.image} 
+  return (
+    <section className="main-category">
+      <h2>어떤 기관의 공고를 찾으시나요?</h2>
+      <ul className="main-category-list-wrapper">
+        {categories.map((cat, i) => (
+          <li
+            key={i}
+            style={{ cursor: "pointer" }}
+            onClick={() =>
+              navigate("/Jop", {
+                state: { label: cat.label },
+              })
+            }
+          >
+            <MainCategoryList
+              label={cat.label}
+              image={cat.image}
             />
-          ))}
-        </ul>
-      </section>
-    )
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
 }
 
 export default MainCategory

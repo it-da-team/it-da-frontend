@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import NavBar from "../../pages/Home/NavBar";
 import LogoImg from "../../assets/images/icon/image-removebg-preview.png"
 
@@ -6,15 +7,17 @@ function Header() {
     return (
         <header className="header">
             <h1 className="logo">
-                <img 
-                    src={LogoImg} 
-                    alt="로고" 
-                    style={{ 
-                        width: '5.5rem', 
-                        height: 'auto',
-                        objectFit: 'contain'
-                    }} 
+            <Link to="/">
+                <img
+                    src={LogoImg}
+                    alt="로고"
+                    style={{
+                    width: '5.5rem',
+                    height: 'auto',
+                    objectFit: 'contain'
+                    }}
                 />
+            </Link>
             </h1>
   
             <NavBar />
