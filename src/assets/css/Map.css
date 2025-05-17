@@ -1,0 +1,41 @@
+.map-section {
+    display: flex;
+    /* 텍스트·지도 순서 그대로 두고, 둘 사이만 띄우겠습니다 */
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 80%;          /* 전체 카드 너비 */
+    margin: 0 auto;
+    padding: 2rem;
+    background: #f9f9f9;
+    border-radius: .75rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    gap: 1rem;            /* 텍스트와 지도 사이 간격 */
+    margin-top: 3rem;
+}
+  
+  .map-text {
+    flex: 0 0 auto;      /* 텍스트는 필요한 만큼만 */
+    text-align: left;
+    margin-left: 2vw; /* 뷰포트 너비의 5% 만큼 */
+      
+  }
+  
+  /* ★ 요기만 바뀌었어요 ★ */
+  .map-wrapper {
+    flex: 0 0 70%;        /* 컨테이너 너비를 전체의 70%로 고정 */
+    margin-left: auto;    /* 남은 공간을 왼쪽에 몰아서 오른쪽으로 밀어내기 */
+    height: 400px;
+  }
+  
+  .map-wrapper > div {
+    width: 100%;          /* SearchMap 내부 div */
+    height: 100%;
+  }
+  
+  .map-dropdown {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
