@@ -1,6 +1,7 @@
 import React from "react";
 import MainBanner from "./MainBanner";
 import MainCategory from "./MainCategory";
+import "../../assets/css/global.css";
 //가장 상단에 배너 이미지 넘기는 텀포넌트 
 
 
