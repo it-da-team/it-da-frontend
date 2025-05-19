@@ -9,7 +9,7 @@ export default function NotFound() {
     <div className="notfound-container">
       <div className="notfound-content">
         <DotLottieReact
-          className="notfound-animation"
+         
           src="https://lottie.host/83de486d-d9ca-4bcb-9c81-e9fd4ca1e3fe/VFAmmyFH7d.lottie"
           loop
           autoplay
