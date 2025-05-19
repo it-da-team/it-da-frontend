@@ -12,8 +12,9 @@ function Header() {
                     src={LogoImg}
                     alt="로고"
                     style={{
-                    width: '5.5rem',
+                    width: '7rem',
                     height: 'auto',
+                    padding: '0 2rem', 
                     objectFit: 'contain'
                     }}
                 />

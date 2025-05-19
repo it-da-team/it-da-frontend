@@ -6,7 +6,7 @@ function Footer() {
             <div className="footer-content">
                 <div className="footer-section">
                     <h3>잇-다</h3>
-                    <p> 대표 문구</p>
+                    <p> 당신의 내일을 잇다.</p>
                 </div>
                 <div className="footer-section">
                     <h4>바로가기</h4>

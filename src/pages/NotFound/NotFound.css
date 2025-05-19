@@ -1,0 +1,42 @@
+/* 화면 전체를 감싸서 중앙 정렬 */
+.notfound-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    /* header, footer 높이를 CSS 변수로 관리 중이라면 빼고 계산해도 좋습니다 */
+    min-height: calc(100vh -  var(--footer-height));
+  }
+  
+  /* 애니메이션 + 텍스트 박스 */
+  .notfound-content {
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  /* Lottie 애니메이션 크기 조절 */
+  .notfound-animation {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 1.5rem;
+  }
+  
+  /* 제목 */
+  .notfound-content h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #374151;
+    margin-bottom: 1rem;   /* 숫자 조절 */
+  }
+  
+  .notfound-content h2 {
+    margin-bottom: 2rem;   /* 숫자 조절 */
+  }
+  
+  /* .btn-block-sm 은 global.css 에 padding만 있고 margin이 없으니, 여기서 추가 */
+  .notfound-content .btn-block-sm {
+    margin-top: 2rem;    /* 버튼 위 여백 */
+  }
+
+  

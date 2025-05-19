@@ -16,6 +16,7 @@
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    text-decoration: none;
   }
   
   /* 기본 색상 버튼 (브랜드 컬러 등) */
@@ -30,8 +31,17 @@
     width: 100%; 
     height: 4rem;
     text-align: center;
+    ;
   }
 
+  .btn-block-sm {
+    display: block;
+    width: 100%;
+    padding: 1rem 1rem;    /* 위/아래 0.4rem, 좌/우 1rem */
+    text-align: center;
+    box-sizing: border-box;
+  }
+  
   .btn-primary:hover {
     background-color: #43a047;
   }
@@ -106,4 +116,9 @@
     margin: 2rem auto;       /* 상하 2rem, 좌우 자동(센터) */
     padding: 0 1rem;         /* 양옆 1rem 여분 */
     box-sizing: border-box;  
+}
+
+.btn:hover,
+.btn:focus {
+  text-decoration: none;
 }
