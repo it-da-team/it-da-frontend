@@ -39,3 +39,9 @@
     gap: 1rem;
     margin-top: 1rem;
   }
+
+  .center {
+    display: flex;
+    justify-content: center; /* 수평 중앙 */
+    align-items: center;     /* 수직 중앙 */
+  }

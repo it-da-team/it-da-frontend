@@ -2,6 +2,7 @@ import React from "react";
 import Map from "./Map.jsx";
 import MainJopList from "./MainJopList.jsx";
 import { useLocation } from "react-router-dom";
+import "../../assets/css/global.css";
 // map component 
 
 //Jop List component
@@ -15,7 +16,7 @@ function Jop(){
     const label = state?.label ?? "전체"; 
 
     return(
-        <div>
+        <div className="main-containe">
             <div>
              <Map label={label} />
             </div>

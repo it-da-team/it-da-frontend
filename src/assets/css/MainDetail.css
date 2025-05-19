@@ -1,0 +1,31 @@
+/* 1) 전체 래퍼: 최대 너비, 센터 정렬, 박스 사이징 */
+.main-detail-container {
+    max-width: 2500px;       /* 원하는 최대폭 */
+    margin: 2rem auto;       /* 상하 2rem, 좌우 자동(센터) */
+    padding: 0 1rem;         /* 양옆 1rem 여분 */
+    box-sizing: border-box;  /* 패딩 포함해서 계산 */
+  }
+  
+  /* 2) 두 컬럼 레이아웃: flex + gap */
+  .two-column-layout {
+    display: flex;
+    gap: 2rem;               /* 컬럼 간 간격 */
+  }
+  
+  /* 3) 7:3 비율로 flex 설정 */
+  .left-column {
+    flex: 8;                 /* 전체 10칸 중 7칸 */
+  }
+  .right-column {
+    flex: 2;                 /* 전체 10칸 중 3칸 */
+    /* overflow: visible; 필요 시 유지 */
+  }
+  
+  /* 4) sticky 박스는 그대로 */
+  .apply-sticky-box {
+    position: sticky;
+    top: 10rem;
+    padding: 0 1rem;
+    z-index: 10;
+  }
+  
