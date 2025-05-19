@@ -9,6 +9,8 @@ function NavBar(){
      <h3><a href="/"/>교사 톡톡</h3>
      <h3><a href="/"/>요즘 놀이</h3>
     </div>
+
+    
     )
 }
 

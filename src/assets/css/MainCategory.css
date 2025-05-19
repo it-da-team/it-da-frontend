@@ -28,7 +28,7 @@
     flex-direction: column;     /* 이미지 위, 텍스트 아래로 */
     justify-content: center;    
     align-items: center;
-    width: 180px;               /* 카드 너비 */
+    width: 350px;               /* 카드 너비 */
     height: 180px;              /* 카드 높이 */
     padding: 1rem;
     background-color: #f9f9f9;
@@ -55,7 +55,7 @@
   
   /* 라벨 텍스트 스타일 */
   .category-label {
-    font-size: 1rem;
+    font-size: 1.3rem;
     color: #333;
   }
   
