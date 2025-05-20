@@ -1,16 +1,16 @@
+// src/components/MainCategoryList.jsx
 import React from "react";
-import "../../assets/css/MainCategory.css"
+import "../../assets/css/MainCategory.css";
 
-function MainCategoryList({label, image}){
-    return (
-        <li className="main-category-list">
-          {/* ① 이미지 */}
-          {image && <img src={image} alt={label} className="category-icon" />}
-    
-          {/* ② 텍스트 */}
-          <span className="category-label">{label}</span>
-        </li>
-      );
+function MainCategoryList({ label, image, active, compact }) {
+  return (
+    <div className={`main-category-list ${compact ? "compact" : ""} ${active ? "active" : ""}`}>
+      {image && (
+        <img src={image} alt={label} className="category-icon" />
+      )}
+      <span className="category-label">{label}</span>
+    </div>
+  );
 }
 
-export default MainCategoryList
+export default MainCategoryList;
