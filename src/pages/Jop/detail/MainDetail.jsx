@@ -1,24 +1,29 @@
 import React from "react";
+import { useParams } from "react-router-dom";
 import DailyTrafficSection from "./DailyTrafficSection";
 import CompanyInfoSection from "./CompanyInfoSection";
 import ApplySection from "./ApplySection";
 import SimilarJobSection from "./SimilarJobSection";
 import "../../../assets/css/MainDetail.css";
 import "../../../assets/css/global.css";
-import sampleLogo from "../../../assets/images/sampleLogo.png";
+import jobDetails from "../../../data/jobDetailData.json";
 
 function MainDetail() {
-  const companyData = {
-    name: "2025 호성초병설유치원 여름방학 중 방과후과정 운영인력 채용",
-    logoUrl: sampleLogo,
-    description: "삼성전자는 글로벌 전자 기업으로...",
-    welfare: "자유로운 연차, 점심 지원, 건강검진",
-    location: "서울 강남구 테헤란로 123",
-  };
+
+  const { id } = useParams();
+  const jobId = parseInt(id);
+  const companyData = jobDetails.find(job => job.id === jobId);
+  
+  console.log("현재 ID:", id);
+  console.log("매칭된 데이터:", companyData);
+  /** 에러 */
+  if (!companyData) {
+    return <div>해당 채용 정보를 찾을 수 없습니다.</div>;
+  }
 
   return (
     <div className="main-detail-container">
-    <div>
+      <div>
       <DailyTrafficSection />
       <div className="divider" />
       <div className="two-column-layout">
@@ -28,7 +33,7 @@ function MainDetail() {
         <div className="right-column">
           {/* sticky 는 이 래퍼에 걸어줍니다 */}
           <div className="apply-sticky-box">
-            <ApplySection />
+            <ApplySection company={companyData}/>
           </div>
         </div>
       </div>

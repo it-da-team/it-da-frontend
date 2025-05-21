@@ -1,0 +1,140 @@
+[
+    {
+      "id": 1,
+      "title": "2024년 하반기 유치원 교사 채용",
+      "companyName": "행복한 유치원",
+      "logoUrl": "/images/sampleLogo.png",
+      "description": "행복한 유치원은 아이들이 즐겁게 배우고 자랄 수 있는 환경을 조성합니다.",
+      "location": "서울특별시 강남구 삼성로 12길 34",
+      "category": { "label": "유치원", "value": "DAYCARE" },
+      "workType": "국공립 유치원",
+      "workSubType" : "정담임",
+       "recruitEndAt" : "2025년 08월 31일"
+    },
+    {
+      "id": 2,
+      "title": "어린이집 보육교사 모집",
+      "companyName": "사랑나눔 어린이집",
+      "logoUrl": "/images/sampleLogo.png",
+      "description": "사랑나눔 어린이집은 따뜻한 돌봄과 전문적인 보육을 제공합니다.",
+      "location": "서울특별시 송파구 송이로 88",
+      "category": { "label": "어린이집", "value": "DAYCARE" },
+      "workType": "국공립 어린이집",
+      "workSubType" : "정담임",
+      "recruitEndAt" : "2025년 08월 31일"
+    },
+    {
+      "id": 3,
+      "title": "유아교육 프로그램 개발자 채용",
+      "companyName": "미래교육",
+      "logoUrl": "/images/sampleLogo.png",
+      "description": "미래교육은 창의적인 교육 콘텐츠를 개발하는 전문 교육 회사입니다.",
+      "location": "서울특별시 마포구 마포대로 45",
+      "category": { "label": "어린이집", "value": "DAYCARE" },
+      "workType": "국공립 어린이집",
+      "workSubType" : "정담임",
+      "recruitEndAt" : "2025년 08월 31일"
+    },
+    {
+      "id": 4,
+      "title": "영어 유아 교사 모집",
+      "companyName": "키즈아카데미",
+      "logoUrl": "/images/sampleLogo.png",
+      "description": "키즈아카데미는 유아 대상 영어교육에 특화된 교육 기관입니다.",
+      "location": "서울특별시 서초구 반포대로 101",
+      "category": { "label": "어린이집", "value": "DAYCARE" },
+      "workType": "국공립 어린이집",
+      "recruitEndAt" : "2025년 08월 31일"
+    },
+    {
+      "id": 5,
+      "title": "가정 방문 유아 교사 채용",
+      "companyName": "홈에듀케이션",
+      "logoUrl": "/images/sampleLogo.png",
+      "description": "홈에듀케이션은 아이의 집으로 직접 찾아가는 교육 서비스를 제공합니다.",
+      "location": "서울특별시 용산구 한강대로 200",
+      "category": { "label": "어린이집", "value": "DAYCARE" },
+      "workType": "국공립 어린이집",
+       "recruitEndAt" : "2025년 08월 31일"
+    },
+    {
+      "id": 6,
+      "title": "미술 특별활동 강사 모집",
+      "companyName": "아트키즈",
+      "logoUrl": "/images/sampleLogo.png",
+      "description": "아트키즈는 유아를 위한 창의적 미술 교육을 제공합니다.",
+      "location": "서울특별시 종로구 율곡로 75",
+      "category": { "label": "어린이집", "value": "DAYCARE" },
+      "workType": "국공립 어린이집",
+      "recruitEndAt" : "2025년 08월 31일"
+    },
+    {
+      "id": 7,
+      "title": "2024년 신규 교사 채용",
+      "companyName": "꿈나무 유치원",
+      "logoUrl": "/images/sampleLogo.png",
+      "description": "꿈나무 유치원은 교사와 아이가 함께 성장하는 교육철학을 실천합니다.",
+      "location": "경기도 성남시 분당구 판교로 123",
+      "category": { "label": "유치원", "value": "DAYCARE" },
+      "workType": "국공립 유치원",
+      "workSubType" : "정담임",
+       "recruitEndAt" : "2025년 08월 31일"
+    },
+    {
+      "id": 8,
+      "title": "보육교사 정규직 채용",
+      "companyName": "해피데이케어",
+      "logoUrl": "/images/sampleLogo.png",
+      "description": "해피데이케어는 아이의 행복을 최우선으로 생각하는 보육기관입니다.",
+      "location": "인천광역시 남동구 예술로 67",
+      "category": { "label": "어린이집", "value": "DAYCARE" },
+      "workType": "국공립 어린이집",
+      "workSubType" : "정담임",
+       "recruitEndAt" : "2025년 08월 31일"
+    },
+    {
+      "id": 9,
+      "title": "유아교육 콘텐츠 기획자 채용",
+      "companyName": "에듀테크",
+      "logoUrl": "/images/sampleLogo.png",
+      "description": "에듀테크는 IT와 교육을 융합하여 스마트러닝을 실현합니다.",
+      "location": "서울특별시 강남구 역삼로 142",
+      "category": { "label": "어린이집", "value": "DAYCARE" },
+      "workType": "국공립 어린이집",
+       "recruitEndAt" : "2025년 08월 31일"
+    },
+    {
+      "id": 10,
+      "title": "유아 음악 교사 모집",
+      "companyName": "뮤직키즈",
+      "logoUrl": "/images/sampleLogo.png",
+      "description": "뮤직키즈는 음악을 통해 아이들의 감성과 창의력을 키웁니다.",
+      "location": "서울특별시 강서구 화곡로 300",
+      "category": { "label": "어린이집", "value": "DAYCARE" },
+      "workType": "국공립 어린이집",
+       "recruitEndAt" : "2025년 08월 31일"
+    },
+    {
+      "id": 11,
+      "title": "영어 방문 교사 채용",
+      "companyName": "홈스쿨링",
+      "logoUrl": "/images/sampleLogo.png",
+      "description": "홈스쿨링은 영어에 특화된 방문 교육 서비스를 제공합니다.",
+      "location": "경기도 수원시 영통구 봉영로 168",
+      "category": { "label": "어린이집", "value": "DAYCARE" },
+      "workType": "국공립 어린이집",
+       "recruitEndAt" : "2025년 08월 31일"
+    },
+    {
+      "id": 12,
+      "title": "영재 교육 교사 모집",
+      "companyName": "브레인키즈",
+      "logoUrl": "/images/sampleLogo.png",
+      "description": "브레인키즈는 유아를 대상으로 한 영재 교육 전문 학원입니다.",
+      "location": "서울특별시 중구 명동길 17",
+      "category": { "label": "어린이집", "value": "DAYCARE" },
+      "workType": "국공립 어린이집",
+       "recruitEndAt" : "2025년 08월 31일"
+    }
+  ]
+  

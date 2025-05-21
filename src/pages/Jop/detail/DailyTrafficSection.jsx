@@ -1,15 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import TrafficNotice from "./TrafficNotice"
+
 import "../../../assets/css/DailyTrafficSection.css";
 
 function DailyTrafficSection() {
   const quotes = [
-    "목표는 세우는 순간부터 미루기 시작하는 것이다",
-    "새해 목표는 작년 목표를 올해 안에 꼭 이루는 것!",
-    "목표는 높은데, 침대가 너무 낮아서 못 일어나겠다.",
-    "작심삼일도 열 번 하면 한 달이다.",
-    "계획 없는 목표는 그냥 소원일 뿐이다. 그래서 나는 매년 소원을 빈다.",
+   "오늘의 작은 걸음이 내일의 큰 변화를 만든다.",
+
+"꿈을 향한 도전은 언제나 옳다.",
+
+"지금의 선택이 미래의 나를 만든다.",
+
+"행복은 결과가 아니라, 그 길을 걷는 과정 속에 있다.",
+
+"포기하지 않으면, 언젠가는 반드시 도착한다.",
+
+"당신의 가능성은 아직 펼쳐지지 않은 미래 그 자체예요.",
+
+"천천히 가도 괜찮아, 멈추지 않는다면.",
+
+"행운은 준비된 사람에게 찾아온다.",
+
+"한 번의 용기가 인생을 바꿀 수 있다.",
+
+"내일은 오늘보다 조금 더 빛날 거예요."
+
+
   ];
 
   const [index, setIndex] = useState(0);
@@ -31,10 +47,7 @@ function DailyTrafficSection() {
 
   return (
     <div className="traffic-section">
-      <TrafficNotice/>
-      <div
-        className="quote-wrapper"
-      >
+      <div className="quote-wrapper">
         <AnimatePresence mode="wait">
           {show && (
             <motion.div
@@ -51,6 +64,7 @@ function DailyTrafficSection() {
         </AnimatePresence>
       </div>
     </div>
+
   );
 }
 

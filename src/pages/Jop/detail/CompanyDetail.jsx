@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "../../../assets/css/Company.css";
 
-function CompanyDetail({ logoUrl }) {
+function CompanyDetail({ logoUrl , description}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
+    <h4>{description}</h4>
+    
       {/* 로고 (클릭하면 모달 열림) */}
       <div className="company-img-wrapper" onClick={() => setIsModalOpen(true)}>
         <img src={logoUrl} alt="회사 로고" className="company-img" />

@@ -1,40 +1,79 @@
-/* 1) 카드들을 감싸는 컨테이너에 flex-wrap 추가 */
-.cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;          /* 카드들 사이 간격 */
-  }
-  
-  .main-jop-list {
-    /* 한 줄에 2개씩 배치할 수 있도록 */
-    flex: 0 0 50%;      /* flex-grow:0, flex-shrink:0, flex-basis:50% */
-    max-width: 100%;     /* 절대 50% 넘지 않도록 */
-    box-sizing: border-box; /* padding 포함해서 계산 */
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    margin: 1rem;
-    background-color: #f9f9f9;
-    border-radius: 0.75rem;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    text-align: center;
-    cursor: pointer;
-    transition: transform .2s, box-shadow .2s;
-  }
-  
+/* --------------------------------------------------
+   1) 카드 컨테이너: 반응형 2열 → 1열 자동 전환
+-------------------------------------------------- */
+.jop-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.main-jop-list:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+/* 반응형 스타일 */
+@media (max-width: 768px) {
   .jop-list {
-    display: flex;
-    flex-wrap: wrap;     /* 공간이 모자라면 다음 줄로 */
-    gap: 1rem;           /* 카드 간격 */
+    grid-template-columns: 1fr;
+    padding: 0.5rem;
   }
-  
-  .jop-list-item {
-    flex: 0 0 calc((100% - 1rem) / 2);
-    /* └─ 1rem 간격을 제외한 나머지 공간을 반으로 나눕니다 */
-  
-    box-sizing: border-box;  /* padding 포함해서 크기 계산 */
-  }
-  
+}
+
+.jop-list-item {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* --------------------------------------------------
+   2) 카드 내부: 2행×2열 그리드
+   좌측: 제목/타입, 우측: 메타(♥·D-day)
+-------------------------------------------------- */
+.main-jop-list {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  gap: 1px 16px;
+  padding: 15px 35px 15px 35px; /* 상·우·하·좌 순서 */
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 제목 (1행·1열) */
+.jop-item-title {
+  grid-column: 1;
+  grid-row: 1;
+  text-align: left;
+  margin: 0;
+  word-break: break-word;
+  margin-bottom: 0.1rem; 
+}
+
+/* 세부 타입 (2행·1열), 가로 나열 */
+.jop-item-type {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  gap: 12px;
+  text-align: left;
+  flex-wrap: wrap;
+  align-items: center
+}
+
+/* 메타 (♥ 아이콘, D-day): 1~2행·2열, 세로 정렬 */
+.job-item-meta {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  min-width: 60px;
+}

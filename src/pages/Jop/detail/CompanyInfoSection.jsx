@@ -7,9 +7,14 @@ import CompanyDetail from "./CompanyDetail"
 function CompanyInfoSection({ company }){
     return(
         <div>
-        <CompanyInfoHeader name={company.name} />
+        <CompanyInfoHeader
+        title={company.title}
+        companyName={company.companyName} />
+
         <div className="divider" />
-        <CompanyDetail  logoUrl={company.logoUrl}/>
+        <CompanyDetail  
+        logoUrl={company.logoUrl}
+        description={company.description}/>
       </div>
     )
 }

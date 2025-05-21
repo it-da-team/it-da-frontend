@@ -37,6 +37,7 @@ export default function MapDropdown({ onSearch }) {
 
   return (
     <div className="map-dropdown">
+      <h3 className="map-dropdown-text">시/군/구 선택</h3>
       <div className="map-filters">
         <select
           value={city}
@@ -68,7 +69,7 @@ export default function MapDropdown({ onSearch }) {
       <button className="search-button" onClick={handleSearch}>
         검색하기
       </button>
-      <h4>총 100건의 채용 공고 확인하러 가기</h4>
+      <h2 className="job-count">총 100건의 채용 공고 확인하러 가기</h2>
     </div>
   );
 }
