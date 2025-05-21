@@ -83,7 +83,7 @@
   cursor: pointer;
   height: 36px;
   width: 100%;
-  max-width: 140px; /* ✅ 이게 핵심! 너무 넓어지는 것 방지 */
+  max-width: 150px; /* ✅ 이게 핵심! 너무 넓어지는 것 방지 */
 }
 /* ✅ hover 효과 */
 .main-category-list.compact:hover {
@@ -107,7 +107,7 @@
 
 /* ✅ 라벨: 높이 줄이면서 읽기 쉽게 */
 .main-category-list.compact .category-label {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   color: #333;
   line-height: 1.2;
 }

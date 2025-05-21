@@ -4,7 +4,7 @@
   flex-direction: row;          /* 기본값이지만 명시적으로 */
   align-items: flex-start;
   gap: 2rem;
-  max-width: 2000px;
+  max-width: 1300px;
   margin: 2rem auto;
   padding: 2rem;
   background: #f9f9f9;
@@ -14,7 +14,7 @@
 .map-left-panel,
 .map-text,
 .map-wrapper {
-  padding: 0 1.5rem;
+  padding: 1 1rem;
 }
 
 .map-left-panel {
@@ -24,35 +24,30 @@
   /* 선은 여기 */
   border-right: 1px solid #e0e0e0;
   /* 텍스트와 선 사이 여백 */
-  padding-left: 0rem;
+  padding-left: 1rem;
   padding-right: 1.8rem;
   margin-right: 0rem;
-  
 }
-.map-right-panel {
-  display: flex !important;        /* flex 활성화 */
-  flex-direction: row !important;  /* ← 이걸 꼭 row 로 */
-  align-items: flex-start;
-  gap: 1rem;
-  
-}
+
 .map-text {
   flex: 0 0 300px;
   margin-left: 0rem;   /* 왼쪽 여백을 0.5rem으로 설정 */    /* 필요에 따라 250~350px로 조절 */
 }
+
 /* 🔹 왼쪽 카테고리 인덱스 */
-
 /* ── 왼쪽 컨트롤(텍스트 + 드롭다운)은 고정 폭으로 ── */
-
 
 /* ── 지도 영역은 남는 공간 전부 차지 ── */
 .map-wrapper {
   flex: 1;            /* 가로 공간 모두 채움 */
   height: 400px;
   width: 10rem;
+  margin-left: 4rem; 
   overflow: hidden;
   animation: zoomIn 0.5s ease;
 }
+
+/* 🔶 카테고리 리스트 */
 .main-category {
   display: flex;
   flex-direction: column;
@@ -66,10 +61,10 @@
   padding: 0;
   margin: 0;
   list-style: none;
-  
 }
 
 .main-category-list {
+  
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -103,17 +98,26 @@
   color: #333;
 }
 
-/* 🔸 오른쪽 패널 */
+/* 🔸 오른쪽 패널 (한곳으로 모아 옮김) */
 .map-right-panel {
   flex: 1;
-  display: flex;
-  flex-direction: column;
+  display: flex !important;        /* flex 활성화 */
+  flex-direction: column;          /* 기본은 column */
   gap: 2rem;
+}
+
+/* 추가 row 설정이 필요하면 아래처럼 함께 정의해도 됩니다 */
+.map-right-panel {
+  display: flex !important;
+  flex-direction: row !important;  /* ← 이걸 꼭 row 로 */
+  align-items: flex-start;
+  gap: 1rem;
 }
 
 /* 상단 텍스트 */
 .map-text {
   text-align: left;
+  font-size: 1rem;
 }
 
 .map-subtext {

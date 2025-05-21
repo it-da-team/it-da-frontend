@@ -1,31 +1,109 @@
 /* 1) 전체 래퍼: 최대 너비, 센터 정렬, 박스 사이징 */
 .main-detail-container {
-    max-width: 2500px;       /* 원하는 최대폭 */
-    margin: 2rem auto;       /* 상하 2rem, 좌우 자동(센터) */
-    padding: 0 1rem;         /* 양옆 1rem 여분 */
-    box-sizing: border-box;  /* 패딩 포함해서 계산 */
+    max-width: 1500px;
+    margin: 5rem auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
   }
   
-  /* 2) 두 컬럼 레이아웃: flex + gap */
   .two-column-layout {
     display: flex;
-    gap: 2rem;               /* 컬럼 간 간격 */
+    gap: 2rem;
+    padding: 3rem 0;
+    flex-wrap: wrap;
   }
   
-  /* 3) 7:3 비율로 flex 설정 */
   .left-column {
-    flex: 8;                 /* 전체 10칸 중 7칸 */
-  }
-  .right-column {
-    flex: 2;                 /* 전체 10칸 중 3칸 */
-    /* overflow: visible; 필요 시 유지 */
+    flex: 1 1 auto;
+    min-width: 0;
   }
   
-  /* 4) sticky 박스는 그대로 */
+  .right-column {
+    flex: 0 0 400px;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .apply-section {
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .apply-section .card {
+    margin-bottom: 1.5rem;
+  }
+  
   .apply-sticky-box {
     position: sticky;
     top: 10rem;
-    padding: 0 1rem;
+    padding: 0;
     z-index: 10;
+  }
+  
+  
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+  }
+  
+  .info-table th,
+  .info-table td {
+    padding: 0.7rem 1.2rem; /* ⬅️ 여백 넉넉히 */
+    text-align: left;
+    vertical-align: middle;
+  }
+  
+  .info-table th {
+    width: 100px;             /* 균형 있는 고정 폭 */
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+  }
+  
+  .info-table td {
+    color: #222;
+    line-height: 1.8;         /* 줄 간격 넉넉히 */
+    word-break: keep-all;     /* 단어 깨짐 방지 */
+  }
+
+  .info-table tr + tr {
+    border-top: 1px solid #e0e0e0;
+  }
+
+
+  @media (max-width: 1024px) {
+    .two-column-layout {
+      flex-direction: column;
+    }
+  
+    .right-column {
+      order: -1; /* ✅ 먼저 렌더링됨 */
+      width: 100%;
+      max-width: 100%;
+      flex: none;
+    }
+  
+    .left-column {
+      order: 0;
+      width: 100%;
+      max-width: 100%;
+      flex: none;
+    }
+  
+    .apply-section {
+      max-width: 100%;
+      padding: 0;
+    }
+  
+    .apply-sticky-box {
+      position: relative; /* sticky 해제 */
+      top: auto;
+      padding: 0;
+    }
+  
+    .card {
+      width: 100%;
+    }
   }
   

@@ -2,10 +2,11 @@ import React from "react";
 
 // 채용공고 헤드 
 // 본문
-function CompanyInfoHeader({name}){
+function CompanyInfoHeader({title, companyName}){
     return(
         <div>
-            <h2>{name}</h2>
+            <h2>{title}</h2>
+            <h4>{companyName}</h4>
         </div>
     )
 }

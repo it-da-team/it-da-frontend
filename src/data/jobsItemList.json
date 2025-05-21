@@ -1,0 +1,134 @@
+[
+  {
+    "id": 1,
+    "companyName": "행복한 유치원",
+    "region": "서울",
+    "district": "강남구",
+    "category": { "label": "유치원", "value": "KINDERGARTEN" },
+    "workType": "사립 유치원",
+    "title": "2024년 하반기 유치원 교사 채용",
+    "isFavorite": false,
+    "dDay": 15
+  },
+  {
+    "id": 2,
+    "companyName": "사랑나눔 어린이집",
+    "region": "서울",
+    "district": "송파구",
+    "category": { "label": "어린이집", "value": "DAYCARE" },
+    "workType": "국공립 어린이집",
+    "title": "어린이집 보육교사 모집",
+    "isFavorite": true,
+    "dDay": 7
+  },
+  {
+    "id": 3,
+    "companyName": "미래교육",
+    "region": "서울",
+    "district": "마포구",
+    "category": { "label": "교육 회사", "value": "EDUCATION_COMPANY" },
+    "workType": "교육 기업",
+    "title": "유아교육 프로그램 개발자 채용",
+    "isFavorite": false,
+    "dDay": 30
+  },
+  {
+    "id": 4,
+    "companyName": "키즈아카데미",
+    "region": "서울",
+    "district": "서초구",
+    "category": { "label": "아동 센터/학원", "value": "CHILD_CENTER" },
+    "workType": "아동 교육 센터",
+    "title": "영어 유아 교사 모집",
+    "isFavorite": false,
+    "dDay": 10
+  },
+  {
+    "id": 5,
+    "companyName": "홈에듀케이션",
+    "region": "서울",
+    "district": "용산구",
+    "category": { "label": "방문 교사", "value": "HOME_VISIT_TEACHER" },
+    "workType": "방문 교육",
+    "title": "가정 방문 유아 교사 채용",
+    "isFavorite": true,
+    "dDay": 5
+  },
+  {
+    "id": 6,
+    "companyName": "아트키즈",
+    "region": "서울",
+    "district": "종로구",
+    "category": { "label": "특별활동 센터", "value": "SPECIAL_ACTIVITY" },
+    "workType": "특별활동 센터",
+    "title": "미술 특별활동 강사 모집",
+    "isFavorite": false,
+    "dDay": 20
+  },
+  {
+    "id": 7,
+    "companyName": "꿈나무 유치원",
+    "region": "경기",
+    "district": "성남시",
+    "category": { "label": "유치원", "value": "KINDERGARTEN" },
+    "workType": "사립 유치원",
+    "title": "2024년 신규 교사 채용",
+    "isFavorite": false,
+    "dDay": 25
+  },
+  {
+    "id": 8,
+    "companyName": "해피데이케어",
+    "region": "인천",
+    "district": "남동구",
+    "category": { "label": "어린이집", "value": "DAYCARE" },
+    "workType": "민간 어린이집",
+    "title": "보육교사 정규직 채용",
+    "isFavorite": true,
+    "dDay": 12
+  },
+  {
+    "id": 9,
+    "companyName": "에듀테크",
+    "region": "서울",
+    "district": "강남구",
+    "category": { "label": "교육 회사", "value": "EDUCATION_COMPANY" },
+    "workType": "교육 기업",
+    "title": "유아교육 콘텐츠 기획자 채용",
+    "isFavorite": false,
+    "dDay": 8
+  },
+  {
+    "id": 10,
+    "companyName": "뮤직키즈",
+    "region": "서울",
+    "district": "강서구",
+    "category": { "label": "특별활동 센터", "value": "SPECIAL_ACTIVITY" },
+    "workType": "음악 교육 센터",
+    "title": "유아 음악 교사 모집",
+    "isFavorite": false,
+    "dDay": 18
+  },
+  {
+    "id": 11,
+    "companyName": "홈스쿨링",
+    "region": "경기",
+    "district": "수원시",
+    "category": { "label": "방문 교사", "value": "HOME_VISIT_TEACHER" },
+    "workType": "방문 교육",
+    "title": "영어 방문 교사 채용",
+    "isFavorite": true,
+    "dDay": 3
+  },
+  {
+    "id": 12,
+    "companyName": "브레인키즈",
+    "region": "서울",
+    "district": "중구",
+    "category": { "label": "아동 센터/학원", "value": "CHILD_CENTER" },
+    "workType": "영재 교육원",
+    "title": "영재 교육 교사 모집",
+    "isFavorite": false,
+    "dDay": 22
+  }
+]
