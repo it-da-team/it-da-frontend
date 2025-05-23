@@ -1,30 +1,23 @@
+// src/pages/Jop/Jop.jsx
 import React from "react";
-import Map from "./Map.jsx";
-import MainJopList from "./MainJopList.jsx";
-import { useLocation } from "react-router-dom";
-import "../../assets/css/global.css";
-// map component 
+import { useSearchParams } from "react-router-dom";
+import { enumToLabel } from "../../utils/categoryMap";
+import Map from "./Map";
+import MainJopList from "./MainJopList";
 
-//Jop List component
-// - 검색 컴포넌트 
-// - 리스트 컴포넌트 
-//   -  리스트 아이템 컴포넌트 
+function Jop() {
+  const [searchParams] = useSearchParams();
+  const categoryEnum = searchParams.get("category") ?? "KINDERGARTEN";
 
+  console.log("🚀 categoryEnum:", categoryEnum);
+  const label = enumToLabel[categoryEnum] ?? "유치원";
 
-function Jop(){
-    const { state } = useLocation();
-    const label = state?.label ?? "전체"; 
-
-    return(
-        <div className="main-containe">
-            <div>
-             <Map label={label} />
-            </div>
-            <div >
-            <MainJopList/>
-            </div>
-        </div>
-    )
+  return (
+    <div className="main-container">
+      <Map label={label} />
+      <MainJopList categoryEnum={categoryEnum} />
+    </div>
+  );
 }
 
-export default Jop
+export default Jop;

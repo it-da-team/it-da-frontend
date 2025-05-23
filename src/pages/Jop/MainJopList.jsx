@@ -1,14 +1,14 @@
+// src/pages/Jop/MainJopList.jsx
 import React from "react";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "../../assets/css/MainJopList.css";
 import JopList from "./JopList";
 
-export default function MainJopList() {
+export default function MainJopList({ categoryEnum }) {
   return (
     <div className="card-container">
       <Tabs className="tabs-container">
-        {/* 탭 + 버튼을 한 줄에 묶는 래퍼 */}
         <div className="tabs-header">
           <TabList className="search">
             <Tab>전체 공고</Tab>
@@ -18,10 +18,10 @@ export default function MainJopList() {
         </div>
 
         <TabPanel>
-          <JopList type="all" />
+          <JopList type="all" categoryEnum={categoryEnum} />
         </TabPanel>
         <TabPanel>
-          <JopList type="favorite" />
+          <JopList type="favorite" categoryEnum={categoryEnum} />
         </TabPanel>
       </Tabs>
     </div>
