@@ -13,8 +13,9 @@ function CompanyInfoSection({ company }){
 
         <div className="divider" />
         <CompanyDetail  
-        logoUrl={company.logoUrl}
-        description={company.description}/>
+        logoUrl={company.imgUrl}
+        description={company.description}
+        companyUrl={company.siteUrl}/>
       </div>
     )
 }
