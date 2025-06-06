@@ -1,11 +1,11 @@
-// src/pages/Jop/Jop.jsx
+// src/pages/recruitment/index.jsx
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { enumToLabel } from "../../utils/categoryMap";
 import Map from "./Map";
-import MainJopList from "./MainJopList";
+import MainRecruitmentList from "./MainRecruitmentList";
 
-function Jop() {
+function Recruitment() {
   const [searchParams] = useSearchParams();
   const categoryEnum = searchParams.get("category") ?? "KINDERGARTEN";
 
@@ -15,9 +15,9 @@ function Jop() {
   return (
     <div className="main-container">
       <Map label={label} />
-      <MainJopList categoryEnum={categoryEnum} />
+      <MainRecruitmentList categoryEnum={categoryEnum} />
     </div>
   );
 }
 
-export default Jop;
+export default Recruitment;

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FavoriteButton from "../../components/com/FavoriteButton";
-import "../../assets/css/JopListItem.css";
+import "../../assets/css/RecruitmentListItem.css";
 import "../../assets/css/global.css";
 
-export default function JopListItem({ job }) {
+export default function RecruitmentListItem({ job }) {
     const navigate = useNavigate();
     const [isFavorite, setIsFavorite] = useState(job.isFavorite);
   
     const handleClick = () => {
-      navigate(`/Jop/Detail/${job.id}`);
+      navigate(`/recruitment/detail/${job.id}`);
     };
    // 즐겨찾기 상태 로컬에서 관리
   const updateFav = async (newFav) => {

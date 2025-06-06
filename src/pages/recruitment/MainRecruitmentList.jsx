@@ -1,11 +1,11 @@
-// src/pages/Jop/MainJopList.jsx
+// src/pages/recruitment/MainRecruitmentList.jsx
 import React from "react";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
-import "../../assets/css/MainJopList.css";
+import "../../assets/css/MainRecruitmentList.css";
 import JopList from "./JopList";
 
-export default function MainJopList({ categoryEnum }) {
+export default function MainRecruitmentList({ categoryEnum }) {
   return (
     <div className="card-container">
       <Tabs className="tabs-container">

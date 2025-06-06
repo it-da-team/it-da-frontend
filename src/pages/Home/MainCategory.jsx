@@ -34,7 +34,7 @@ function MainCategory({ onCategorySelect, selected, compact = false }) {
             onClick={() =>
               compact
                 ? onCategorySelect?.(cat.label)
-                : navigate(`/Jop?category=${labelToEnum[cat.label]}`)
+                : navigate(`/recruitment?category=${labelToEnum[cat.label]}`)
             }
           >
             <MainCategoryList
