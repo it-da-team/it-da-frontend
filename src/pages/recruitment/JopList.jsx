@@ -1,9 +1,9 @@
-// src/pages/Jop/JopList.jsx
+// src/pages/recruitment/RecruitmentList.jsx
 import React from "react";
-import JopListItem from "./JopListItem";
+import RecruitmentListItem from "./JopListItem";
 import useRecruitmentList from "../../hooks/recruitment/useRecruitmentList";
 
-export default function JopList({ type, categoryEnum }) {
+export default function RecruitmentList({ type, categoryEnum }) {
   const { data: jobsToShow, loading, error } = useRecruitmentList(categoryEnum);
 
   if (loading) return <p>불러오는 중...</p>;
@@ -21,7 +21,7 @@ export default function JopList({ type, categoryEnum }) {
     <div className="jop-list">
       {filtered.map(job => (
         <div className="jop-list-item" key={job.id}>
-          <JopListItem job={job} />
+          <RecruitmentListItem job={job} />
         </div>
       ))}
     </div>
