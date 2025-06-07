@@ -36,3 +36,33 @@ export const fetchRecruitmentDetail = async (id) => {
         throw error;
     }
 };
+
+export const fetchFilteredRecruitments = async (filterDto) => {
+    try {
+      console.log('필터 검색 요청 시작:', {
+        url: '/recruitment/filter',
+        method: 'POST',
+        data: filterDto
+      });
+      
+      const response = await axios.post(`/recruitment/filter`, filterDto);
+      
+      console.log('필터 검색 응답:', {
+        status: response.status,
+        data: response.data
+      });
+      
+      return response.data.data || [];
+    } catch (error) {
+      console.error("필터 검색 에러:", {
+        message: error.message,
+        status: error.response?.status,
+        data: error.response?.data,
+        config: error.config,
+        url: error.config?.url,
+        method: error.config?.method,
+        requestData: error.config?.data
+      });
+      throw error;
+    }
+};
