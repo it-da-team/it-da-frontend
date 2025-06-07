@@ -41,22 +41,22 @@
 .tabs-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #eee; /* 여기서 탭+버튼 전체에 선 */
+    align-items: flex-end; /* ✅ 또는 baseline */
+    flex-wrap: wrap;
+    gap: 1rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
-}
-
+    border-bottom: 2px solid #eee;
+  }
 /* TabList (탭 레이블 그룹) */
 .search {
     display: flex;
     justify-content: flex-start;
     gap: 1rem;
-    margin: 0;
+    margin: 0; /* ✅ 이걸로 변경! */
     padding: 0;
     list-style: none;
-    margin-top: 5rem;
-}
+  }
 
 /* 개별 Tab 스타일 */
 .search .react-tabs__tab {
@@ -110,3 +110,38 @@
     display: none;
 }
   
+.search-keywords-button-row {
+    display: flex;
+    align-items: flex-end; /* 버튼과 태그를 하단 정렬 */
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+  
+.selected-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-height: 3rem;
+    padding: 0rem 0;
+    align-items: flex-end; /* 태그들을 하단 정렬 */
+}
+  
+.keyword-tag {
+    background-color: #f0f0f0;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.2; /* 텍스트 세로 정렬을 위한 line-height 조정 */
+}
+  
+@media (max-width: 768px) {
+    .search-keywords-button-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .tab-action-button {
+      width: 100%;
+    }
+}

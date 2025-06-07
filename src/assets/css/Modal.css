@@ -1,0 +1,204 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* 다른 요소보다 위에 표시 */
+  }
+  
+  .modal-content {
+    background-color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  /* Optional: fade-in animation */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* 모달 헤더 */
+.search-header {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  /* 각 섹션 구분 */
+  .search-section {
+    margin-bottom: 1.5rem;
+  }
+  
+  .search-section h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* 서브 타입(유치원/어린이집) 컨테이너 */
+  .sub-type-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .sub-type-section {
+    flex: 1;
+  }
+  
+  .sub-type-section h5 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* 버튼 리스트 공통 스타일 */
+  .button-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .list-button {
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .list-button.selected {
+    background-color: #FFC107;
+    color: white;
+    border-color: #FFC107;
+  }
+  
+  .list-button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  /* 구분선 */
+  .divider {
+    height: 1px;
+    background-color: #ddd;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  /* 하단 검색/취소 버튼 */
+  .search-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  
+  .search-button,
+  .cancel-button {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  .search-button {
+    background-color: #FFC107;
+    color: white;
+  }
+  
+  .search-button:hover {
+    background-color: #FF6F00;
+  }
+  
+  .cancel-button {
+    background-color: #f5f5f5;
+    color: #333;
+  }
+  
+  .cancel-button:hover {
+    background-color: #e0e0e0;
+  }
+
+.search-section h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1.7rem; /* 기존: 0.75rem → 늘림 */
+}
+
+.institution-section h4 {
+    margin-bottom: 0rem;
+  }
+
+.sub-type-section h5 {
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1rem; /* 기존: 0.5rem → 늘림 */
+}
+
+
+.search-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .search-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 1rem 0;
+    color: #333;
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    color: #555;
+    transition: color 0.2s ease;
+  }
+  
+  .close-button:hover {
+    color: #000;
+  }
+  
+
+  .selected-keyword-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .keyword-tag {
+    background-color: #FFE082;
+    color: #333;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+  }
+  
