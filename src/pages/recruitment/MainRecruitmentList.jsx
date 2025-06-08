@@ -15,7 +15,7 @@ export default function MainRecruitmentList({ categoryEnum }) {
   const { searchResults, loading, error, searchRecruitments } = useRecruitmentSearch(categoryEnum);
   const [selectedKeywords, setSelectedKeywords] = useState([]);
 
-  console.log('MainRecruitmentList categoryEnum:', categoryEnum); // 디버깅용
+  console.log('MainRecruitmentList categoryEnum:', categoryEnum);
 
   // 키워드 코드를 표시 값으로 변환
   const getDisplayValue = (keyword) => {
@@ -90,7 +90,6 @@ export default function MainRecruitmentList({ categoryEnum }) {
             <Tab>관심 공고</Tab>
           </TabList>
 
-          {/* ✅ 버튼과 키워드를 나란히 배치 */}
           <div className="search-keywords-button-row">
             {selectedKeywords.length > 0 && (
               <div className="selected-keywords">

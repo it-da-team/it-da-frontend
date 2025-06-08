@@ -1,0 +1,84 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-button:hover {
+  color: #333;
+}
+
+.search-results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.search-result-item {
+  padding: 15px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #f9f9f9;
+}
+
+.search-result-item h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.company-name {
+  color: #666;
+  margin: 5px 0;
+}
+
+.result-details {
+  display: flex;
+  gap: 15px;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.result-details span {
+  background: #eee;
+  padding: 3px 8px;
+  border-radius: 4px;
+} 
