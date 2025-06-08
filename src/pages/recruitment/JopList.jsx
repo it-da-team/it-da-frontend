@@ -1,5 +1,5 @@
 // src/pages/recruitment/JopList.jsx
-import React from "react";
+import React, { useState, useEffect } from "react";
 import JopListItem from "./JopListItem";
 import useRecruitmentList from "../../hooks/recruitment/useRecruitmentList";
 
