@@ -6,9 +6,19 @@ import { getFavoriteRecruitments } from "../../utils/localStorage";
 import FavoriteGuide from "../../components/recruitment/FavoriteGuide";
 import "../../assets/css/JopList.css";
 
-export default function JopList({ type, categoryEnum, searchResults, loading: searchLoading, error: searchError }) {
+export default function JopList({ type, categoryEnum, searchResults, loading: searchLoading, error: searchError, selectedFilters, onFilterChange }) {
   const { data: jobsToShow, loading: listLoading, error: listError } = useRecruitmentList(categoryEnum);
   const [favoriteJobs, setFavoriteJobs] = useState([]);
+
+  // 필터 제거 핸들러
+  const handleRemoveFilter = (filterType) => {
+    if (onFilterChange) {
+      onFilterChange({
+        ...selectedFilters,
+        [filterType]: null
+      });
+    }
+  };
 
   // 로컬스토리지에서 관심공고 목록 가져오기
   const loadFavorites = () => {
@@ -39,7 +49,7 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
     if (!searchResults.length) return <p>검색 결과가 없습니다.</p>;
 
     const filtered = type === "favorite"
-      ? favoriteJobs  // 검색 결과가 아닌 저장된 관심공고 목록 사용
+      ? favoriteJobs
       : searchResults;
 
     return (
@@ -52,6 +62,24 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
             </div>
           ))}
         </div>
+        {selectedFilters?.region && (
+          <div className="search-tag region">
+            {selectedFilters.region}
+            <button onClick={() => handleRemoveFilter('region')}>×</button>
+          </div>
+        )}
+        {selectedFilters?.category && (
+          <div className="search-tag category">
+            {selectedFilters.category}
+            <button onClick={() => handleRemoveFilter('category')}>×</button>
+          </div>
+        )}
+        {selectedFilters?.jobType && (
+          <div className="search-tag job-type">
+            {selectedFilters.jobType}
+            <button onClick={() => handleRemoveFilter('jobType')}>×</button>
+          </div>
+        )}
       </div>
     );
   }
@@ -61,7 +89,7 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
   if (listError) return <p>에러 발생: {listError}</p>;
 
   const filtered = type === "favorite"
-    ? favoriteJobs  // 전체 목록이 아닌 저장된 관심공고 목록 사용
+    ? favoriteJobs
     : jobsToShow;
 
   if (!filtered.length) {
@@ -78,6 +106,24 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
           </div>
         ))}
       </div>
+      {selectedFilters?.region && (
+        <div className="search-tag region">
+          {selectedFilters.region}
+          <button onClick={() => handleRemoveFilter('region')}>×</button>
+        </div>
+      )}
+      {selectedFilters?.category && (
+        <div className="search-tag category">
+          {selectedFilters.category}
+          <button onClick={() => handleRemoveFilter('category')}>×</button>
+        </div>
+      )}
+      {selectedFilters?.jobType && (
+        <div className="search-tag job-type">
+          {selectedFilters.jobType}
+          <button onClick={() => handleRemoveFilter('jobType')}>×</button>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ButtonList from "./ButtonList";
+import { TEACHER_DUTY_KEYWORDS } from "../constants/keywords";
 
-export default function TeacherDutySelector({ onKeywordChange }) {
+export default function TeacherDutySelector({ onKeywordChange, selectedKeywords = [] }) {
     const [selectedDuties, setSelectedDuties] = useState([]);
-    const teacherDutyTypes = ["정담임", "비담임", "보조", "대체", "누리반", "연장반", "방과후", "조리사/차량/행정", "신입", "무관"];
+    const teacherDutyTypes = Object.values(TEACHER_DUTY_KEYWORDS);
+
+    // selectedKeywords가 변경될 때마다 선택된 직무 업데이트
+    useEffect(() => {
+        const duties = selectedKeywords.filter(keyword => 
+            teacherDutyTypes.includes(keyword)
+        );
+        setSelectedDuties(duties);
+    }, [selectedKeywords]);
 
     const handleDutyChange = (item, isSelected) => {
         const newSelected = isSelected

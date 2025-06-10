@@ -3,24 +3,36 @@
     display: flex;
     flex-direction: column;
     align-items: center;      /* 가로 중앙 정렬 */
-    padding: 2rem 0;          /* 위아래 여백 */
-  }
+    padding: 4rem 2rem;
+}
+
+/* compact 모드일 때 패딩 줄이기 */
+.main-category.compact {
+    padding: 2rem 2rem;
+}
   
   /* 제목 스타일 (필요 시) */
   .main-category h2 {
+    text-align: center;
     font-size: 1.5rem;
+    color: #333;
     margin-bottom: 1.5rem;
   }
   
 .main-category-list-wrapper {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;               /* 카드 간격 */
-    justify-items: center;   /* 각 칸 안에서 카드 중앙 정렬 */
-    padding: 0;
-    margin: 1rem 0;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
     list-style: none;
-  }
+}
+  
+.main-category-list-wrapper li {
+    display: flex;
+    justify-content: center;
+}
   
   /* 카드 스타일: 살짝 키운 정사각형 */
   .main-category-list {
@@ -64,50 +76,129 @@
   
 /* ✅ 리스트 wrapper: 세로 정렬 유지 */
 .main-category.compact .main-category-list-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    margin: 0.5rem 0;
+    padding-right: 1.5rem;
 }
 
 /* ✅ 카테고리 아이템: 가로로 긴 카드 느낌 */
 .main-category-list.compact {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  gap: 0.5rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 0.4rem;
-  background-color: transparent;
-  box-shadow: none;
-  transition: background 0.2s;
-  cursor: pointer;
-  height: 36px;
-  width: 100%;
-  max-width: 150px; /* ✅ 이게 핵심! 너무 넓어지는 것 방지 */
-}
-/* ✅ hover 효과 */
-.main-category-list.compact:hover {
-  background-color: #fff8e1;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.8rem;
+    padding: 0.3rem 1rem;
+    border-radius: 0.4rem;
+    background-color: transparent;
+    box-shadow: none;
+    transition: background 0.2s;
+    cursor: pointer;
+    height: 32px;
+    width: 180px;
+    position: relative;
 }
 
 /* ✅ active 상태 강조 */
 .main-category-list.compact.active {
-  background-color: #ffecb3;
-  color: #ff6f00;
-  font-weight: 600;
+    background-color: #ffecb3;
+    color: #ff6f00;
+    font-weight: 600;
+    width: 180px;
+    min-width: 180px;
+}
+
+/* ✅ hover 효과 */
+.main-category-list.compact:hover {
+    background-color: #fff8e1;
+    width: 180px;
+    min-width: 180px;
 }
 
 /* ✅ 아이콘: 좌측 고정 크기 */
 .main-category-list.compact .category-icon {
-  width: 22px;
-  height: 22px;
-  object-fit: contain;
-  margin: 0;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    margin: 0;
 }
 
 /* ✅ 라벨: 높이 줄이면서 읽기 쉽게 */
 .main-category-list.compact .category-label {
-  font-size: 1.1rem;
-  color: #333;
-  line-height: 1.2;
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.2;
+    white-space: nowrap;
+    padding-right: 0.5rem; /* 오른쪽 여백 추가 */
+}
+
+/* 태블릿 화면 (768px ~ 1023px) */
+@media screen and (max-width: 1023px) {
+    .main-category {
+        padding: 3rem 1.5rem;
+    }
+
+    .main-category h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .main-category-list-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.3rem;
+    }
+}
+
+/* 모바일 화면 (768px 미만) */
+@media screen and (max-width: 767px) {
+    .main-category {
+        padding: 2rem 2rem;
+    }
+
+    .main-category h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .main-category-list-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        padding: 0;
+        width: 100%;
+    }
+
+    .main-category-list {
+        width: 100%;
+        height: 110px;
+        padding: 0.8rem;
+        min-width: 0;
+    }
+
+    .category-icon {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 0.3rem;
+    }
+
+    .category-label {
+        font-size: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+    }
+
+    .main-category.compact .main-category-list-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin: 0.3rem 0;
+    }
+
+    .main-category-list.compact {
+        height: 32px;
+        width: 180px;
+    }
 }

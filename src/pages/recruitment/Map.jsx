@@ -16,6 +16,7 @@ function Map() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
 
   // 카테고리 선택 핸들러
   const handleCategorySelect = (category) => {
@@ -103,6 +104,51 @@ function Map() {
         <div className="map-text">
           <h1 className="map-title">지역별</h1>
           <h3 className="map-subtext">채용 공고 확인하기</h3>
+          
+          <button 
+            className="category-filter-button"
+            onClick={() => setIsFilterOpen(!isFilterOpen)}
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+            </svg>
+            <span>검색 조건 설정</span>
+          </button>
+
+          {isFilterOpen && (
+            <div className="filter-panel">
+              <div className="filter-section">
+                <h3>
+                  기업 유형 선택하기
+                  <button className="close-button" onClick={() => setIsFilterOpen(false)}>
+                    <svg viewBox="0 0 24 24">
+                      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                  </button>
+                </h3>
+                <MainCategory 
+                  compact 
+                  selected={enumToLabel[selectedCategory]} 
+                  onCategorySelect={handleCategorySelect} 
+                />
+              </div>
+
+              <div className="filter-section">
+                <h3>지역 선택하기</h3>
+                <MapDropdown
+                  selectedCity={selectedCity}
+                  selectedDistrict={selectedDistrict}
+                  onCityChange={setSelectedCity}
+                  onDistrictChange={setSelectedDistrict}
+                  onSearch={() => {
+                    handleSearch();
+                    setIsFilterOpen(false);
+                  }}
+                />
+              </div>
+            </div>
+          )}
+
           <MapDropdown
             selectedCity={selectedCity}
             selectedDistrict={selectedDistrict}
@@ -110,6 +156,7 @@ function Map() {
             onDistrictChange={setSelectedDistrict}
             onSearch={handleSearch}
           />
+
           {searchResults.length > 0 && (
             <div className="job-count">
               <span className="job-count-label">검색된 채용공고 총</span>

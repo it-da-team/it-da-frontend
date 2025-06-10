@@ -65,29 +65,26 @@ export default function RecruitmentListItem({ job }) {
     return (
       <div className="main-jop-list" onClick={handleClick}>
         <div className="jop-item-title">
-          <h2>{job.title}</h2>
-          <h3>{job.companyName}</h3>
-          <div className="divider" />
+          <div>
+            <h2>{job.title}</h2>
+            <h3>{job.companyName}</h3>
+          </div>
+          <div className="job-item-meta">
+            <div onClick={handleFavoriteClick}>
+              <FavoriteButton
+                initialFavorite={isFavorite}
+                onToggle={updateFav}
+                lottieSrc="https://lottie.host/eb195dde-1eb6-4032-b4e8-8dcb4c2f810e/xZfDm20WdP.lottie"
+                size={40}
+              />
+            </div>
+          </div>
         </div>
-        
         <div className="jop-item-type">
           <h4>{`${job.region} ${job.district}`}</h4>
-          <div className="v-divider" />
           <h4>{job.category.label}</h4>
-          <div className="v-divider" />
           <h4>{job.workType}</h4>
-        </div>
-
-        <div className="job-item-meta">
-          <div onClick={handleFavoriteClick}>
-            <FavoriteButton
-              initialFavorite={isFavorite}
-              onToggle={updateFav}
-              lottieSrc="https://lottie.host/eb195dde-1eb6-4032-b4e8-8dcb4c2f810e/xZfDm20WdP.lottie"
-              size={32}
-            />
-          </div>
-          <div>{`D - ${job.dDay}`}</div>
+          <h4>{`D - ${job.dDay}`}</h4>
         </div>
       </div>
     );
