@@ -54,20 +54,59 @@
 }
 
 .search-result-item {
-  padding: 15px;
-  border: 1px solid #eee;
-  border-radius: 4px;
-  background: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  gap: 30px;
 }
 
-.search-result-item h3 {
+.search-result-left {
+  flex: 1;
+  max-width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-result-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  min-width: 250px;
+}
+
+.right-top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.d-day {
+  font-weight: bold;
+  color: #FF6F00;
+  font-size: 1.2em;
+  font-weight: 800;
+  text-shadow: 0.5px 0.5px 1px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-left h3 {
   margin: 0 0 10px 0;
   color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .company-name {
   color: #666;
   margin: 5px 0;
+  margin-bottom: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .result-details {
@@ -75,10 +114,13 @@
   gap: 15px;
   color: #666;
   font-size: 0.9em;
+  white-space: nowrap;
+  overflow: visible;
 }
 
 .result-details span {
   background: #eee;
   padding: 3px 8px;
   border-radius: 4px;
+  white-space: nowrap;
 } 

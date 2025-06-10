@@ -45,15 +45,36 @@ function Map() {
       if (response && response.data) {
         console.log("전체 응답 데이터:", response.data);
         const processedData = response.data.map(item => {
-          console.log("처리 중인 아이템:", item);
-          return {
+          console.log("처리 중인 아이템 원본:", item);
+          
+          // 각 필드 확인
+          console.log("필드 확인:", {
+            title: item.title,
+            companyName: item.companyName,
+            category: item.category,
+            workType: item.workType,
+            workSubType: item.workSubType,
+            dDay: item.dDay,
+            recruitmentIdHash: item.recruitmentIdHash,
+            fullAddress: item.fullAddress
+          });
+
+          const processedItem = {
             ...item,
-            fullAddress: item.fullAddress,
-            recruitmentIdHash: item.recruitmentIdHash
+            fullAddress: item.fullAddress || '',
+            recruitmentIdHash: item.recruitmentIdHash || item.id,
+            title: item.title || '제목 없음',
+            workType: item.workType || item.workSubType || '',
+            dDay: item.dDay || 0,
+            category: item.category || selectedCategory,
+            companyName: item.companyName || '기관명 없음'
           };
+
+          console.log("처리된 아이템:", processedItem);
+          return processedItem;
         });
         
-        console.log("처리된 데이터:", processedData);
+        console.log("최종 처리된 데이터:", processedData);
         setSearchResults(processedData);
         
         const recruitmentIds = processedData.map(item => item.recruitmentIdHash);
@@ -102,7 +123,25 @@ function Map() {
                   try {
                     const recruitmentIds = searchResults.map(item => item.recruitmentIdHash);
                     console.log("Button click - sending IDs:", recruitmentIds);
-                    await sendTotalRecruitments(recruitmentIds);
+                    const response = await sendTotalRecruitments(recruitmentIds);
+                    console.log("Total recruitments response:", response);
+                    
+                    // API 응답 데이터 처리
+                    if (response && response.data) {
+                      const processedData = response.data.map(item => ({
+                        ...item,
+                        fullAddress: item.fullAddress || '',
+                        recruitmentIdHash: item.id || item.recruitmentIdHash,
+                        title: item.title || '제목 없음',
+                        workType: item.workType || item.workSubType || '',
+                        dDay: item.dDay || 0,
+                        category: item.category || selectedCategory,
+                        companyName: item.companyName || '기관명 없음'
+                      }));
+                      console.log("Processed total recruitments data:", processedData);
+                      setSearchResults(processedData);
+                    }
+                    
                     setIsModalOpen(true);
                   } catch (error) {
                     console.error('Error sending recruitment IDs:', error);

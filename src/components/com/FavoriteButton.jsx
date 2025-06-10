@@ -11,6 +11,11 @@ export default function FavoriteButton({
   const [isPlaying, setIsPlaying] = useState(false);
   const animRef = useRef(null);
 
+  // initialFavorite prop이 변경될 때마다 상태 업데이트
+  useEffect(() => {
+    setFavorite(initialFavorite);
+  }, [initialFavorite]);
+
   const handleClick = () => {
     if (isPlaying) return;
 

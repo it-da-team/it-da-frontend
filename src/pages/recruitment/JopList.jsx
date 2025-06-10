@@ -2,9 +2,35 @@
 import React, { useState, useEffect } from "react";
 import JopListItem from "./JopListItem";
 import useRecruitmentList from "../../hooks/recruitment/useRecruitmentList";
+import { getFavoriteRecruitments } from "../../utils/localStorage";
+import FavoriteGuide from "../../components/recruitment/FavoriteGuide";
+import "../../assets/css/JopList.css";
 
 export default function JopList({ type, categoryEnum, searchResults, loading: searchLoading, error: searchError }) {
   const { data: jobsToShow, loading: listLoading, error: listError } = useRecruitmentList(categoryEnum);
+  const [favoriteJobs, setFavoriteJobs] = useState([]);
+
+  // 로컬스토리지에서 관심공고 목록 가져오기
+  const loadFavorites = () => {
+    const favorites = getFavoriteRecruitments();
+    setFavoriteJobs(favorites);
+  };
+
+  useEffect(() => {
+    loadFavorites();
+
+    // 로컬스토리지 변경 이벤트 리스너 등록
+    const handleStorageChange = (e) => {
+      if (e.key === 'favoriteRecruitments') {
+        loadFavorites();
+      }
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, []);
 
   // 검색이 실행되었을 때
   if (searchResults !== undefined) {
@@ -13,16 +39,19 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
     if (!searchResults.length) return <p>검색 결과가 없습니다.</p>;
 
     const filtered = type === "favorite"
-      ? searchResults.filter(job => job.isFavorite)
+      ? favoriteJobs  // 검색 결과가 아닌 저장된 관심공고 목록 사용
       : searchResults;
 
     return (
-      <div className="jop-list">
-        {filtered.map(job => (
-          <div className="jop-list-item" key={job.id}>
-            <JopListItem job={job} />
-          </div>
-        ))}
+      <div className="jop-list-container">
+        {type === "favorite" && <FavoriteGuide />}
+        <div className="jop-list">
+          {filtered.map(job => (
+            <div className="jop-list-item" key={job.id}>
+              <JopListItem job={job} />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
@@ -32,7 +61,7 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
   if (listError) return <p>에러 발생: {listError}</p>;
 
   const filtered = type === "favorite"
-    ? jobsToShow.filter(job => job.isFavorite)
+    ? favoriteJobs  // 전체 목록이 아닌 저장된 관심공고 목록 사용
     : jobsToShow;
 
   if (!filtered.length) {
@@ -40,12 +69,15 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
   }
 
   return (
-    <div className="jop-list">
-      {filtered.map(job => (
-        <div className="jop-list-item" key={job.id}>
-          <JopListItem job={job} />
-        </div>
-      ))}
+    <div className="jop-list-container">
+      {type === "favorite" && <FavoriteGuide />}
+      <div className="jop-list">
+        {filtered.map(job => (
+          <div className="jop-list-item" key={job.id}>
+            <JopListItem job={job} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
