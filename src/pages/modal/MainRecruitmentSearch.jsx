@@ -53,6 +53,7 @@ export function MainRecruitmentSearch({ onClose, onSearch, initialCategory }) {
   }, []);
 
   console.log('MainRecruitmentSearch initialCategory:', initialCategory); // 디버깅용
+  console.log('Selected Keywords:', selectedKeywords); // 디버깅용
 
   const showKindergarten = selectedCompanyTypes.includes(COMPANY_TYPE_KEYWORDS.KINDERGARTEN);
   const showDaycare = selectedCompanyTypes.includes(COMPANY_TYPE_KEYWORDS.DAYCARE);
@@ -173,7 +174,10 @@ export function MainRecruitmentSearch({ onClose, onSearch, initialCategory }) {
         <SearchHeader onClose={onClose} />
         <SelectedKeywordTags keywords={selectedKeywords} />
 
-        <RegionSelector onKeywordChange={updateKeywords} />
+        <RegionSelector 
+          onKeywordChange={updateKeywords}
+          selectedKeywords={selectedKeywords}
+        />
 
         <CompanyTypeSelector
           selectedItems={selectedCompanyTypes}
@@ -195,8 +199,12 @@ export function MainRecruitmentSearch({ onClose, onSearch, initialCategory }) {
                 showKindergarten={showKindergarten}
                 showDaycare={showDaycare}
                 onKeywordChange={updateKeywords}
+                selectedKeywords={selectedKeywords}
               />
-              <TeacherDutySelector onKeywordChange={updateKeywords} />
+              <TeacherDutySelector 
+                onKeywordChange={updateKeywords}
+                selectedKeywords={selectedKeywords}
+              />
             </motion.div>
           )}
         </AnimatePresence>

@@ -65,4 +65,187 @@
 
 .jop-list {
   width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.main-jop-list {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 0.6rem 1.25rem;
+  margin-bottom: 0;
+  transition: transform 0.2s;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.main-jop-list:hover {
+  transform: translateY(-2px);
+}
+
+.jop-item-title {
+  margin-bottom: 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.jop-item-title > div:first-child {
+  flex: 1;
+}
+
+.jop-item-title h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.2rem;
+  line-height: 1.2;
+}
+
+.jop-item-title h3 {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.jop-item-type {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+  align-items: center;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.jop-item-type::-webkit-scrollbar {
+  display: none;
+}
+
+.jop-item-type h4 {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  line-height: 1.2;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* 지역 태그 */
+.jop-item-type h4:nth-child(1),
+.search-tag.region {
+  background: #E3F2FD;
+}
+
+/* 카테고리 태그 */
+.jop-item-type h4:nth-child(2),
+.search-tag.category {
+  background: #F3E5F5;
+}
+
+/* 직군 태그 */
+.jop-item-type h4:nth-child(3),
+.search-tag.job-type {
+  background: #E8F5E9;
+}
+
+/* D-day 태그 */
+.jop-item-type h4:nth-child(4),
+.search-tag.d-day {
+  background: #FFF3E0;
+}
+
+.job-item-meta {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+  min-width: 40px;
+}
+
+.job-item-meta > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.25rem;
+}
+
+.job-item-meta > div:last-child {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  .jop-list {
+    grid-template-columns: 1fr;
+  }
+
+  .main-jop-list {
+    padding: 0.75rem 1rem;
+  }
+
+  .jop-item-title {
+    gap: 0.5rem;
+  }
+
+  .jop-item-title h2 {
+    font-size: 1.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .jop-item-title h3 {
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .jop-item-type {
+    gap: 0.4rem;
+  }
+
+  .jop-item-type h4 {
+    font-size: 0.95rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+.search-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  color: #333;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.search-tag button {
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.search-tag button:hover {
+  color: #333;
 } 

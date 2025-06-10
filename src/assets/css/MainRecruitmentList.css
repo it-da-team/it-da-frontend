@@ -17,17 +17,24 @@
     }
     
     .tabs-header {
-        flex-direction: column;
+        flex-direction: row !important;
         gap: 1rem;
+        align-items: center;
     }
     
     .search {
-        margin-top: 1rem;
+        margin-top: 0;
+        flex-shrink: 0;
     }
     
     .tab-action-button {
-        margin-top: 1rem;
-        width: 100%;
+        margin-top: 0;
+        width: auto;
+    }
+
+    .search-keywords-button-row {
+        flex-direction: row;
+        align-items: center;
     }
 }
 
@@ -41,22 +48,24 @@
 .tabs-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end; /* ✅ 또는 baseline */
-    flex-wrap: wrap;
+    align-items: center;
+    flex-wrap: nowrap;
     gap: 1rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid #eee;
-  }
+}
+
 /* TabList (탭 레이블 그룹) */
 .search {
     display: flex;
     justify-content: flex-start;
     gap: 1rem;
-    margin: 0; /* ✅ 이걸로 변경! */
+    margin: 0;
     padding: 0;
     list-style: none;
-  }
+    flex-shrink: 0;
+}
 
 /* 개별 Tab 스타일 */
 .search .react-tabs__tab {
@@ -68,6 +77,7 @@
     border: 1px solid transparent;
     border-bottom: none;
     transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
 }
 
 .search .react-tabs__tab:hover {
@@ -95,7 +105,7 @@
     width: 10rem;
     height: 3rem;
     transition: background-color 0.2s;
-    margin-top: 5rem;
+    margin-top: 0;
 }
 
 .tab-action-button:hover {
@@ -112,7 +122,7 @@
   
 .search-keywords-button-row {
     display: flex;
-    align-items: flex-end; /* 버튼과 태그를 하단 정렬 */
+    align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
 }
@@ -123,7 +133,7 @@
     gap: 0.5rem;
     min-height: 3rem;
     padding: 0rem 0;
-    align-items: flex-end; /* 태그들을 하단 정렬 */
+    align-items: center;
 }
   
 .keyword-tag {
@@ -132,16 +142,23 @@
     border-radius: 999px;
     font-size: 0.9rem;
     color: #333;
-    line-height: 1.2; /* 텍스트 세로 정렬을 위한 line-height 조정 */
+    line-height: 1.2;
 }
-  
+
 @media (max-width: 768px) {
     .search-keywords-button-row {
-      flex-direction: column;
-      align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
     }
   
     .tab-action-button {
-      width: 100%;
+        width: auto;
+        min-width: 120px;
+    }
+
+    .selected-keywords {
+        flex: 1;
+        margin-right: 1rem;
     }
 }

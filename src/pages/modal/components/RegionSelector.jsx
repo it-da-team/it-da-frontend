@@ -1,9 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ButtonList from "./ButtonList";
 
-export default function RegionSelector({ onKeywordChange }) {
+export default function RegionSelector({ onKeywordChange, selectedKeywords = [] }) {
     const [selectedRegions, setSelectedRegions] = useState([]);
     const regions = ["서울", "경기", "인천", "강원", "충청", "전라", "경상", "제주"];
+
+    // selectedKeywords가 변경될 때마다 선택된 지역 업데이트
+    useEffect(() => {
+        const regions = selectedKeywords.filter(keyword => 
+            ["서울", "경기", "인천", "강원", "충청", "전라", "경상", "제주"].includes(keyword)
+        );
+        setSelectedRegions(regions);
+    }, [selectedKeywords]);
 
     const handleRegionChange = (item, isSelected) => {
         const newSelected = isSelected
