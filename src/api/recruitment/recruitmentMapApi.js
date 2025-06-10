@@ -18,7 +18,8 @@ export const fetchMapRecruitments = async (params) => {
       params: queryParams
     });
     
-    console.log("Response:", response);
+    console.log("API Response Data:", response.data);
+    console.log("First item in response:", response.data[0]);
     return response.data;
   } catch (error) {
     console.error("지도용 API 에러:", error);
