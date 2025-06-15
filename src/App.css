@@ -1,7 +1,9 @@
 /* src/styles/global.css */
 /* global.css 맨 위에 한 번만! */
 @import url('https://fonts.googleapis.com/earlyaccess/nanumgothic.css');
-
+html {
+  font-size: 13px !important;
+}
 /* 전역 폰트 설정 */
 html, body {
   font-family: 'Nanum Gothic', sans-serif;
