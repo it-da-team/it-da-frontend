@@ -40,12 +40,12 @@ export const fetchRecruitmentDetail = async (id) => {
 export const fetchFilteredRecruitments = async (filterDto) => {
     try {
       console.log('필터 검색 요청 시작:', {
-        url: '/recruitment/filter',
+        url: '/filter',
         method: 'POST',
         data: filterDto
       });
       
-      const response = await axios.post(`/recruitment/filter`, filterDto);
+      const response = await axios.post('/filter', filterDto);
       
       console.log('필터 검색 응답:', {
         status: response.status,

@@ -6,6 +6,7 @@ import "../../assets/css/global.css";
 
 export default function NotFound() {
   return (
+    <div className="container">
     <div className="notfound-container">
       <div className="notfound-content">
         <DotLottieReact
@@ -20,6 +21,7 @@ export default function NotFound() {
           홈으로 돌아가기
         </Link>
       </div>
+    </div>
     </div>
   );
 }

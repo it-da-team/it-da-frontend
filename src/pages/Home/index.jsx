@@ -12,9 +12,11 @@ import "../../assets/css/global.css";
 // 그 아래 원장님이신가요? 센터장이신가요? 
 function Home(){
     return(
+        <div className="container">
         <div className="home">
             <MainBanner/>
             <MainCategory/>
+        </div>
         </div>
     )
 }
