@@ -2,7 +2,7 @@
 /* global.css 맨 위에 한 번만! */
 @import url('https://fonts.googleapis.com/earlyaccess/nanumgothic.css');
 html {
-  font-size: 13px !important;
+  font-size: 11px !important;
 }
 /* 전역 폰트 설정 */
 html, body {
