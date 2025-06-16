@@ -1,5 +1,4 @@
-// src/components/MainCategory.jsx
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import MainCategoryList from "./MainCategoryList";
 import { labelToEnum } from "../../utils/categoryMap";
@@ -23,29 +22,50 @@ const categories = [
 
 function MainCategory({ onCategorySelect, selected, compact = false }) {
   const navigate = useNavigate();
+  const listWrapperRef = useRef(null);
+
+  const scroll = (offset) => {
+    if (listWrapperRef.current) {
+      listWrapperRef.current.scrollBy({ left: offset, behavior: "smooth" });
+    }
+  };
 
   return (
     <section className={`main-category ${compact ? "compact" : ""}`}>
       {!compact && <h2>어떤 기관의 공고를 찾으시나요?</h2>}
-      <ul className="main-category-list-wrapper">
-        {categories.map((cat, i) => (
-          <li
-            key={i}
-            onClick={() =>
-              compact
-                ? onCategorySelect?.(cat.label)
-                : navigate(`/recruitment?category=${labelToEnum[cat.label]}`)
-            }
-          >
-            <MainCategoryList
-              label={cat.label}
-              image={cat.image}
-              active={selected === cat.label}
-              compact={compact}
-            />
-          </li>
-        ))}
-      </ul>
+
+      <div className="main-category-scroll-container">
+        {!compact && (
+          <>
+            <button className="scroll-arrow left" onClick={() => scroll(-208)}>
+              ❮
+            </button>
+            <button className="scroll-arrow right" onClick={() => scroll(208)}>
+              ❯
+            </button>
+          </>
+        )}
+
+        <ul className="main-category-list-wrapper" ref={listWrapperRef}>
+          {categories.map((cat, i) => (
+            <li
+              key={i}
+              onClick={() =>
+                compact
+                  ? onCategorySelect?.(cat.label)
+                  : navigate(`/recruitment?category=${labelToEnum[cat.label]}`)
+              }
+            >
+              <MainCategoryList
+                label={cat.label}
+                image={cat.image}
+                active={selected === cat.label}
+                compact={compact}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }
