@@ -4,8 +4,7 @@ import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 export default function FavoriteButton({
   initialFavorite = false,
   onToggle,
-  lottieSrc,
-  size = 32
+  lottieSrc
 }) {
   const [favorite, setFavorite] = useState(initialFavorite);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -62,8 +61,8 @@ export default function FavoriteButton({
       onClick={handleClick}
       style={{
         position: "relative",
-        width: size,
-        height: size,
+        width: 35,
+        height: 35,
         cursor: isPlaying ? "default" : "pointer",
         display: "flex",
         alignItems: "center",
@@ -74,13 +73,13 @@ export default function FavoriteButton({
       {!isPlaying && (
         <svg
           viewBox="0 0 24 24"
-          width={size}
-          height={size}
+          width={35}
+          height={35}
           fill={favorite ? "#e74c3c" : "#ccc"}
           style={{
             position: "absolute",
-            top: 0,
-            left: 0
+            top: 5,
+            left: 20
           }}
         >
           <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5
@@ -98,11 +97,11 @@ export default function FavoriteButton({
           autoplay
           loop={false}
           style={{
-            width: size,
-            height: size,
+            width: 35,
+            height: 35,
             position: "absolute",
-            top: 0,
-            left: 0
+            top: 5,
+            left: 20
           }}
         />
       )}
