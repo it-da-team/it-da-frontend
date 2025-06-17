@@ -1,0 +1,220 @@
+/* 로그인 페이지 컨테이너 */
+body {
+    font-family: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  }
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,248,225,0.85) 50%, rgba(224,192,151,0.8) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.login-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* 로그인 박스 */
+.login-box {
+  background: white;
+  padding: 3.5rem;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 420px;
+  height: 580px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeUp 0.8s ease-out;
+}
+
+@keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .login-logo {
+    width: 60px;
+    margin-bottom: 1rem;
+  }
+.login-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+      0 12px 32px rgba(0, 0, 0, 0.08),
+      0 0 40px rgba(252, 234, 187, 0.2),
+      0 0 50px rgba(248, 181, 0, 0.15);
+  /* 머스타드 노랑 */
+    animation: glow 1.5s ease-in-out infinite alternate;
+  }
+  
+  .login-button {
+    gap: 0.5rem; /* 아이콘과 텍스트 간격 */
+  }
+  
+  .icon-wrapper {
+    margin: 0; /* 기존 margin-right 제거 */
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.12),
+        0 0 40px rgba(252, 234, 187, 0.35),
+        0 0 60px rgba(248, 181, 0, 0.25);
+    }
+    to {
+      box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.12),
+        0 0 55px rgba(255, 223, 130, 0.4),
+        0 0 70px rgba(255, 200, 80, 0.3);
+    }
+  }
+
+/* 타이틀 */
+.login-title {
+  color: #333;
+  margin-bottom: 3.5rem;
+  font-size: 2.8rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  position: relative;
+}
+
+.login-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 4px;
+  background: linear-gradient(90deg, #FFD700, #FFA500);
+  border-radius: 2px;
+}
+
+/* 서브타이틀 */
+.login-subtitle {
+  color: #444;
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  line-height: 1.6;
+}
+/* ✅ 공통 스타일 */
+.login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1.1rem;
+    margin: 0.8rem 0;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+    color: #333;
+    position: relative;
+    overflow: hidden;
+    gap: 0.75rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  
+  /* 호버 효과 (공통) */
+  .login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  
+  /* ✅ 카카오 로그인 (밝은 머스타드톤) */
+  .kakao-button {
+    background: linear-gradient(135deg, #fbe26a, #f7ca3e);
+    color: #3c1e1e;
+  }
+  
+  .kakao-button:hover {
+    background: linear-gradient(135deg, #ffeb80, #f5bc00);
+  }
+  
+  /* ✅ 구글 로그인 (모던한 연회색 톤) */
+  .google-button {
+    background: linear-gradient(135deg, #f5f5f5, #eaeaea);
+    color: #444;
+    border: 1px solid #ddd;
+  }
+  
+  .google-button:hover {
+    background: linear-gradient(135deg, #ffffff, #e5e5e5);
+    border-color: #bbb;
+  }
+/* 아이콘 래퍼 */
+.icon-wrapper {
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .login-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2.2rem 0;
+    font-size: 0.9rem;
+    color: #aaa;
+    position: relative;
+  }
+  
+  .login-divider::before,
+  .login-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+  }
+  
+  .login-divider::before {
+    margin-right: 0.8rem;
+  }
+  
+  .login-divider::after {
+    margin-left: 0.8rem;
+  }
+
+  .login-message {
+    font-size: 0.95rem;
+    color: #777;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    font-weight: 500;
+  }

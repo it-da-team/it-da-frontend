@@ -11,6 +11,7 @@ import ScrollToTop from './components/common/ScrollToTop';
 import Story from './pages/Story';
 import Talk from './pages/Talk';
 import Play from './pages/Play';
+import Login from './pages/Users/login';
 
 const config = defineConfig({
   initialColorMode: 'light',
@@ -29,6 +30,7 @@ function App() {
           <Route path="/story" element={<Story />} />
           <Route path="/talk" element={<Talk />} />
           <Route path="/play" element={<Play />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </DefaultLayout>
