@@ -1,0 +1,74 @@
+.talk-detail-container {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.talk-detail-content {
+    padding: 1.5rem;
+}
+
+.talk-detail-header {
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.talk-detail-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #343a40;
+    margin-bottom: 0.75rem;
+}
+
+.talk-detail-summary {
+    font-size: 1.1rem;
+    color: #868e96;
+}
+
+.talk-detail-image-wrapper {
+    margin-bottom: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.talk-detail-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.talk-detail-body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #495057;
+}
+
+.talk-detail-body p {
+    margin-bottom: 1.5rem;
+}
+
+.back-to-list-wrapper {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.back-to-list-button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #ffd700;
+    color: #333;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease;
+}
+
+.back-to-list-button:hover {
+    background-color: #e6c300;
+    transform: translateY(-2px);
+} 

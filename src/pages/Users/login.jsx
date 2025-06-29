@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { SiKakaotalk } from 'react-icons/si';
 import LogoImg from "../../assets/images/icon/image-removebg-preview.png"
@@ -8,34 +7,6 @@ import '../../assets/css/Login.css';
 const API_BASE = process.env.REACT_APP_RECRUITMENT_API_BASE_URL;
 
 export default function Login() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    // URL에서 토큰 파라미터 확인
-    const urlParams = new URLSearchParams(window.location.search);
-    const encodedToken = urlParams.get('token');
-    
-    if (encodedToken) {
-      try {
-        // URL 디코딩 후 JSON 파싱
-        const decodedToken = decodeURIComponent(encodedToken);
-        const tokenData = JSON.parse(decodedToken);
-        
-        if (tokenData.token) {
-          // 토큰을 로컬 스토리지에 저장
-          localStorage.setItem('accessToken', tokenData.token);
-          localStorage.setItem('isLoggedIn', 'true');
-          
-          // 메인 페이지로 리다이렉트
-          navigate('/', { replace: true });
-        }
-      } catch (error) {
-        console.error('Token handling error:', error);
-      }
-    }
-  }, [navigate]);
-
   const kakaoLogin = () => {
     window.location.href = `${API_BASE}/oauth2/authorization/kakao`;
   };

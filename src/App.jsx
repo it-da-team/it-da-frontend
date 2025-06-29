@@ -3,11 +3,18 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import DefaultLayout from './layouts/DefaultLayout';
 import Login from './pages/Users/login';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import Home from './pages/Home/Home';
+import Home from './pages/Home';
 import './App.css';
 import FavoriteRecruitments from './pages/recruitment/FavoriteRecruitments';
 import Header from './components/common/Header';
 import Footer from './components/common/Footer';
+import CommunityPage from './pages/Community';
+import CreatePost from './pages/Community/CreatePost';
+import PostDetail from './pages/Community/PostDetail';
+import Talk from './pages/Talk';
+import Play from './pages/Play';
+import Story from './pages/Story';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -15,35 +22,26 @@ function App() {
       <Header />
       <main>
         <Routes>
-          {/* 공개 라우트 */}
           <Route path="/login" element={<Login />} />
-          
-          {/* 보호된 라우트 */}
-          <Route
-            path="/"
+          <Route 
+            path="/*"
             element={
               <ProtectedRoute>
                 <DefaultLayout>
-                  <Home />
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/community" element={<CommunityPage />} />
+                    <Route path="/community/create" element={<CreatePost />} />
+                    <Route path="/community/post/:postId" element={<PostDetail />} />
+                    <Route path="/talk" element={<Talk />} />
+                    <Route path="/play" element={<Play />} />
+                    <Route path="/story" element={<Story />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
                 </DefaultLayout>
               </ProtectedRoute>
-            }
+            } 
           />
-          
-          {/* 기타 보호된 라우트들 */}
-          <Route
-            path="/mypage"
-            element={
-              <ProtectedRoute>
-                <DefaultLayout>
-                  {/* 마이페이지 컴포넌트 */}
-                </DefaultLayout>
-              </ProtectedRoute>
-            }
-          />
-          
-          {/* 404 페이지 */}
-          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
       <Footer />

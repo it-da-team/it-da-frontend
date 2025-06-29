@@ -1,0 +1,57 @@
+/* Community.css */
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap');
+
+/* body 태그에 직접 적용되던 스타일을 클래스로 변경 */
+.community-body {
+  background-color: #f8f9fa;
+}
+
+body {
+  /* color와 font-family는 전역으로 유지하되, background-color는 제거 */
+  color: #343a40;
+  font-family: 'Pretendard', sans-serif;
+  background-color: #fff; /* 기본 배경색을 흰색으로 명시 */
+}
+
+.community-container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.community-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.community-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #212529;
+  margin-bottom: 8px;
+}
+
+.community-header p {
+  font-size: 1.1rem;
+  color: #6c757d;
+}
+
+.community-main-content {
+  display: flex;
+  gap: 30px;
+}
+
+.community-left-column {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.community-right-column {
+  flex: 1;
+  position: sticky;
+  top: 20px;
+  align-self: flex-start;
+} 

@@ -1,0 +1,220 @@
+/* Comment.css */
+.comment-container {
+    border-bottom: 1px solid #e9ecef;
+    padding: 20px 0;
+}
+
+.comment-main {
+    margin-bottom: 10px;
+}
+
+.comment-author-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.comment-author-name {
+    font-weight: 600;
+    color: #343a40;
+}
+
+/* AuthorBadge 스타일 중복. 전역화 필요 */
+.author-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+.teacher-badge { background-color: #e3f2fd; color: #1976d2; }
+.director-badge { background-color: #f3e5f5; color: #7b1fa2; }
+
+.comment-content {
+    margin: 8px 0;
+    line-height: 1.6;
+    color: #495057;
+}
+
+.comment-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.comment-date {
+    font-size: 0.9rem;
+    color: #868e96;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.edited-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #6c757d;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+.edited-indicator svg {
+    font-size: 0.7rem;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.comment-action-button {
+    background: none;
+    border: none;
+    color: #868e96;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.comment-action-button:hover {
+    background-color: #f8f9fa;
+    color: #495057;
+}
+
+.comment-action-button .liked-icon {
+    color: #e64980;
+}
+
+/* 답글 버튼 특별 스타일 */
+.comment-action-button.show-replies-button {
+    color: #1976d2;
+}
+
+.comment-action-button.show-replies-button:hover {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+.comment-action-button.show-replies-button:disabled {
+    color: #adb5bd;
+    cursor: not-allowed;
+}
+
+.comment-action-button.show-replies-button svg {
+    font-size: 0.8rem;
+}
+
+.reply-form-wrapper {
+    margin: 15px 0;
+    padding-left: 20px;
+    border-left: 2px solid #e9ecef;
+}
+
+/* 답글 관련 스타일 */
+.show-replies-button {
+    background: none;
+    border: none;
+    color: #1976d2;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.show-replies-button:hover {
+    background-color: #f8f9fa;
+}
+
+.show-replies-button:disabled {
+    color: #adb5bd;
+    cursor: not-allowed;
+}
+
+.show-replies-button svg {
+    font-size: 0.8rem;
+}
+
+.replies-container {
+    margin-left: 20px;
+    padding-left: 20px;
+    border-left: 2px solid #e9ecef;
+    margin-top: 10px;
+}
+
+.replies-container .comment-container {
+    padding: 15px 0;
+}
+
+.replies-container .comment-container:last-child {
+    border-bottom: none;
+}
+
+/* 삭제된 댓글 스타일 */
+.deleted-reply {
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.deleted-reply:last-child {
+    border-bottom: none;
+}
+
+.deleted-reply-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.deleted-text {
+    color: #868e96;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.deleted-date {
+    color: #adb5bd;
+    font-size: 0.8rem;
+}
+
+.reply-item {
+    margin-bottom: 10px;
+}
+
+.reply-item:last-child {
+    margin-bottom: 0;
+}
+
+/* 대댓글의 대댓글 스타일 (3단계) */
+.replies-container .replies-container {
+    margin-left: 15px;
+    padding-left: 15px;
+    border-left: 1px solid #dee2e6;
+}
+
+.replies-container .replies-container .comment-container {
+    padding: 10px 0;
+}
+
+.replies-container .replies-container .deleted-reply {
+    padding: 10px 0;
+}
+
+/* 3단계 이상에서는 답글 버튼 숨기기 */
+.replies-container .replies-container .comment-actions .comment-action-button:contains("답글") {
+    display: none;
+} 

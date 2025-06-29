@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "title": "유튜브로 배우는 무지개 클레이 놀이",
+    "description": "유튜브 영상을 보며 아이들의 창의력과 색 감각을 길러보세요.",
+    "month": "4월",
+    "theme": "미술",
+    "age": 3,
+    "sourceType": "youtube",
+    "sourceUrl": "https://www.youtube.com/embed/watch?v=videoseries",
+    "shoppingItems": [
+      { "id": 1, "name": "무지개색 클레이", "price": 5000, "link": "#" },
+      { "id": 2, "name": "도화지", "price": 2000, "link": "#" }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "인스타 감성! 휴지심 미술 놀이",
+    "description": "인스타그램에서 핫한 휴지심을 이용한 미술 놀이 아이디어입니다.",
+    "month": "4월",
+    "theme": "미술",
+    "age": 3,
+    "sourceType": "instagram",
+    "sourceUrl": "https://www.instagram.com/p/C2_a5f2vAsg/?utm_source=ig_embed&utm_campaign=loading",
+    "shoppingItems": [
+      { "id": 1, "name": "색 휴지심", "price": 3000, "link": "#" },
+      { "id": 2, "name": "글루건", "price": 4000, "link": "#" }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "오감만족! 신나는 물감 놀이 (유튜브)",
+    "description": "손과 발을 이용해 자유롭게 표현하는 오감 발달 물감 놀이를 영상으로 만나보세요.",
+    "month": "7월",
+    "theme": "미술",
+    "age": 4,
+    "sourceType": "youtube",
+    "sourceUrl": "https://www.youtube.com/embed/watch?v=videoseries",
+    "shoppingItems": [
+      { "id": 1, "name": "손에 묻지 않는 물감", "price": 12000, "link": "#" },
+      { "id": 2, "name": "대형 전지", "price": 3000, "link": "#" }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "인스타 추천! 상상력 가득 블록 놀이",
+    "description": "협동심과 공간 지각 능력을 키울 수 있는 블록 놀이 사진들입니다.",
+    "month": "1월",
+    "theme": "구성",
+    "age": 5,
+    "sourceType": "instagram",
+    "sourceUrl": "https://www.instagram.com/p/C2_a5f2vAsg/?utm_source=ig_embed&utm_campaign=loading",
+    "shoppingItems": [
+        { "id": 1, "name": "레고 클래식", "price": 50000, "link": "#" },
+        { "id": 2, "name": "원목 블록 세트", "price": 35000, "link": "#" }
+    ]
+  }
+] 

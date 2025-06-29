@@ -1,0 +1,17 @@
+/* CommentSection.css */
+.comment-section-container {
+    padding-top: 30px;
+}
+
+.comment-section-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #343a40;
+}
+
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+} 

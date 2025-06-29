@@ -1,0 +1,45 @@
+/* CommentForm.css */
+.comment-form-container {
+    margin-bottom: 30px;
+}
+
+.comment-textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.6;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.comment-textarea:focus {
+    border-color: #e99a19;
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+}
+
+.comment-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.submit-comment-button {
+    background-color: #ffd700;
+    color: #343a40;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-comment-button:hover {
+    background-color: #e99a19;
+    color: #fff;
+} 

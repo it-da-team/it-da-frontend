@@ -1,0 +1,43 @@
+/* PostEditor.css */
+.post-editor-container {
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-editor-container:focus-within {
+    border-color: #e99a19;
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.3);
+}
+
+.title-input {
+    width: 100%;
+    padding: 20px;
+    border: none;
+    border-bottom: 1px solid #f1f3f5;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #343a40;
+    outline: none;
+}
+
+.title-input::placeholder {
+    color: #ced4da;
+}
+
+.content-textarea {
+    width: 100%;
+    padding: 20px;
+    border: none;
+    outline: none;
+    resize: vertical;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #495057;
+    font-family: 'Pretendard', sans-serif;
+}
+
+.content-textarea::placeholder {
+    color: #ced4da;
+} 
