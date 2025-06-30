@@ -242,4 +242,20 @@ export async function searchPosts(keyword, token) {
     console.error('게시글 검색 실패:', error);
     throw new Error('검색 결과를 불러오지 못했습니다.');
   }
-} 
+}
+
+// 게시글 생성 API
+export async function createPost(postData, token) {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/community/create/`, postData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('게시글 생성 실패:', error.response);
+    throw new Error(error.response?.data?.message || '게시글 생성에 실패했습니다.');
+  }
+}

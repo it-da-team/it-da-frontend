@@ -45,17 +45,18 @@ const formatDate = (dateString) => {
 };
 
 const PostListItem = ({ post }) => {
-  const { id, title, author, authorBadge, likes, createdAt, imageUrl, category } = post;
+  const { id, title, author, authorBadge, likes, createdAt, category, content } = post;
 
   return (
     <Link to={`/community/post/${id}`} className="post-list-item-link">
-        <article className={`post-list-item ${imageUrl ? 'has-thumbnail' : ''}`}>  
+        <article className="post-list-item">  
             <div className="post-main-row">
                 <div className="post-content">
                     <div className="post-header">
                         <span className="post-category">{category}</span>
                     </div>
                     <h3 className="post-title">{title}</h3>
+                    <p className="post-content-preview">{content}</p>
                     <div className="post-meta">
                         <div className="post-author-wrapper">
                             <span className="post-author">{author}</span>
@@ -64,11 +65,6 @@ const PostListItem = ({ post }) => {
                         <span className="post-created-at">{formatDate(createdAt)}</span>
                     </div>
                 </div>
-                {imageUrl && (
-                    <div className="post-thumbnail">
-                        <img src={imageUrl} alt={`${title} 썸네일`} />
-                    </div>
-                )}
             </div>
             <div className="post-footer">
                 <div className="post-stats">

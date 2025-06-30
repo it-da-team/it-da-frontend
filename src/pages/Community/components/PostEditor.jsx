@@ -1,20 +1,23 @@
 import React from 'react';
 import './PostEditor.css';
 
-const PostEditor = () => {
+const PostEditor = ({ title, content, onTitleChange, onContentChange }) => {
   return (
     <div className="form-section">
-      <h3 className="form-section-title">본문</h3>
       <div className="post-editor-container">
         <input
           type="text"
           placeholder="제목을 입력하세요"
           className="title-input"
+          value={title}
+          onChange={onTitleChange}
         />
         <textarea
-          placeholder="이곳에 글을 작성해주세요.&#10;사진이나 동영상은 아래에서 첨부할 수 있습니다."
+          placeholder="이곳에 글을 작성해주세요."
           className="content-textarea"
           rows="15"
+          value={content}
+          onChange={onContentChange}
         ></textarea>
       </div>
     </div>

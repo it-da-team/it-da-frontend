@@ -51,11 +51,18 @@
   }
   
   .post-title {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 600;
-    color: #343a40;
-    margin: 0 0 15px 0;
-    line-height: 1.4;
+    margin: 0;
+    color: #333;
+  }
+  
+  .post-content-preview {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #666;
+    margin: 8px 0;
   }
   
   .post-meta {
@@ -70,7 +77,7 @@
   .post-author-wrapper {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
   
   .post-author {
@@ -112,14 +119,15 @@
     object-fit: cover;
   }
   
+  .post-created-at {
+    font-size: 0.8rem;
+    color: #868e96;
+  }
+  
   .post-footer {
     border-top: 1px solid #f1f3f5;
-    padding-top: 5px;
-    background-color: #fff;
-    margin-top: 8px;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
+    padding-top: 10px;
+    margin-top: 10px;
   }
 
   /* 썸네일 있을 경우 footer 위치 조정 - 통일된 스타일 적용 */
