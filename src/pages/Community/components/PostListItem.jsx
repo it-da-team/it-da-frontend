@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './PostListItem.css';
-import { FaHeart, FaCommentDots, FaUserGraduate, FaUserTie } from 'react-icons/fa';
+import { FaHeart, FaCommentDots, FaUserGraduate, FaUserTie, FaUser } from 'react-icons/fa';
 
 const AuthorBadge = ({ badge }) => {
     let badgeIcon;
@@ -13,6 +13,9 @@ const AuthorBadge = ({ badge }) => {
     } else if (badge === '원장') {
       badgeIcon = <FaUserTie />;
       badgeClass = 'director-badge';
+    } else if (badge === '일반 회원') {
+      badgeIcon = <FaUser />;
+      badgeClass = 'basic-badge';
     } else {
       return null;
     }

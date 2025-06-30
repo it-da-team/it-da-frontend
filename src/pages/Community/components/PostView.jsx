@@ -1,6 +1,6 @@
 import React from 'react';
 import './PostView.css';
-import { FaUserGraduate, FaUserTie } from 'react-icons/fa';
+import { FaUserGraduate, FaUserTie, FaUser } from 'react-icons/fa';
 
 const AuthorBadge = ({ badge }) => {
     // PostListItem.jsx에서 가져온 컴포넌트와 동일
@@ -13,6 +13,9 @@ const AuthorBadge = ({ badge }) => {
     } else if (badge === '원장') {
       badgeIcon = <FaUserTie />;
       badgeClass = 'director-badge';
+    } else if (badge === '일반 회원') {
+      badgeIcon = <FaUser />;
+      badgeClass = 'basic-badge';
     } else {
       return null;
     }

@@ -1,16 +1,28 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Comment.css';
-import { FaUserGraduate, FaUserTie, FaHeart, FaCommentDots, FaEdit } from 'react-icons/fa';
+import { FaUserGraduate, FaUserTie, FaHeart, FaCommentDots, FaEdit, FaUser } from 'react-icons/fa';
 import CommentForm from './CommentForm'; // 답글 작성 시 재사용
 import { fetchReplies } from '../../../api/community/communityApi';
 import { getToken } from '../../../utils/localStorage';
 
 const AuthorBadge = ({ badge }) => {
-    // PostView.jsx와 동일한 컴포넌트
     if (!badge) return null;
-    const isTeacher = badge === '교사';
-    const badgeIcon = isTeacher ? <FaUserGraduate /> : <FaUserTie />;
-    const badgeClass = isTeacher ? 'teacher-badge' : 'director-badge';
+    
+    let badgeIcon;
+    let badgeClass;
+  
+    if (badge === '교사') {
+      badgeIcon = <FaUserGraduate />;
+      badgeClass = 'teacher-badge';
+    } else if (badge === '원장') {
+      badgeIcon = <FaUserTie />;
+      badgeClass = 'director-badge';
+    } else if (badge === '일반 회원') {
+      badgeIcon = <FaUser />;
+      badgeClass = 'basic-badge';
+    } else {
+      return null;
+    }
   
     return (
       <span className={`author-badge ${badgeClass}`}>
