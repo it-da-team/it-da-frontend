@@ -255,7 +255,39 @@ export async function createPost(postData, token) {
     });
     return response.data;
   } catch (error) {
-    console.error('게시글 생성 실패:', error.response);
+    console.error('게시글 생성 실패:', error.response?.data || error.message);
     throw new Error(error.response?.data?.message || '게시글 생성에 실패했습니다.');
+  }
+}
+
+// 댓글 생성 API
+export async function createComment(commentData, token) {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/community/create/comment`, commentData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('댓글 생성 실패:', error.response?.data || error.message);
+    throw new Error(error.response?.data?.message || '댓글 생성에 실패했습니다.');
+  }
+}
+
+// 대댓글 생성 API
+export async function createReComment(reCommentData, token) {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/community/create/recomment`, reCommentData, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('대댓글 생성 실패:', error.response?.data || error.message);
+    throw new Error(error.response?.data?.message || '대댓글 생성에 실패했습니다.');
   }
 }
