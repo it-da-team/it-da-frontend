@@ -1,24 +1,19 @@
 import React from 'react';
+import ColumnList from './components/ColumnList';
 import './Talk.css';
 
-function Talk() {
-  return (
-    <div className="under-development">
-      <div className="content">
-        <h1>교사 톡톡</h1>
-        <div className="message">
-          <p>현재 개발 중인 서비스입니다.</p>
-          <p>곧 만나보실 수 있어요!</p>
+const Talk = () => {
+    return (
+        <div className="talk-page-container">
+            <header className="talk-page-header">
+                <h1>선배 톡톡</h1>
+                <p>업계 선배들의 생생한 경험과 지혜를 만나보세요.</p>
+            </header>
+            <main className="talk-page-main">
+                <ColumnList />
+            </main>
         </div>
-        <div className="animation">
-          <img 
-            src="https://lottie.host/83de486d-d9ca-4bcb-9c81-e9fd4ca1e3fe/VFAmmyFH7d.lottie" 
-            alt="개발 중 애니메이션"
-          />
-        </div>
-      </div>
-    </div>
-  );
-}
+    );
+};
 
 export default Talk; 
