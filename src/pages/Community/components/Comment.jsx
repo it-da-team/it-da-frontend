@@ -80,9 +80,26 @@ const Comment = ({
 
     const isExpanded = expandedComments.has(comment.id);
 
-    const handleReplyCreated = () => {
+    // 대댓글 DTO를 Comment 컴포넌트에서 기대하는 형태로 매핑하는 함수
+    const mapRecommentDtoToComment = (dto) => ({
+        id: dto.id,
+        author: dto.author,
+        authorBadge: dto.authorBadge,
+        content: dto.content,
+        likes: dto.likes,
+        createdAt: dto.createdAt,
+        updatedAt: dto.updatedAt,
+        parentCommentId: dto.parentCommentId,
+        isDeleted: dto.isDeleted,
+        hasReplies: dto.hasReplies,
+        replyCount: dto.recommentCount,
+        depth: dto.depth
+    });
+
+    const handleReplyCreated = (parentId, newReply) => {
         setShowReplyForm(false);
-        onCommentCreated(comment.id);
+        setReplies(prev => [mapRecommentDtoToComment(newReply), ...prev]);
+        if (onCommentCreated) onCommentCreated(comment.id, newReply);
     };
 
     // 역할 1: 서버에서 답글 데이터만 불러오는 함수
@@ -183,28 +200,31 @@ const Comment = ({
             {/* 답글 목록 */}
             {isExpanded && replies.length > 0 && (
                 <div className="replies-container">
-                    {replies.map(reply => (
-                        <div key={reply.id} className="reply-item">
-                            {reply.isDeleted ? (
-                                <div className="deleted-reply">
-                                    <div className="deleted-reply-content">
-                                        <span className="deleted-text">삭제된 댓글입니다.</span>
-                                        <span className="deleted-date">{formatDate(reply.createdAt)}</span>
+                    {replies
+                        .slice() // 복사본 생성
+                        .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) // 최신순 정렬
+                        .map(reply => (
+                            <div key={reply.id} className="reply-item">
+                                {reply.isDeleted ? (
+                                    <div className="deleted-reply">
+                                        <div className="deleted-reply-content">
+                                            <span className="deleted-text">삭제된 댓글입니다.</span>
+                                            <span className="deleted-date">{formatDate(reply.createdAt)}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            ) : (
-                                <Comment 
-                                    comment={reply} 
-                                    depth={currentDepth + 1}
-                                    postId={postId}
-                                    onCommentCreated={onCommentCreated}
-                                    expandedComments={expandedComments}
-                                    toggleCommentExpansion={toggleCommentExpansion}
-                                    commentElementRefs={commentElementRefs}
-                                />
-                            )}
-                        </div>
-                    ))}
+                                ) : (
+                                    <Comment 
+                                        comment={reply} 
+                                        depth={currentDepth + 1}
+                                        postId={postId}
+                                        onCommentCreated={onCommentCreated}
+                                        expandedComments={expandedComments}
+                                        toggleCommentExpansion={toggleCommentExpansion}
+                                        commentElementRefs={commentElementRefs}
+                                    />
+                                )}
+                            </div>
+                        ))}
                 </div>
             )}
         </div>

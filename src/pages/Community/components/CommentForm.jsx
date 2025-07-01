@@ -16,23 +16,33 @@ const CommentForm = ({ postId, parentId, onCommentCreated, isReply = false }) =>
     setIsSubmitting(true);
     try {
       const token = getToken();
+      console.log('댓글 작성 시 사용되는 토큰:', token);
+      console.log('댓글 작성 postId:', postId);
       if (!token) {
         alert('로그인이 필요합니다.');
+        setIsSubmitting(false);
+        return;
+      }
+      if (!postId) {
+        alert('게시글 정보가 없습니다. 새로고침 후 다시 시도해 주세요.');
         setIsSubmitting(false);
         return;
       }
       
       if (parentId) {
         // 대댓글 생성
-        await createReComment({ postId, parentId, content }, token);
+        const newReply = await createReComment({ postId, parentId, content }, token);
+        setContent('');
+        if (onCommentCreated) {
+          onCommentCreated(parentId, newReply);
+        }
       } else {
         // 일반 댓글 생성
-        await createComment({ postId, content }, token);
-      }
-
-      setContent('');
-      if (onCommentCreated) {
-        onCommentCreated(parentId);
+        const newComment = await createComment({ hashId: postId, content }, token);
+        setContent('');
+        if (onCommentCreated) {
+          onCommentCreated(null, newComment);
+        }
       }
     } catch (error) {
       console.error('댓글 작성 실패:', error);

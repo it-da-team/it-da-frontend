@@ -32,18 +32,44 @@ const PostDetail = () => {
         });
     };
 
-    // 2. 댓글/대댓글 생성 시 '액션'을 기록하도록 수정
-    const handleCommentCreated = (parentId) => {
-        if (parentId) {
-            // 대댓글 생성 시
-            setExpandedComments(prevExpanded => new Set(prevExpanded).add(parentId));
-            setPendingAction({ type: 'RECOMMENT_CREATED', parentId });
-        } else {
-            // 새 댓글 생성 시
-            const oldIds = new Set((post?.comments || []).map(c => c.id));
-            setPendingAction({ type: 'COMMENT_CREATED', oldIds });
+    // ParentCommentDto를 Comment 컴포넌트에서 기대하는 형태로 매핑하는 함수
+    const mapParentCommentDtoToComment = (dto) => ({
+        id: dto.id,
+        author: dto.author,
+        authorBadge: dto.authorBadge,
+        content: dto.content,
+        likes: dto.likes,
+        createdAt: dto.createdAt,
+        updatedAt: dto.updatedAt,
+        replyCount: dto.reCommentsCount,
+        hasReplies: dto.hasReplies,
+        replies: []
+    });
+
+    const handleCommentCreated = (parentId, newCommentOrReply) => {
+        if (!newCommentOrReply) {
+            console.error('댓글/대댓글 객체가 undefined/null입니다:', newCommentOrReply);
+            return;
         }
-        fetchPost();
+        if (parentId) {
+            setExpandedComments(prevExpanded => new Set(prevExpanded).add(parentId));
+            setPost(prev => ({
+                ...prev,
+                comments: prev.comments.map(comment =>
+                    comment.id === parentId
+                        ? { ...comment, replies: [...(comment.replies || []), newCommentOrReply] }
+                        : comment
+                ),
+                commentsCount: (prev.commentsCount || 0) + 1
+            }));
+        } else {
+            console.log('새 댓글 객체:', newCommentOrReply);
+            setPost(prev => ({
+                ...prev,
+                comments: [mapParentCommentDtoToComment(newCommentOrReply), ...(prev.comments || [])],
+                commentsCount: (prev.commentsCount || 0) + 1
+            }));
+        }
     };
 
     const fetchPost = async () => {

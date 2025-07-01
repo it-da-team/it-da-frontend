@@ -269,7 +269,8 @@ export async function createComment(commentData, token) {
         'Content-Type': 'application/json'
       }
     });
-    return response.data;
+    console.log('createComment API 응답:', response.data);
+    return response.data.data;
   } catch (error) {
     console.error('댓글 생성 실패:', error.response?.data || error.message);
     throw new Error(error.response?.data?.message || '댓글 생성에 실패했습니다.');
@@ -285,7 +286,7 @@ export async function createReComment(reCommentData, token) {
         'Content-Type': 'application/json'
       }
     });
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error('대댓글 생성 실패:', error.response?.data || error.message);
     throw new Error(error.response?.data?.message || '대댓글 생성에 실패했습니다.');
