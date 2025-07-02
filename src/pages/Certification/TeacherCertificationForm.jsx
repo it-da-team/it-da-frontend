@@ -5,12 +5,14 @@ import InstitutionInfoInput from './InstitutionInfoInput';
 import FileUploadBox from './FileUploadBox';
 import AgreementCheckbox from './AgreementCheckbox';
 import ErrorMessage from '../../components/common/ErrorMessage';
+import CertificationLoading from '../../components/common/CertificationLoading';
 
 const TeacherCertificationForm = ({ onSubmitSuccess }) => {
   const [institutionName, setInstitutionName] = useState('');
   const [institutionAddress, setInstitutionAddress] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
   const [isAgreed, setIsAgreed] = useState(false);
+  const [consentAlarmTransfer, setConsentAlarmTransfer] = useState(false);
   const [feedback, setFeedback] = useState({ message: '', type: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDragOver, setIsDragOver] = useState(false);
@@ -26,8 +28,12 @@ const TeacherCertificationForm = ({ onSubmitSuccess }) => {
     setFeedback({ message: '', type: '' });
     const formData = new FormData();
     formData.append('file', selectedFile);
-    formData.append('institutionName', institutionName);
-    formData.append('institutionAddress', institutionAddress);
+    formData.append('data', new Blob([JSON.stringify({
+      companyName: institutionName,
+      companyAddress: institutionAddress,
+      consentPersonalInfo: isAgreed,
+      consentAlarmTransfer: consentAlarmTransfer
+    })], { type: 'application/json' }));
     try {
       const token = getToken();
       if (!token) {
@@ -41,6 +47,7 @@ const TeacherCertificationForm = ({ onSubmitSuccess }) => {
       setInstitutionName('');
       setInstitutionAddress('');
       setIsAgreed(false);
+      setConsentAlarmTransfer(false);
       if (onSubmitSuccess) onSubmitSuccess();
     } catch (error) {
       setFeedback({ message: `서버 오류가 발생했습니다: ${error.message}`, type: 'error' });
@@ -59,26 +66,39 @@ const TeacherCertificationForm = ({ onSubmitSuccess }) => {
             관리자 확인 후 '교사' 등급으로 조정됩니다.
           </p>
         </div>
-        <form className="certification-form" onSubmit={handleSubmit}>
-          <InstitutionInfoInput
-            institutionName={institutionName}
-            setInstitutionName={setInstitutionName}
-            institutionAddress={institutionAddress}
-            setInstitutionAddress={setInstitutionAddress}
-          />
-          <FileUploadBox
-            selectedFile={selectedFile}
-            setSelectedFile={setSelectedFile}
-            isDragOver={isDragOver}
-            setIsDragOver={setIsDragOver}
-            fileInputRef={fileInputRef}
-          />
-          <AgreementCheckbox isAgreed={isAgreed} setIsAgreed={setIsAgreed} />
-          {feedback.type === 'error' && <ErrorMessage message={feedback.message} />}
-          <button type="submit" className="submit-button" disabled={isSubmitting}>
-            {isSubmitting ? '제출 중...' : '제출하기'}
-          </button>
-        </form>
+        {isSubmitting ? (
+          <CertificationLoading />
+        ) : (
+          <form className="certification-form" onSubmit={handleSubmit}>
+            <InstitutionInfoInput
+              institutionName={institutionName}
+              setInstitutionName={setInstitutionName}
+              institutionAddress={institutionAddress}
+              setInstitutionAddress={setInstitutionAddress}
+            />
+            <FileUploadBox
+              selectedFile={selectedFile}
+              setSelectedFile={setSelectedFile}
+              isDragOver={isDragOver}
+              setIsDragOver={setIsDragOver}
+              fileInputRef={fileInputRef}
+            />
+            <AgreementCheckbox isAgreed={isAgreed} setIsAgreed={setIsAgreed} />
+            <div className="form-group-checkbox">
+              <input
+                type="checkbox"
+                id="alarm-consent"
+                checked={consentAlarmTransfer}
+                onChange={e => setConsentAlarmTransfer(e.target.checked)}
+              />
+              <label htmlFor="alarm-consent">알림(문자/이메일) 수신에 동의합니다.</label>
+            </div>
+            {feedback.type === 'error' && <ErrorMessage message={feedback.message} />}
+            <button type="submit" className="submit-button" disabled={isSubmitting}>
+              {isSubmitting ? '제출 중...' : '제출하기'}
+            </button>
+          </form>
+        )}
       </div>
     </div>
   );
