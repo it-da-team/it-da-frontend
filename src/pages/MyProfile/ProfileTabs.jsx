@@ -3,21 +3,23 @@ import './ProfileTabs.css';
 import { FaHashtag } from 'react-icons/fa';
 import PostListItem from '../Community/components/PostListItem';
 
-function ProfileTabs({ profile, tab, setTab }) {
-  const myChannels = profile.myChannels || [];
-  const joinedChannels = profile.joinedChannels || [];
+function ProfileTabs({ myPostList = [], myChannelList = [], subscribedChannelList = [], name, authorBadge, tab, setTab }) {
+  const myPosts = myPostList;
+  const likedPosts = [];
+  const myChannels = myChannelList;
+  const joinedChannels = subscribedChannelList;
   const channelCount = myChannels.length;
   const canCreateChannel = channelCount < 1;
 
   // Helper to map profile post data to PostListItem expected shape
   const mapProfilePost = (post) => ({
     ...post,
-    author: profile.nickname,
-    authorBadge: profile.badge,
+    author: post.author || name,
+    authorBadge: post.authorBadge || authorBadge,
     category: post.category || '',
     content: post.content || '',
     commentsCount: post.commentsCount || 0,
-    createdAt: post.date || post.createdAt,
+    createdAt: post.createdAt,
   });
 
   return (
@@ -30,8 +32,8 @@ function ProfileTabs({ profile, tab, setTab }) {
       <div className="profile-tabs-content">
         {tab === 'posts' && (
           <div className="profile-card-list">
-            {profile.myPosts?.length > 0 ? (
-              profile.myPosts.map(post => (
+            {myPosts.length > 0 ? (
+              myPosts.map(post => (
                 <PostListItem key={post.id} post={mapProfilePost(post)} />
               ))
             ) : (
@@ -41,8 +43,8 @@ function ProfileTabs({ profile, tab, setTab }) {
         )}
         {tab === 'likes' && (
           <div className="profile-card-list">
-            {profile.likedPosts?.length > 0 ? (
-              profile.likedPosts.map(post => (
+            {likedPosts.length > 0 ? (
+              likedPosts.map(post => (
                 <PostListItem key={post.id} post={mapProfilePost(post)} />
               ))
             ) : (

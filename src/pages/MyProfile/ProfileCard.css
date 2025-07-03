@@ -186,4 +186,55 @@
   border-radius: 50%;
   background: #fff;
   box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.profile-card-center-layout {
+  align-items: center;
+  text-align: center;
+  padding: 36px 0 32px 0;
+  margin-bottom: 32px;
+}
+
+.profile-card-avatar-nickname-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.profile-card-avatar-center {
+  display: block;
+  margin: 0 auto;
+  vertical-align: middle;
+  transform: translateY(6px);
+  margin-bottom: 36px;
+}
+
+.profile-card-nickname-col {
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  display: flex;
+}
+
+.profile-card-nickname-large {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.profile-card-info-center {
+  align-items: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-card-bio-margin {
+  margin-top: 18px;
+  color: #666;
+  font-size: 1.08rem;
 } 

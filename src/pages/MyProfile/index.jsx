@@ -1,35 +1,49 @@
 import React, { useState } from 'react';
 import './MyProfile.css';
-import profileData from '../../data/myProfileData.json';
 import ProfileCard from './ProfileCard';
 import Dashboard from './Dashboard';
 import ProfileTabs from './ProfileTabs';
+import { useMyProfile } from '../../hooks/useMyProfile';
+import MyPostList from './MyPostList';
+import MyChannelList from './MyChannelList';
+import SubscribedChannelList from './SubscribedChannelList';
 
-function MyProfile() {
-  // 임시 데이터 사용
-  const [profile] = useState(profileData.profile);
+// 토큰은 props로 전달받거나, 필요시 context/localStorage 등에서 가져올 수 있습니다.
+const ProfilePage = ({ token }) => {
+  const { profile, loading, error } = useMyProfile(token);
   const [tab, setTab] = useState('posts');
 
-  // 실제 구현 시 로그인 유저와 프로필 유저 비교
-  const isOwner = true; // TODO: 실제 유저 비교로 변경
+  if (loading) return <div>로딩중...</div>;
+  if (error) return <div>에러 발생: {error.message}</div>;
+  if (!profile) return null;
 
   return (
     <div className="myprofile-root">
-      {/* 상단: 프로필 카드 + 대시보드 */}
-      <div className="myprofile-top-section">
+      <div className="myprofile-top-section" style={{ gap: '56px', marginBottom: '24px' }}>
         <div className="myprofile-left-col">
-          <ProfileCard profile={profile} />
+          <ProfileCard
+            name={profile.name}
+            authorBadge={profile.authorBadge}
+            introduction={profile.introduction}
+          />
         </div>
-        <Dashboard markdown={profile.dashboardMarkdown} isOwner={isOwner} />
+        <Dashboard markdown={profile.dashboard} isOwner={true} />
       </div>
-      {/* 하단: 탭(상단과 동일한 넓이) */}
       <div className="myprofile-bottom-section">
         <div className="myprofile-tabs-wrap">
-          <ProfileTabs profile={profile} tab={tab} setTab={setTab} />
+          <ProfileTabs
+            myPostList={profile.myPostList}
+            myChannelList={profile.myChannelList}
+            subscribedChannelList={profile.subscribedChannelList}
+            name={profile.name}
+            authorBadge={profile.authorBadge}
+            tab={tab}
+            setTab={setTab}
+          />
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default MyProfile; 
+export default ProfilePage; 

@@ -48,10 +48,21 @@ const formatDate = (dateString) => {
 };
 
 const PostListItem = ({ post }) => {
-  const { id, title, author, authorBadge, likes, createdAt, category, content } = post;
+  if (!post) return null;
+  const {
+    title = '',
+    content = '',
+    imageUrl = '',
+    author = '',
+    authorBadge = '',
+    likes = 0,
+    commentsCount = 0,
+    createdAt = '',
+    category = '',
+  } = post;
 
   return (
-    <Link to={`/community/post/${id}`} className="post-list-item-link">
+    <Link to={`/community/post/${post.id}`} className="post-list-item-link">
         <article className="post-list-item">  
             <div className="post-main-row">
                 <div className="post-content">
@@ -75,7 +86,7 @@ const PostListItem = ({ post }) => {
                         <FaHeart /> {likes}
                     </span>
                     <span className="post-comments">
-                        <FaCommentDots /> {post.commentsCount || 0}
+                        <FaCommentDots /> {commentsCount}
                     </span>
                 </div>
             </div>
