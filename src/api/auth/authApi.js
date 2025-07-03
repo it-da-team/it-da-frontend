@@ -10,7 +10,7 @@ const API_BASE_URL = process.env.REACT_APP_RECRUITMENT_API_BASE_URL;
  */
 export async function requestTeacherAuth(formData, token) {
   try {
-    const response = await axios.post(`${API_BASE_URL}/api/v1/users/auth-request`, formData, {
+    const response = await axios.post(`${API_BASE_URL}/community/teacher/certification/`, formData, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',

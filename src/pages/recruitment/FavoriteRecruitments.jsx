@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getFavoriteRecruitments } from '../../utils/localStorage';
 import RecruitmentListItem from './JopListItem';
-import '../../assets/css/RecruitmentList.css';
+import '../../assets/css/JopList.css';
 
 export default function FavoriteRecruitments() {
   const [favoriteRecruitments, setFavoriteRecruitments] = useState([]);

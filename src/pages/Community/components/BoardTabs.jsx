@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './BoardTabs.css';
 import { FaLock } from 'react-icons/fa';
 import { getUser, getToken } from '../../../utils/localStorage';
@@ -7,6 +7,7 @@ import { getUser, getToken } from '../../../utils/localStorage';
 const BoardTabs = ({ selectedCategory, onCategoryChange }) => {
   const user = getUser();
   const token = getToken();
+  const navigate = useNavigate();
   
   // 디버깅을 위한 로그
   console.log('BoardTabs - Token exists:', !!token);
@@ -81,7 +82,7 @@ const BoardTabs = ({ selectedCategory, onCategoryChange }) => {
       <div className="tab-actions">
         {userRole === 'basic' && (
           <div className="auth-buttons">
-            <button className="auth-button teacher">교사 인증하기</button>
+            <button className="auth-button teacher" onClick={() => navigate('/certification/teacher')}>교사 인증하기</button>
             <button className="auth-button director">원장 인증하기</button>
           </div>
         )}
