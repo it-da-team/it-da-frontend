@@ -1,0 +1,40 @@
+.popular-channel-item {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  padding: 12px 0;
+  border-bottom: 1px solid #f5f5f5;
+  gap: 12px;
+}
+.popular-channel-title {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #222;
+  min-width: 0;
+}
+.channel-hashtag-icon {
+  color: #FFC107;
+  font-size: 1.15rem;
+  min-width: 1.2em;
+  line-height: 1;
+  vertical-align: middle;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.channel-title-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+  display: inline-block;
+  max-width: 100%;
+}
+.popular-channel-desc {
+  font-size: 0.97rem;
+  color: #888;
+  margin-left: 12px;
+  flex-shrink: 0;
+} 

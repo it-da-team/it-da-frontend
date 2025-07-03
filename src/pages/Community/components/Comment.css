@@ -22,13 +22,13 @@
 
 /* AuthorBadge 스타일 중복. 전역화 필요 */
 .author-badge {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 4px;
-    padding: 2px 8px;
-    border-radius: 12px;
+    gap: 6px;
     font-size: 0.8rem;
-    font-weight: 500;
+    padding: 4px 16px;
+    border-radius: 14px;
+    font-weight: 700;
 }
 .teacher-badge { background-color: #e3f2fd; color: #1976d2; }
 .director-badge { background-color: #f3e5f5; color: #7b1fa2; }

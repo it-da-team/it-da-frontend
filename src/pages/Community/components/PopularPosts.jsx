@@ -1,41 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import './PopularPosts.css';
 import { FaFire } from 'react-icons/fa';
-import { fetchPopularPosts } from '../../../api/community/communityApi';
-import { getToken } from '../../../utils/localStorage';
+import popularPostsData from '../../../data/popularPosts.json';
 
 const PopularPosts = () => {
   const [popularPosts, setPopularPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const token = getToken();
-        if (!token) {
-          setError('로그인이 필요합니다.');
-          setLoading(false);
-          return;
-        }
-
-        const data = await fetchPopularPosts(token);
-        setPopularPosts(data || []);
-        setLoading(false);
-      } catch (err) {
-        console.error('인기글 조회 실패:', err);
-        setError('인기글을 불러오지 못했습니다.');
-        setLoading(false);
-        // 에러 발생 시 빈 배열로 설정
-        setPopularPosts([]);
-      }
-    };
-
-    fetchPosts();
+    // 더미 데이터 사용
+    setPopularPosts(popularPostsData.posts || []);
+    setLoading(false);
   }, []);
 
   if (loading) return <div className="popular-posts-container">로딩 중...</div>;
-  if (error) return <div className="popular-posts-container">{error}</div>;
 
   return (
     <div className="popular-posts-container">

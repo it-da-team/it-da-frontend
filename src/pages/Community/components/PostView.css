@@ -38,12 +38,12 @@
    전역 CSS나 별도 파일로 분리하는 것이 좋습니다. 
    우선은 중복해서 정의합니다. */
 .author-badge {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     font-size: 0.8rem;
-    padding: 3px 8px;
-    border-radius: 15px;
+    padding: 4px 16px;
+    border-radius: 14px;
     font-weight: 700;
 }
   
