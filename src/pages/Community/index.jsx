@@ -4,7 +4,10 @@ import PostList from './components/PostList';
 import PostListItem from './components/PostListItem';
 import PopularPosts from './components/PopularPosts';
 import SearchBar from './components/SearchBar';
+import PopularChannels from '../MyProfile/PopularChannels';
+import { Link } from 'react-router-dom';
 import './Community.css';
+import bannerImg from '../../assets/images/ondam_community_banner.png'; // 실제 경로에 맞게 수정 필요
 
 const CommunityPage = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -35,8 +38,11 @@ const CommunityPage = () => {
   return (
     <div className="community-container">
       <header className="community-header">
-        <h1>온담 커뮤니티</h1>
-        <p>따뜻한 이야기를 나누는 공간, 온담</p>
+        <img 
+          src={bannerImg} 
+          alt="온담 커뮤니티 - 따뜻한 이야기를 나누는 공간, 온담" 
+          className="community-header-banner"
+        />
       </header>
       <main className="community-main-content">
         <div className="community-left-column">
@@ -63,7 +69,11 @@ const CommunityPage = () => {
           )}
         </div>
         <aside className="community-right-column">
+          <Link to="/myprofile" className="go-myprofile-btn">
+            내 프로필 보러가기
+          </Link>
           <PopularPosts />
+          <PopularChannels />
         </aside>
       </main>
     </div>

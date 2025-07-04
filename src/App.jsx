@@ -18,6 +18,7 @@ import OauthConsent from './pages/Users/OauthConsent';
 import OauthSuccess from './pages/Users/OauthSuccess';
 import TeacherCertification from './pages/Certification/TeacherCertification';
 import ScrollToTop from './components/common/ScrollToTop';
+import MyProfile from './pages/MyProfile';
 import './App.css';
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                 <Route path="/community" element={<CommunityPage />} />
                 <Route path="/community/create" element={<CreatePost />} />
                 <Route path="/community/post/:postId" element={<PostDetail />} />
+                <Route path="/myprofile" element={<MyProfile />} />
                 <Route path="/talk" element={<Talk />} />
                 <Route path="/play" element={<Play />} />
                 <Route path="/story" element={<Story />} />

@@ -44,6 +44,8 @@
   
   .lock-icon {
     font-size: 0.9rem;
+    margin-left: 3px;
+    margin-right: 0;
   }
   
   .tab-item.locked:hover::after {

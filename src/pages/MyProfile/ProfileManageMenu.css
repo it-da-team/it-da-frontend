@@ -1,0 +1,37 @@
+.profile-manage-menu-outer {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+.profile-manage-toggle {
+  background: none;
+  border: none;
+  color: #222;
+  font-size: 1.08rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 10px 0 8px 0;
+  margin-bottom: 0;
+  transition: color 0.2s;
+}
+.profile-manage-toggle:hover {
+  color: #FFC107;
+}
+.profile-manage-list {
+  list-style: none;
+  padding: 0 0 0 2px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+.profile-manage-list li {
+  font-size: 1rem;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.profile-manage-list li:hover {
+  color: #FFC107;
+} 

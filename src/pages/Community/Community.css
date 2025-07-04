@@ -21,8 +21,43 @@ body {
 }
 
 .community-header {
-  text-align: center;
-  margin-bottom: 40px;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto 40px auto;
+  overflow: hidden;
+}
+
+.community-header-banner {
+  width: 100%;
+  height: 140px;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 12px 32px 0 rgba(0,0,0,0.16), 0 1.5px 0 rgba(0,0,0,0.04);
+  position: relative;
+  z-index: 1;
+}
+
+.community-header-banner::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 32px;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, #fff 100%);
+}
+
+@media (max-width: 1280px) {
+  .community-header-banner {
+    height: 12vw;
+    min-height: 90px;
+    max-height: 160px;
+    object-fit: contain;
+  }
 }
 
 .community-header h1 {
@@ -54,4 +89,49 @@ body {
   position: sticky;
   top: 20px;
   align-self: flex-start;
+}
+
+.community-right-column > *:not(:last-child) {
+  margin-bottom: 28px;
+}
+
+.go-myprofile-btn {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+  background: transparent;
+  color: #333;
+  font-weight: 700;
+  font-size: 1.08rem;
+  text-align: center;
+  border-radius: 10px;
+  padding: 16px 0;
+  margin-bottom: 28px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transition: color 0.2s, transform 0.2s, border-color 0.2s;
+  z-index: 1;
+  border: none;
+}
+.go-myprofile-btn::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 0;
+  background: linear-gradient(90deg, #FFC107 0%, #ffe082 100%);
+  z-index: -1;
+  transition: width 0.35s cubic-bezier(.4,0,.2,1);
+}
+.go-myprofile-btn:hover {
+  color: #fff;
+  transform: translateX(8px) scale(1.03);
+  border: none;
+}
+.go-myprofile-btn:hover::before {
+  width: 100%;
+}
+.go-myprofile-btn span, .go-myprofile-btn {
+  position: relative;
+  z-index: 1;
 } 
