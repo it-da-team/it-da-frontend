@@ -29,7 +29,7 @@ const ProfilePage = ({ token }) => {
         </div>
         <Dashboard markdown={profile.dashboard} isOwner={true} />
       </div>
-      <div className="myprofile-bottom-section">
+      <div className="myprofile-bottom-section" style={{ marginTop: '40px' }}>
         <div className="myprofile-tabs-wrap">
           <ProfileTabs
             myPostList={profile.myPostList}

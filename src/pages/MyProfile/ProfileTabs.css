@@ -130,4 +130,26 @@
   border-top: 1.5px solid #eee;
   margin: 24px 0 12px 0;
   width: 100%;
+}
+.new-post-toggle-btn {
+  background: #FFC107;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.08rem;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 32px;
+  margin-bottom: 0;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(255,193,7,0.08);
+  width: 180px;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}
+.new-post-toggle-btn:hover {
+  background: #e6b006;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(255,193,7,0.12);
 } 

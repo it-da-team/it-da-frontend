@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ProfileTabs.css';
 import { FaHashtag } from 'react-icons/fa';
 import PostListItem from '../Community/components/PostListItem';
+import NewPostCard from './NewPostCard';
 
-function ProfileTabs({ myPostList = [], myChannelList = [], subscribedChannelList = [], name, authorBadge, tab, setTab }) {
+function ProfileTabs({ myPostList = [], myChannelList = [], subscribedChannelList = [], name, authorBadge, tab, setTab, onPostCreated }) {
+  const [showNewPost, setShowNewPost] = useState(false);
   const myPosts = myPostList;
   const likedPosts = [];
   const myChannels = myChannelList;
@@ -32,6 +34,24 @@ function ProfileTabs({ myPostList = [], myChannelList = [], subscribedChannelLis
       <div className="profile-tabs-content">
         {tab === 'posts' && (
           <div className="profile-card-list">
+            <div style={{ width: '100%', marginBottom: '18px' }}>
+              <button
+                className="new-post-toggle-btn"
+                onClick={() => setShowNewPost((prev) => !prev)}
+                style={{ marginBottom: showNewPost ? '18px' : 0 }}
+              >
+                {showNewPost ? '작성 취소' : '새 글 작성'}
+              </button>
+              {showNewPost && (
+                <NewPostCard
+                  onSuccess={() => {
+                    setShowNewPost(false);
+                    if (onPostCreated) onPostCreated();
+                  }}
+                  onCancel={() => setShowNewPost(false)}
+                />
+              )}
+            </div>
             {myPosts.length > 0 ? (
               myPosts.map(post => (
                 <PostListItem key={post.id} post={mapProfilePost(post)} />
