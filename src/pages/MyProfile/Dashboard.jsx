@@ -1,12 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaRegStickyNote } from 'react-icons/fa';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import './Dashboard.css';
+import recruitmentClient from '../../api/instances/recruitmentClient';
 // 마크다운 렌더러 라이브러리 추후 적용 가능
-function Dashboard({ markdown, isOwner }) {
-  const [value, setValue] = useState(markdown);
+export default function Dashboard({ markdown, isOwner, onSave }) {
   const [editing, setEditing] = useState(false);
+  const [value, setValue] = useState(markdown || '');
+  const [isSaving, setIsSaving] = useState(false);
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    setValue(markdown || '');
+  }, [markdown]);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    setError('');
+    try {
+      const token = localStorage.getItem('accessToken');
+      const res = await recruitmentClient.post('/community/profile/update/dashboard', { dashboard: value }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (onSave) onSave(res.data.data.dashboard);
+      setEditing(false);
+    } catch (err) {
+      setError(err.response?.data?.message || '저장에 실패했습니다.');
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   // 디버깅: 대시보드 마크다운 값 출력
   console.log('대시보드 마크다운:', value);
@@ -56,7 +80,8 @@ function Dashboard({ markdown, isOwner }) {
             onChange={e => setValue(e.target.value)}
             rows={8}
           />
-          <button className="dashboard-save-btn">저장</button>
+          <button className="dashboard-save-btn" onClick={handleSave} disabled={isSaving}>{isSaving ? '저장 중...' : '저장'}</button>
+          {error && <div style={{color:'#e53e3e', fontSize:'0.98rem', marginTop:8}}>{error}</div>}
         </div>
       ) : (
         <div className="dashboard-markdown">
@@ -81,6 +106,4 @@ function Dashboard({ markdown, isOwner }) {
       )}
     </div>
   );
-}
-
-export default Dashboard; 
+} 

@@ -14,15 +14,18 @@ function ProfileTabs({ myPostList = [], myChannelList = [], subscribedChannelLis
   const canCreateChannel = channelCount < 1;
 
   // Helper to map profile post data to PostListItem expected shape
-  const mapProfilePost = (post) => ({
-    ...post,
-    author: post.author || name,
-    authorBadge: post.authorBadge || authorBadge,
-    category: post.category || '',
-    content: post.content || '',
-    commentsCount: post.commentsCount || 0,
-    createdAt: post.createdAt,
-  });
+  const mapProfilePost = (post) => {
+    if (!post) return {};
+    return {
+      ...post,
+      author: post.author || name,
+      authorBadge: post.authorBadge || authorBadge,
+      category: post.category || '',
+      content: post.content || '',
+      commentsCount: post.commentsCount || 0,
+      createdAt: post.createdAt,
+    };
+  };
 
   return (
     <div className="profile-tabs-section">
@@ -44,16 +47,16 @@ function ProfileTabs({ myPostList = [], myChannelList = [], subscribedChannelLis
               </button>
               {showNewPost && (
                 <NewPostCard
-                  onSuccess={() => {
+                  onSuccess={(createdPost) => {
                     setShowNewPost(false);
-                    if (onPostCreated) onPostCreated();
+                    if (onPostCreated) onPostCreated(createdPost);
                   }}
                   onCancel={() => setShowNewPost(false)}
                 />
               )}
             </div>
-            {myPosts.length > 0 ? (
-              myPosts.map(post => (
+            {myPosts.filter(Boolean).length > 0 ? (
+              myPosts.filter(Boolean).map(post => (
                 <PostListItem key={post.id} post={mapProfilePost(post)} />
               ))
             ) : (

@@ -253,7 +253,7 @@ export async function createPost(postData, token) {
         'Content-Type': 'application/json'
       }
     });
-    return response.data;
+    return response.data.data;
   } catch (error) {
     console.error('게시글 생성 실패:', error.response?.data || error.message);
     throw new Error(error.response?.data?.message || '게시글 생성에 실패했습니다.');
