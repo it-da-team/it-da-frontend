@@ -1,0 +1,356 @@
+/* CreateChannel.css */
+.create-channel-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.create-channel-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 2px solid #f1f3f5;
+}
+
+.create-channel-header h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 12px;
+}
+
+.create-channel-header p {
+  font-size: 1.1rem;
+  color: #868e96;
+  margin: 0;
+}
+
+.user-role-info {
+  margin-top: 20px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e9ecef;
+}
+
+.role-badge {
+  display: inline-block;
+  background: #FFC107;
+  color: #343a40;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.role-badge strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.role-upgrade-notice {
+  font-size: 0.9rem;
+  color: #856404;
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.create-channel-form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.form-section {
+  width: 100%;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.section-description {
+  font-size: 1rem;
+  color: #868e96;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.form-group {
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.form-label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+}
+
+.required {
+  color: #ff6b6b;
+  font-weight: 700;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  font-size: 1rem;
+  color: #495057;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #FFC107;
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+  color: #adb5bd;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.number-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.number-input {
+  padding-right: 50px;
+}
+
+.number-suffix {
+  position: absolute;
+  right: 16px;
+  color: #868e96;
+  font-weight: 500;
+  pointer-events: none;
+}
+
+.input-counter {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  color: #adb5bd;
+  background: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.input-hint {
+  display: block;
+  font-size: 0.9rem;
+  color: #868e96;
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.error-message {
+  background-color: #fff5f5;
+  color: #e53e3e;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #fed7d7;
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+}
+
+.success-message {
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #c3e6cb;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  animation: slideIn 0.5s ease;
+}
+
+.success-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.success-content h4 {
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.success-content p {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 2px solid #f1f3f5;
+}
+
+.form-actions button {
+  padding: 14px 32px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+.cancel-button {
+  background-color: #f8f9fa;
+  color: #495057;
+  border: 2px solid #e9ecef;
+}
+
+.cancel-button:hover {
+  background-color: #e9ecef;
+  border-color: #dee2e6;
+  transform: translateY(-1px);
+}
+
+.submit-button {
+  background-color: #FFC107;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #e6b006;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+}
+
+.submit-button:disabled {
+  background-color: #adb5bd;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 레이아웃 미리보기 */
+.layout-preview-section {
+  margin-top: 30px;
+  padding-top: 30px;
+  border-top: 2px solid #f1f3f5;
+}
+
+.preview-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #343a40;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.preview-container {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 20px;
+  border: 2px dashed #dee2e6;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.preview-container .channel-layout {
+  background: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .create-channel-container {
+    margin: 20px;
+    padding: 24px;
+  }
+  
+  .create-channel-header h2 {
+    font-size: 1.8rem;
+  }
+
+  .user-role-info {
+    margin-top: 16px;
+    padding: 12px;
+  }
+
+  .role-badge {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+  }
+
+  .role-upgrade-notice {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .form-actions button {
+    width: 100%;
+  }
+  
+  .preview-container {
+    padding: 12px;
+  }
+  
+  .preview-container .channel-layout {
+    padding: 12px;
+  }
+} 

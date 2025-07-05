@@ -5,8 +5,6 @@ import Dashboard from './Dashboard';
 import ProfileTabs from './ProfileTabs';
 import { useMyProfile } from '../../hooks/useMyProfile';
 import MyPostList from './MyPostList';
-import MyChannelList from './MyChannelList';
-import SubscribedChannelList from './SubscribedChannelList';
 import EditProfileModal from './EditProfileModal';
 
 // 토큰은 props로 전달받거나, 필요시 context/localStorage 등에서 가져올 수 있습니다.

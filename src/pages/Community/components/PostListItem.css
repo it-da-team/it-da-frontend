@@ -48,7 +48,7 @@
   }
   
   .post-category {
-    width: 300px;
+    width: 50px;
     display: block;      /* 또는 flex */
     background-color: #f1f3f5;
     color: #868e96;

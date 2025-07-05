@@ -1,0 +1,257 @@
+/* PermissionSelector.css */
+.permission-selector {
+  width: 100%;
+}
+
+.permission-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+  margin-top: 18px;
+}
+
+.permission-option {
+  background: #fff;
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.permission-option:hover {
+  border-color: #FFC107;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.15);
+}
+
+.permission-option.selected {
+  border-color: #FFC107;
+  background: linear-gradient(135deg, #fff9e6 0%, #fff 100%);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+}
+
+/* 비활성화된 권한 옵션 스타일 */
+.permission-option.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  background: #f8f9fa;
+  border-color: #dee2e6;
+}
+
+.permission-option.disabled:hover {
+  border-color: #dee2e6;
+  transform: none;
+  box-shadow: none;
+}
+
+.permission-option.disabled .permission-icon {
+  position: relative;
+}
+
+.lock-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.8rem;
+  z-index: 1;
+}
+
+.permission-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.permission-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.permission-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #343a40;
+  margin: 0 0 4px 0;
+  line-height: 1.3;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.required-badge {
+  background: #dc3545;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.permission-description {
+  font-size: 0.9rem;
+  color: #868e96;
+  margin: 0;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.permission-check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  animation: fadeIn 0.3s ease;
+}
+
+.check-circle {
+  width: 20px;
+  height: 20px;
+  background: #FFC107;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.permission-note {
+  background: #e3f2fd;
+  border: 1px solid #bbdefb;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.permission-note-detail {
+  color: #1976d2;
+  font-size: 0.95em;
+}
+
+.permission-auth-notice {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 18px;
+  color: #343a40;
+  font-size: 0.97rem;
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.auth-notice-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.auth-notice-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.permission-auth-notice strong {
+  color: #343a40;
+}
+
+.permission-auth-notice .role-badge {
+  margin-bottom: 0;
+}
+
+.permission-auth-notice .auth-link-divider {
+  color: #bdb76b;
+  margin: 0 6px;
+}
+
+.permission-auth-notice .auth-link {
+  color: #FFC107;
+  text-decoration: none;
+  font-weight: 600;
+  margin: 0 4px;
+}
+
+.permission-auth-notice .auth-link:hover {
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .permission-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .permission-option {
+    padding: 14px;
+    gap: 10px;
+  }
+  
+  .permission-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+  
+  .permission-name {
+    font-size: 1rem;
+  }
+  
+  .permission-description {
+    font-size: 0.85rem;
+  }
+  
+  .required-badge {
+    font-size: 0.65rem;
+    padding: 1px 4px;
+  }
+  
+
+}
+
+@media (max-width: 600px) {
+  .permission-auth-notice {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .auth-notice-right {
+    margin-left: 0;
+  }
+} 

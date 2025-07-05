@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './ProfileTabs.css';
 import { FaHashtag } from 'react-icons/fa';
 import PostListItem from '../Community/components/PostListItem';
 import NewPostCard from './NewPostCard';
+import ChannelSection from './components/ChannelSection';
 
 function ProfileTabs({ myPostList = [], myChannelList = [], subscribedChannelList = [], name, authorBadge, tab, setTab, onPostCreated }) {
+  const navigate = useNavigate();
   const [showNewPost, setShowNewPost] = useState(false);
   const myPosts = myPostList;
   const likedPosts = [];
@@ -25,6 +28,14 @@ function ProfileTabs({ myPostList = [], myChannelList = [], subscribedChannelLis
       commentsCount: post.commentsCount || 0,
       createdAt: post.createdAt,
     };
+  };
+
+  const handleNavigateToCreate = () => {
+    navigate('/channel/create');
+  };
+
+  const handleNavigateToChannelMain = () => {
+    navigate('/channels');
   };
 
   return (
@@ -76,55 +87,14 @@ function ProfileTabs({ myPostList = [], myChannelList = [], subscribedChannelLis
           </div>
         )}
         {tab === 'channels' && (
-          <div className="profile-channel-list-wrap">
-            <div className="profile-channel-list-header">
-              <button
-                className="create-channel-btn"
-                disabled={!canCreateChannel}
-                title={canCreateChannel ? '' : '채널은 1개만 만들 수 있습니다.'}
-              >
-                내 채널 만들러가기 ({channelCount}/1)
-              </button>
-            </div>
-            {myChannels.length > 0 && (
-              <>
-                <div className="profile-channel-section-title">내가 만든 채널</div>
-                <div className="profile-card-list">
-                  {myChannels.map(channel => (
-                    <div className="profile-channel-card" key={channel.id}>
-                      <div className="profile-channel-title">
-                        <FaHashtag className="channel-hashtag-icon" />
-                        {channel.name}
-                      </div>
-                      <div className="profile-channel-desc">{channel.description}</div>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-            {myChannels.length > 0 && joinedChannels.length > 0 && (
-              <hr className="profile-channel-divider" />
-            )}
-            {joinedChannels.length > 0 && (
-              <>
-                <div className="profile-channel-section-title">참여한 채널</div>
-                <div className="profile-card-list">
-                  {joinedChannels.map(channel => (
-                    <div className="profile-channel-card" key={channel.id}>
-                      <div className="profile-channel-title">
-                        <FaHashtag className="channel-hashtag-icon" />
-                        {channel.name}
-                      </div>
-                      <div className="profile-channel-desc">{channel.description}</div>
-                    </div>
-                  ))}
-                </div>
-              </>
-            )}
-            {myChannels.length === 0 && joinedChannels.length === 0 && (
-              <div className="profile-card-empty">채널 목록이 없습니다.</div>
-            )}
-          </div>
+          <ChannelSection
+            myChannels={myChannels}
+            joinedChannels={joinedChannels}
+            canCreateChannel={canCreateChannel}
+            channelCount={channelCount}
+            onNavigateToCreate={handleNavigateToCreate}
+            onNavigateToChannelMain={handleNavigateToChannelMain}
+          />
         )}
       </div>
     </div>
