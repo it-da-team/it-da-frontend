@@ -19,6 +19,8 @@ import OauthSuccess from './pages/Users/OauthSuccess';
 import TeacherCertification from './pages/Certification/TeacherCertification';
 import ScrollToTop from './components/common/ScrollToTop';
 import MyProfile from './pages/MyProfile';
+import CreateChannel from './pages/Channel/CreateChannel';
+import ChannelMain from './pages/Channel/index';
 import './App.css';
 
 function App() {
@@ -41,6 +43,8 @@ function App() {
                 <Route path="/community/create" element={<CreatePost />} />
                 <Route path="/community/post/:postId" element={<PostDetail />} />
                 <Route path="/myprofile" element={<MyProfile />} />
+                <Route path="/channel/create" element={<CreateChannel />} />
+                <Route path="/channels" element={<ChannelMain />} />
                 <Route path="/talk" element={<Talk />} />
                 <Route path="/play" element={<Play />} />
                 <Route path="/story" element={<Story />} />

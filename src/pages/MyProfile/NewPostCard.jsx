@@ -37,8 +37,8 @@ const NewPostCard = ({ onSuccess, onCancel }) => {
       authorType: permissionMap[permission]
     };
     try {
-      await createPost(postData, token);
-      if (onSuccess) onSuccess();
+      const createdPost = await createPost(postData, token);
+      if (onSuccess) onSuccess(createdPost);
     } catch (err) {
       setError(err.message || '게시글 등록에 실패했습니다.');
     } finally {

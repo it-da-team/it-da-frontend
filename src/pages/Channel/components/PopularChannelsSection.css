@@ -1,0 +1,322 @@
+/* 인기 채널 섹션 */
+.popular-channels-section {
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 193, 7, 0.1);
+}
+
+.popular-channels-section .section-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.popular-channels-section .section-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 8px 0;
+  background: linear-gradient(135deg, #FFC107 0%, #FF8F00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title-icon {
+  color: #FF8F00;
+  font-size: 1.6rem;
+}
+
+.popular-channels-section .section-subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* 탭 네비게이션 */
+.popular-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 32px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 4px;
+}
+
+.popular-tab {
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 80px;
+}
+
+.popular-tab.active {
+  background: linear-gradient(135deg, #FFC107 0%, #FF8F00 100%);
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.popular-tab:hover:not(.active) {
+  background: rgba(255, 193, 7, 0.1);
+  color: #FF8F00;
+}
+
+/* 채널 그리드 */
+.popular-channels-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* 인기 채널 카드 */
+.popular-channel-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 193, 7, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.popular-channel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* 랭킹 표시 */
+.channel-rank {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #FFC107 0%, #FF8F00 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.rank-number {
+  color: white;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+/* 채널 콘텐츠 */
+.channel-content {
+  margin-top: 8px;
+}
+
+.channel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.channel-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.channel-icon {
+  color: #FFC107;
+  font-size: 1.1rem;
+}
+
+.channel-title h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.channel-permission {
+  background: linear-gradient(135deg, #FFC107 0%, #FF8F00 100%);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 16px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 채널 설명 */
+.channel-description {
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 채널 통계 */
+.channel-stats {
+  margin-bottom: 16px;
+}
+
+.member-count {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.member-count svg {
+  color: #FFC107;
+}
+
+.max-members {
+  color: #999;
+  font-weight: 400;
+}
+
+.member-progress {
+  width: 100%;
+  height: 6px;
+  background: #e9ecef;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #FFC107 0%, #FF8F00 100%);
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+/* 키워드 태그 */
+.channel-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.keyword-tag {
+  background: rgba(255, 193, 7, 0.1);
+  color: #FF8F00;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 193, 7, 0.2);
+  transition: all 0.2s ease;
+}
+
+.keyword-tag:hover {
+  background: rgba(255, 193, 7, 0.2);
+  transform: translateY(-1px);
+}
+
+/* 참여하기 버튼 */
+.join-channel-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #FFC107 0%, #FF8F00 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.join-channel-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 193, 7, 0.4);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .popular-channels-section {
+    padding: 24px 20px;
+  }
+  
+  .popular-channels-section .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .popular-tabs {
+    gap: 4px;
+    padding: 3px;
+  }
+  
+  .popular-tab {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    min-width: 70px;
+  }
+  
+  .popular-channels-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .popular-channel-card {
+    padding: 20px;
+  }
+  
+  .channel-title h3 {
+    font-size: 1.1rem;
+  }
+  
+  .channel-description {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .popular-channels-section {
+    padding: 20px 16px;
+  }
+  
+  .popular-tabs {
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .popular-tab {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .channel-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .channel-permission {
+    align-self: flex-start;
+  }
+} 
