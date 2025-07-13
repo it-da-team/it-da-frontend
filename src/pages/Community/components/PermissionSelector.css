@@ -1,0 +1,150 @@
+/* PermissionSelector.css */
+.permission-selector-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.permission-selector-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #343a40;
+}
+
+.permission-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.permission-option {
+    position: relative;
+    background-color: #fff;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+}
+
+.permission-option:hover {
+    border-color: #ffd700;
+    transform: translateY(-2px);
+}
+
+.permission-option.selected {
+    border-color: #ffd700;
+    background-color: #fffdf0;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.25);
+    transform: translateY(-2px);
+}
+
+.permission-option.disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.permission-option.disabled:hover {
+    transform: none;
+    border-color: #dee2e6;
+}
+
+.permission-option input[type="radio"] {
+    display: none;
+}
+
+.permission-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.permission-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.permission-icon {
+    font-size: 1.5rem;
+    color: #495057;
+    transition: color 0.2s ease-in-out;
+}
+
+.permission-option.selected .permission-icon {
+    color: #e6b800;
+}
+
+.permission-label {
+    font-size: 1rem;
+    color: #212529;
+}
+
+.permission-description {
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.lock-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.auth-guidance {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #f1f9ff;
+    border: 1px solid #d0ebff;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.auth-guidance p {
+    margin: 0 0 15px 0;
+    color: #495057;
+    font-weight: 500;
+}
+
+.auth-buttons-group {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.auth-link-button {
+    border: 1px solid;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+.auth-link-button.teacher {
+    border-color: #20c997;
+    color: #20c997;
+}
+.auth-link-button.teacher:hover {
+    background-color: #20c997;
+    color: white;
+}
+.auth-link-button.director {
+    border-color: #5c7cfa;
+    color: #5c7cfa;
+}
+.auth-link-button.director:hover {
+    background-color: #5c7cfa;
+    color: white;
+} 

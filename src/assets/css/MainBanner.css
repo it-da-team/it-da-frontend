@@ -13,9 +13,10 @@
   }
   
   .banner-wrapper img {
-    width      : 100%;
-    height     : 100%;
-    object-fit : cover;   /* 항상 컨테이너를 꽉 채우고 잘라냄 */
-    display    : block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    margin-top: 4rem;
   }
   

@@ -1,0 +1,76 @@
+/* PostView.css */
+.post-view-container {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.post-view-header {
+    margin-bottom: 30px;
+}
+
+.post-view-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #212529;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.post-view-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #868e96;
+}
+
+.author-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.author-name {
+    font-weight: 600;
+}
+
+/* AuthorBadge 스타일은 PostListItem.css와 공유되므로, 
+   전역 CSS나 별도 파일로 분리하는 것이 좋습니다. 
+   우선은 중복해서 정의합니다. */
+.author-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    padding: 3px 8px;
+    border-radius: 15px;
+    font-weight: 700;
+}
+  
+.teacher-badge {
+    background-color: #e3fafc;
+    color: #15aabf;
+}
+  
+.director-badge {
+    background-color: #e5dbff;
+    color: #7048e8;
+}
+
+.post-view-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #495057;
+}
+
+.post-view-content p {
+    margin: 0 0 1.5em;
+}
+
+.post-view-content img,
+.post-view-content video {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+} 

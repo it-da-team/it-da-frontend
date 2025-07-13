@@ -1,38 +1,37 @@
-/* 🔶 전체 레이아웃 */
 .map-section {
-  display: flex;                /* ✅ 수평 배치 */
-  flex-direction: row;          /* 기본값이지만 명시적으로 */
-  align-items: flex-start;
-  gap: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;                  /* ✅ 줄임 */
   max-width: 1300px;
-  margin: 2rem auto;
-  padding: 2rem;
+  margin: 3rem auto;          /* 센터 정렬 유지 */
+  padding: 1.5rem;            /* ✅ 줄임 */
   background: #f9f9f9;
   border-radius: 1rem;
+  width: calc(100% - 2rem);   /* 좌우 마진을 1rem씩 줄임 */
 }
 
 .map-left-panel,
 .map-text,
 .map-wrapper {
-  padding: 1 1rem;
+  padding: 0 1rem;
 }
 
 .map-left-panel {
-  flex: 0 0 160px;
-  max-width: 160px;
-
-  /* 선은 여기 */
+  flex: 0 0 auto;
+  min-width: 140px;
+  max-width: 150px;
   border-right: 1px solid #e0e0e0;
-  /* 텍스트와 선 사이 여백 */
   padding-left: 1rem;
-  padding-right: 1.8rem;
+  padding-right: 1rem;
   margin-right: 0rem;
 }
 
 .map-text {
-  flex: 0 0 300px;
-  margin-left: 0rem;   /* 왼쪽 여백을 0.5rem으로 설정 */    /* 필요에 따라 250~350px로 조절 */
-  padding-top: 0.5rem;
+  flex: 0 0 200px;            /* ✅ 조금 줄임 */
+  margin-left: 1rem;
+  padding-top: 0;
+  padding-bottom: 1rem;
   text-align: left;
 }
 
@@ -49,24 +48,28 @@
   margin-bottom: 1.5rem;
 }
 
-/* 🔹 왼쪽 카테고리 인덱스 */
-/* ── 왼쪽 컨트롤(텍스트 + 드롭다운)은 고정 폭으로 ── */
-
-/* ── 지도 영역은 남는 공간 전부 차지 ── */
 .map-wrapper {
   flex: 1;            /* 가로 공간 모두 채움 */
-  height: 400px;
+  height: 300px;
   width: 10rem;
   margin-left: 4rem; 
   overflow: hidden;
   animation: zoomIn 0.5s ease;
 }
 
-/* 🔶 카테고리 리스트 */
 .main-category {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  width: 100%;
+}
+
+/* ✅ compact 너비 제한 추가 */
+.main-category.compact {
+  width: auto;
+  min-width: 100px;
+  max-width: 110px;
+  padding: 0.25rem 0;
 }
 
 .main-category-list-wrapper {
@@ -76,10 +79,10 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  width: 100%;
 }
 
 .main-category-list {
-  
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -88,6 +91,44 @@
   background-color: transparent;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
+  width: 100%;
+  min-width: 0;
+}
+
+.main-category-list.compact {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.3rem;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
+  background-color: transparent;
+  box-shadow: none;
+  cursor: pointer;
+  height: 26px;                 /* ✅ 높이 줄임 */
+  width: 100%;
+  min-width: 0;
+  position: relative;
+}
+
+.main-category-list.compact .category-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.main-category-list.compact .category-label {
+  font-size: 0.85rem;           /* ✅ 글자도 작게 */
+  color: #333;
+  line-height: 1.2;
+  white-space: normal;
+  word-break: keep-all;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .main-category-list:hover {
@@ -100,49 +141,25 @@
   color: #FF6F00;
 }
 
-/* 아이콘 */
 .category-icon {
   width: 28px;
   height: 28px;
   object-fit: contain;
 }
 
-/* 라벨 */
 .category-label {
   font-size: 1rem;
   color: #333;
 }
 
-/* 🔸 오른쪽 패널 (한곳으로 모아 옮김) */
 .map-right-panel {
   flex: 1;
-  display: flex !important;        /* flex 활성화 */
-  flex-direction: column;          /* 기본은 column */
-  gap: 2rem;
-}
-
-/* 추가 row 설정이 필요하면 아래처럼 함께 정의해도 됩니다 */
-.map-right-panel {
   display: flex !important;
-  flex-direction: row !important;  /* ← 이걸 꼭 row 로 */
-  align-items: flex-start;
+  flex-direction: row !important;
+  align-items: center;
   gap: 1rem;
 }
 
-/* 상단 텍스트 */
-.map-text {
-  text-align: left;
-  font-size: 1rem;
-}
-
-.map-subtext {
-  font-size: 1.2rem;
-  color: #555;
-  font-weight: 400;
-  margin-top: 0.3rem;
-}
-
-/* 📌 드롭다운 영역 */
 .map-dropdown {
   display: flex;
   flex-direction: column;
@@ -325,6 +342,8 @@
 @media screen and (max-width: 1023px) {
   .map-section {
     position: relative;
+    margin: 3rem auto;    /* 센터 정렬 유지 */
+    width: calc(100% - 1rem);  /* 좌우 마진을 0.5rem씩 줄임 */
   }
 
   .map-left-panel {
@@ -466,7 +485,8 @@
 @media screen and (max-width: 767px) {
   .map-section {
     padding: 1rem;
-    margin: 1rem auto;
+    margin: 1rem auto;    /* 센터 정렬 유지 */
+    width: calc(100% - 1rem);  /* 좌우 마진을 0.5rem씩 줄임 */
   }
 
   .map-wrapper {

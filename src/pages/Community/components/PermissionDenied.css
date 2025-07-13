@@ -1,0 +1,131 @@
+/* PermissionDenied.css */
+.permission-denied-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  padding: 40px 20px;
+}
+
+.permission-denied-content {
+  max-width: 500px;
+  text-align: center;
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+}
+
+.permission-denied-icon {
+  font-size: 4rem;
+  color: #e74c3c;
+  margin-bottom: 20px;
+}
+
+.permission-denied-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.permission-denied-info {
+  margin-bottom: 30px;
+}
+
+.permission-denied-description {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.permission-status {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  border-left: 4px solid #e74c3c;
+}
+
+.current-role,
+.required-role {
+  font-size: 1rem;
+  color: #495057;
+}
+
+.current-role strong {
+  color: #6c757d;
+}
+
+.required-role strong {
+  color: #e74c3c;
+}
+
+.permission-denied-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.action-button.primary {
+  background: #3498db;
+  color: white;
+}
+
+.action-button.primary:hover {
+  background: #2980b9;
+  transform: translateY(-2px);
+}
+
+.action-button.secondary {
+  background: #ecf0f1;
+  color: #2c3e50;
+  border: 2px solid #bdc3c7;
+}
+
+.action-button.secondary:hover {
+  background: #d5dbdb;
+  border-color: #95a5a6;
+  transform: translateY(-2px);
+}
+
+.action-button svg {
+  font-size: 0.9rem;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .permission-denied-container {
+    padding: 20px 10px;
+  }
+  
+  .permission-denied-content {
+    padding: 30px 20px;
+  }
+  
+  .permission-denied-title {
+    font-size: 1.5rem;
+  }
+  
+  .permission-denied-description {
+    font-size: 1rem;
+  }
+} 

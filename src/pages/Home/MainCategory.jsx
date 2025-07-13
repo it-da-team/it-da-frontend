@@ -1,5 +1,4 @@
-// src/components/MainCategory.jsx
-import React from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import MainCategoryList from "./MainCategoryList";
 import { labelToEnum } from "../../utils/categoryMap";
@@ -27,25 +26,27 @@ function MainCategory({ onCategorySelect, selected, compact = false }) {
   return (
     <section className={`main-category ${compact ? "compact" : ""}`}>
       {!compact && <h2>어떤 기관의 공고를 찾으시나요?</h2>}
-      <ul className="main-category-list-wrapper">
-        {categories.map((cat, i) => (
-          <li
-            key={i}
-            onClick={() =>
-              compact
-                ? onCategorySelect?.(cat.label)
-                : navigate(`/recruitment?category=${labelToEnum[cat.label]}`)
-            }
-          >
-            <MainCategoryList
-              label={cat.label}
-              image={cat.image}
-              active={selected === cat.label}
-              compact={compact}
-            />
-          </li>
-        ))}
-      </ul>
+      <div className="main-category-list-fixed">
+        <ul className="main-category-list-wrapper">
+          {categories.map((cat, i) => (
+            <li
+              key={i}
+              onClick={() =>
+                compact
+                  ? onCategorySelect?.(cat.label)
+                  : navigate(`/recruitment?category=${labelToEnum[cat.label]}`)
+              }
+            >
+              <MainCategoryList
+                label={cat.label}
+                image={cat.image}
+                active={selected === cat.label}
+                compact={compact}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }
