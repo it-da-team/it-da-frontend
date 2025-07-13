@@ -22,31 +22,12 @@ const categories = [
 
 function MainCategory({ onCategorySelect, selected, compact = false }) {
   const navigate = useNavigate();
-  const listWrapperRef = useRef(null);
-
-  const scroll = (offset) => {
-    if (listWrapperRef.current) {
-      listWrapperRef.current.scrollBy({ left: offset, behavior: "smooth" });
-    }
-  };
 
   return (
     <section className={`main-category ${compact ? "compact" : ""}`}>
       {!compact && <h2>어떤 기관의 공고를 찾으시나요?</h2>}
-
-      <div className="main-category-scroll-container">
-        {!compact && (
-          <>
-            <button className="scroll-arrow left" onClick={() => scroll(-208)}>
-              ❮
-            </button>
-            <button className="scroll-arrow right" onClick={() => scroll(208)}>
-              ❯
-            </button>
-          </>
-        )}
-
-        <ul className="main-category-list-wrapper" ref={listWrapperRef}>
+      <div className="main-category-list-fixed">
+        <ul className="main-category-list-wrapper">
           {categories.map((cat, i) => (
             <li
               key={i}

@@ -2,8 +2,8 @@
 .main-category {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 4rem 2rem;
+    gap: 3rem;
+    width: 100%;
   }
   
   .main-category.compact {
@@ -20,33 +20,36 @@
     font-size: 1.5rem;
     color: #333;
     margin-bottom: 1.5rem;
+    margin-top: 5rem;
   }
   
-  /* ✅ 슬라이드 전체 감싸는 영역 */
-  .main-category-scroll-container {
-    position: relative;
-    width: 100%;
-    overflow-x: hidden;
-    box-sizing: border-box;
-    max-width: 800px;
+  .main-category-list-fixed {
+    max-width: 900px;
     margin: 0 auto;
-    
-  }
-  
-  /* ✅ compact 아닌 경우 - 가로 슬라이드 */
-  .main-category:not(.compact) .main-category-list-wrapper {
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 3rem;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
+    justify-content: center;
+  }
+
+  .main-category-list-wrapper {
+    display: grid;
+    grid-template-columns: repeat(6, 140px);
+    gap: 2rem;
+    width: auto;
     padding: 0;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    white-space: nowrap;
-    box-sizing: border-box;
+    margin: 0;
+    list-style: none;
+    justify-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 700px) {
+    .main-category-list-wrapper {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+    }
   }
   
   .main-category:not(.compact) .main-category-list-wrapper::-webkit-scrollbar {
@@ -204,6 +207,34 @@
   @media screen and (max-width: 480px) {
     .main-category:not(.compact) .main-category-list-wrapper {
       max-width: 400px;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .main-category-list-wrapper {
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-rows: 1fr;
+      max-width: 1000px;
+      justify-content: center;
+      column-gap: 3rem;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .main-category-list-wrapper {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, auto);
+      max-width: 600px;
+      gap: 1.2rem;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .main-category-list-wrapper {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, auto);
+      max-width: 100%;
+      gap: 1rem;
     }
   }
   

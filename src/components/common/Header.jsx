@@ -60,12 +60,6 @@ function Header() {
                         <img
                             src={LogoImg}
                             alt="로고"
-                            style={{
-                                width: '7rem',
-                                height: 'auto',
-                                padding: '0 2rem', 
-                                objectFit: 'contain'
-                            }}
                         />
                     </Link>
                 </h1>

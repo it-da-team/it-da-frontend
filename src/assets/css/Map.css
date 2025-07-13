@@ -4,10 +4,11 @@
   align-items: center;
   gap: 1rem;                  /* ✅ 줄임 */
   max-width: 1300px;
-  margin: 3rem auto;
+  margin: 3rem auto;          /* 센터 정렬 유지 */
   padding: 1.5rem;            /* ✅ 줄임 */
   background: #f9f9f9;
   border-radius: 1rem;
+  width: calc(100% - 2rem);   /* 좌우 마진을 1rem씩 줄임 */
 }
 
 .map-left-panel,
@@ -341,6 +342,8 @@
 @media screen and (max-width: 1023px) {
   .map-section {
     position: relative;
+    margin: 3rem auto;    /* 센터 정렬 유지 */
+    width: calc(100% - 1rem);  /* 좌우 마진을 0.5rem씩 줄임 */
   }
 
   .map-left-panel {
@@ -482,7 +485,8 @@
 @media screen and (max-width: 767px) {
   .map-section {
     padding: 1rem;
-    margin: 1rem auto;
+    margin: 1rem auto;    /* 센터 정렬 유지 */
+    width: calc(100% - 1rem);  /* 좌우 마진을 0.5rem씩 줄임 */
   }
 
   .map-wrapper {

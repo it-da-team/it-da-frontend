@@ -6,8 +6,6 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import Home from './pages/Home';
 import './App.css';
 import FavoriteRecruitments from './pages/recruitment/FavoriteRecruitments';
-import Header from './components/common/Header';
-import Footer from './components/common/Footer';
 import CommunityPage from './pages/Community';
 import CreatePost from './pages/Community/CreatePost';
 import PostDetail from './pages/Community/PostDetail';
@@ -19,8 +17,7 @@ import NotFound from './pages/NotFound';
 function App() {
   return (
     <Router>
-      <Header />
-      <main>
+      <div className="app-container">
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route 
@@ -43,8 +40,7 @@ function App() {
             } 
           />
         </Routes>
-      </main>
-      <Footer />
+      </div>
     </Router>
   );
 }

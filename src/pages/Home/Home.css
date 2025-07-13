@@ -1,0 +1,48 @@
+/* 홈 페이지 스타일 */
+.home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* 테스트 컨텐츠 스타일 */
+.test-content {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.test-content h2 {
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.test-content p {
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.long-content {
+  margin-top: 2rem;
+}
+
+.long-content h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.long-content h4 {
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.long-content p {
+  color: #777;
+  line-height: 1.6;
+  margin: 0;
+} 

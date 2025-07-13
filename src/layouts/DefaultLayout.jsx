@@ -8,9 +8,9 @@ export default function DefaultLayout({ children }) {
     const isLoginPage = location.pathname === '/login';
 
     return (
-        <div className={isLoginPage ? 'login-page' : ''}>
+        <div className={`layout-container ${isLoginPage ? 'login-page' : ''}`}>
             <Header />
-            <main>  
+            <main className="layout-main">  
                 {children}
             </main>
             <Footer />
