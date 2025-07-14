@@ -1,0 +1,208 @@
+.region-stats-section {
+  width: 100%;
+  margin: 0 auto 3.5rem auto;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.region-stats-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 4.2rem;
+  letter-spacing: -0.01em;
+}
+
+.region-stats-graph {
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.region-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  width: 100%;
+}
+.region-label {
+  width: 54px;
+  font-size: 1.05rem;
+  color: #555;
+  font-weight: 600;
+  text-align: right;
+  flex-shrink: 0;
+}
+.region-bar-bg {
+  flex: 1;
+  background: #fdf6e3;
+  border-radius: 0.8rem;
+  height: 2.1rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+.region-bar {
+  background: linear-gradient(90deg, #ffe082 0%, #ffd54f 100%);
+  height: 100%;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  padding-left: 1.1rem;
+  font-weight: 700;
+  color: #222;
+  font-size: 1.08rem;
+  min-width: 2.5rem;
+  transition: width 0.7s cubic-bezier(.4,0,.2,1);
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: fadeBar 0.7s cubic-bezier(.4,0,.2,1) forwards;
+}
+.region-bar-count {
+  margin-left: 0.5rem;
+  color: #ffb300;
+  font-size: 1.01rem;
+}
+
+@keyframes fadeBar {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.region-stats-graph-vertical {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 2.2rem;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 600px;
+  height: 220px;
+}
+.region-bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48px;
+  min-width: 40px;
+}
+.region-bar-bg-vertical {
+  width: 100%;
+  height: 180px;
+  background: #fdf6e3;
+  border-radius: 0.8rem 0.8rem 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
+  overflow: visible;
+}
+.region-bar-vertical {
+  width: 100%;
+  background: linear-gradient(180deg, #ffe082 0%, #ffb347 100%);
+  border-radius: 0.8rem 0.8rem 0 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transition: height 0.7s cubic-bezier(.4,0,.2,1);
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeBarVertical 0.7s cubic-bezier(.4,0,.2,1) forwards;
+  position: relative;
+}
+.region-bar-count-vertical {
+  position: absolute;
+  top: -2.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffb300;
+  font-size: 1.08rem;
+  font-weight: 700;
+  background: #fffbe7;
+  border-radius: 0.7rem;
+  padding: 0.18rem 0.7rem;
+  box-shadow: 0 2px 8px 0 rgba(30,34,90,0.07);
+  z-index: 2;
+}
+.region-label-vertical {
+  margin-top: 0.7rem;
+  font-size: 1.05rem;
+  color: #555;
+  font-weight: 600;
+  text-align: center;
+}
+@keyframes fadeBarVertical {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.region-bar-tooltip {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%) translateY(0.7rem);
+  background: #fffbe7;
+  border-radius: 0.8rem;
+  box-shadow: 0 4px 16px 0 rgba(30,34,90,0.13);
+  padding: 0.7rem 1.1rem 0.9rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 100;
+  min-width: 120px;
+  animation: fadeInTooltip 0.18s cubic-bezier(.4,0,.2,1);
+}
+.region-bar-tooltip-title {
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: #232323;
+  margin-bottom: 0.5rem;
+}
+.region-bar-tooltip-btn {
+  background: linear-gradient(90deg, #ffe082 0%, #ffd54f 100%);
+  color: #222;
+  font-size: 0.97rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.38rem 1.1rem;
+  cursor: pointer;
+  transition: background 0.18s;
+  box-shadow: 0 2px 8px 0 rgba(30,34,90,0.07);
+}
+.region-bar-tooltip-btn:hover {
+  background: linear-gradient(90deg, #ffd54f 0%, #ffe082 100%);
+}
+@keyframes fadeInTooltip {
+  from { opacity: 0; transform: translateX(-50%) translateY(1.5rem); }
+  to { opacity: 1; transform: translateX(-50%) translateY(0.7rem); }
+}
+
+@media (max-width: 700px) {
+  .region-stats-section {
+    padding: 0 0.3rem;
+  }
+  .region-stats-graph {
+    max-width: 100%;
+  }
+  .region-label {
+    width: 38px;
+    font-size: 0.97rem;
+  }
+  .region-bar-bg {
+    height: 1.5rem;
+  }
+  .region-bar {
+    font-size: 0.97rem;
+    padding-left: 0.7rem;
+  }
+} 
