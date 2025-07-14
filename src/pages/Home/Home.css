@@ -45,4 +45,39 @@
   color: #777;
   line-height: 1.6;
   margin: 0;
+}
+
+.main-section {
+  margin-bottom: 5rem;
+}
+.main-section.last-section {
+  margin-bottom: 5rem;
+}
+.gap-hot-stat {
+  margin-bottom: 5rem;
+}
+.divider-horizon {
+  width: 100%;
+  max-width: 1100px;
+  height: 1px;
+  background: #ededed;
+  opacity: 1;
+  border: none;
+  border-radius: 1.2rem;
+  margin: 5rem auto;
+  box-shadow: 0 2px 8px 0 rgba(30,34,90,0.07);
+}
+@media (max-width: 700px) {
+  .main-section {
+    margin-bottom: 3rem;
+  }
+  .main-section.last-section {
+    margin-bottom: 3rem;
+  }
+  .gap-hot-stat {
+    margin-bottom: 3rem;
+  }
+  .divider-horizon {
+    margin: 3rem auto;
+  }
 } 

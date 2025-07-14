@@ -115,7 +115,7 @@ function NavBar({ isOpen }) {
                 className={`nav-item ${activeIndex === 4 ? 'active' : ''}`}
                 onClick={() => handleMenuClick(4)}
             >
-                <h3>잇다 마켓</h3>
+                <h3>멘토링</h3>
             </Link>
         </nav>
     );

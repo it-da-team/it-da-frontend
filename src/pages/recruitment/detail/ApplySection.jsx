@@ -1,7 +1,6 @@
 import React from "react";
 import TrafficNotice from "./TrafficNotice"
-import "../../../assets/css/global.css";
-import "../../../assets/css/MainDetail.css";
+import "../../../assets/css/ApplySection.css";
 
 function ApplySection( { company }) {
   return (
