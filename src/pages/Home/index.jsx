@@ -19,6 +19,7 @@ function Home() {
       <div className="main-section">
         <MainCategoryList />
       </div>
+
       <div className="divider-horizon" />
       
       <div className="main-section last-section">
