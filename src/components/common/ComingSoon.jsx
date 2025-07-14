@@ -8,7 +8,7 @@ export default function ComingSoon() {
       <div className="coming-soon-lottie">
         <iframe
           src="https://lottie.host/embed/a2e934f6-aec0-4ec1-a2c7-1ad2adf656cc/slR36Zd4t7.lottie"
-          style={{ width: 350, height: 350, border: 'none', background: 'transparent' }}
+          style={{ width: 300, height: 300, border: 'none', background: 'transparent' }}
           allowFullScreen
           title="준비중 모션"
         />
