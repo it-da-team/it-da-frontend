@@ -21,7 +21,7 @@ function CompanyDetail({ company }) {
             </a>
           </>
         ) : (
-          '외부 공고 안내, 유도 메시지, 고양이 lottie 등 UX 개선 요소가 항상 노출됩니다.'
+          ''
         )}
         buttonText={externalUrl ? '외부 공고 바로가기' : '비슷한 공고 보기'}
         onButtonClick={() => {
@@ -32,6 +32,7 @@ function CompanyDetail({ company }) {
           }
         }}
         showButton={true}
+        sourceName={company?.sourceName}
       />
       {/* 기존 내용 */}
       {company?.description && <h4>{company.description}</h4>}
