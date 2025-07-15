@@ -1,8 +1,18 @@
 import React from "react";
 import TrafficNotice from "./TrafficNotice"
 import "../../../assets/css/ApplySection.css";
+import formatDate from '../../../utils/formatDate';
 
 function ApplySection( { company }) {
+  // 우선순위: externalUrl > siteUrl > applyUrl
+  const applyUrl = company?.externalUrl || company?.siteUrl || company?.applyUrl || '';
+
+  const handleApplyClick = () => {
+    if (applyUrl) {
+      window.open(applyUrl, '_blank');
+    }
+  };
+
   return (
     <div className="apply-section">
       <TrafficNotice />
@@ -15,7 +25,7 @@ function ApplySection( { company }) {
             </tr>
             <tr>
               <th>주소</th>
-              <td>{company.location}</td>
+              <td>{company.region} {company.district}</td>
             </tr>
             <tr>
               <th>직군</th>
@@ -32,13 +42,13 @@ function ApplySection( { company }) {
             </tr>
             <tr>
               <th>마감일</th>
-              <td>{company.recruitEndAt}</td>
+              <td>{formatDate(company.recruitEndAt)}</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-        <button className="btn btn-primary btn-block">지원하기</button>
+        <button className="btn btn-primary btn-block" onClick={handleApplyClick}>지원하기</button>
       </div>
   );
 }

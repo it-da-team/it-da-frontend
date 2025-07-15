@@ -50,14 +50,14 @@
   }
 
   .traffic-notice-wrapper {
-    background-color: #fff3cd; /* 밝은 노랑 */
-    padding: 0.5rem 1.8rem;
+    background-color: #fff3cd;
+    padding: 0.5rem 4.5rem;
     border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
     margin-bottom: 2rem;
     display: inline-block;
     max-width: 100%;
-  }
+}
   
   .traffic-notice {
     font-size: 1rem;  /* 기존보다 크게 */

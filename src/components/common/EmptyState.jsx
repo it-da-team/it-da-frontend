@@ -12,11 +12,11 @@ export default function EmptyState({
   children,
 }) {
   return (
-    <div className="coming-soon-container" style={{ padding: 32, minHeight: 400 }}>
+    <div className="coming-soon-container" style={{ padding: 32, minHeight: 600, marginBottom:400 }}>
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Lottie animationData={catPeeping} loop={true} style={{ width: 220, height: 220, marginBottom: 16 }} />
         <h2 className="coming-soon-title" style={{ marginBottom: 12 }}>{title}</h2>
-        <p className="coming-soon-desc" style={{ marginBottom: 24 }}>{description}</p>
+        <p className="coming-soon-desc" style={{ marginBottom: 24 }}>출처 : </p>
         {children}
         {showButton && (
           <button

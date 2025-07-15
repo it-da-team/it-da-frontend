@@ -2,11 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   min-height: 60vh;
-  padding: 3rem 1rem;
+  padding: 1rem 1rem;
   background: #fff;
-  margin-top: 6rem;
 }
 
 .coming-soon-illustration {
