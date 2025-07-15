@@ -7,9 +7,12 @@ import SimilarJobSection from "./SimilarJobSection";
 import { fetchRecruitmentDetail } from "../../../api/recruitment/recruitmentApi";
 import "../../../assets/css/MainDetail.css";
 import "../../../assets/css/global.css";
+import EmptyState from '../../../components/common/EmptyState';
+import { useNavigate } from 'react-router-dom';
 
 function MainDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [companyData, setCompanyData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -34,7 +37,14 @@ function MainDetail() {
 
   if (loading) return <div>로딩 중...</div>;
   if (error) return <div>에러 발생: {error}</div>;
-  if (!companyData) return <div>해당 채용 정보를 찾을 수 없습니다.</div>;
+  if (!companyData) return (
+    <EmptyState
+      title="해당 채용 정보를 찾을 수 없습니다."
+      description="공고가 마감되었거나 삭제되었을 수 있습니다."
+      buttonText="비슷한 공고 보기"
+      onButtonClick={() => navigate('/recruitment')}
+    />
+  );
 
   return (
     <div className="main-detail-container">
