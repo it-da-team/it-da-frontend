@@ -86,3 +86,34 @@
     height: 4rem;
     text-align: center;
 }
+
+/* 버튼 영역 전체를 flex column, center 정렬 */
+.apply-section .apply-actions-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 12px;
+}
+
+/* 오류 제보하기 버튼 */
+.report-error-btn {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #e57300;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 500;
+  gap: 0.5rem;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.report-error-btn .report-error-icon {
+  margin-right: 4px;
+  font-size: 1.2em;
+  color: #e57300;
+}
