@@ -2,6 +2,7 @@ import React from "react";
 import TrafficNotice from "./TrafficNotice"
 import "../../../assets/css/ApplySection.css";
 import formatDate from '../../../utils/formatDate';
+import { FaExclamationTriangle } from 'react-icons/fa';
 
 function ApplySection( { company }) {
   // 우선순위: externalUrl > siteUrl > applyUrl
@@ -25,7 +26,7 @@ function ApplySection( { company }) {
             </tr>
             <tr>
               <th>주소</th>
-              <td>{company.region} {company.district}</td>
+              <td>{company.fullAddress}</td>
             </tr>
             <tr>
               <th>직군</th>
@@ -48,8 +49,18 @@ function ApplySection( { company }) {
         </table>
       </div>
 
+      {/* 버튼 영역: 지원하기 + 오류 제보하기를 하나의 flex column 박스에 묶음 */}
+      <div className="apply-actions-wrapper">
         <button className="btn btn-primary btn-block" onClick={handleApplyClick}>지원하기</button>
+        <button 
+          className="report-error-btn"
+          onClick={() => alert('오류 제보 기능은 준비 중입니다.')}
+        >
+          <FaExclamationTriangle className="report-error-icon" />
+          오류 제보하기
+        </button>
       </div>
+    </div>
   );
 }
 
