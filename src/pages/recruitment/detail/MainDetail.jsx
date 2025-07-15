@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import DailyTrafficSection from "./DailyTrafficSection";
 import CompanyInfoSection from "./CompanyInfoSection";
 import ApplySection from "./ApplySection";
@@ -8,7 +8,8 @@ import { fetchRecruitmentDetail } from "../../../api/recruitment/recruitmentApi"
 import "../../../assets/css/MainDetail.css";
 import "../../../assets/css/global.css";
 import EmptyState from '../../../components/common/EmptyState';
-import { useNavigate } from 'react-router-dom';
+import { addFavoriteRecruitment, removeFavoriteRecruitment, isFavoriteRecruitment } from "../../../utils/localStorage";
+
 
 function MainDetail() {
   const { id } = useParams();
@@ -16,6 +17,7 @@ function MainDetail() {
   const [companyData, setCompanyData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -24,6 +26,9 @@ function MainDetail() {
         const data = await fetchRecruitmentDetail(id);
         console.log("받은 상세 데이터:", data);
         setCompanyData(data);
+        if (data) {
+          setIsFavorite(isFavoriteRecruitment(data.id));
+        }
       } catch (err) {
         console.error("상세 데이터 로딩 에러:", err);
         setError(err.message);
@@ -34,6 +39,17 @@ function MainDetail() {
 
     loadData();
   }, [id]);
+
+  const handleFavoriteToggle = async (newFavState) => {
+    if (!companyData) return;
+
+    if (newFavState) {
+      addFavoriteRecruitment(companyData);
+    } else {
+      removeFavoriteRecruitment(companyData.id);
+    }
+    setIsFavorite(newFavState);
+  };
 
   if (loading) return <div>로딩 중...</div>;
   if (error) return <div>에러 발생: {error}</div>;
@@ -49,11 +65,13 @@ function MainDetail() {
   return (
     <div className="main-detail-container">
       <div>
-        <DailyTrafficSection />
-        <div className="divider" />
         <div className="two-column-layout">
           <div className="left-column">
-            <CompanyInfoSection company={companyData} />
+            <CompanyInfoSection
+              company={companyData}
+              isFavorite={isFavorite}
+              onFavoriteToggle={handleFavoriteToggle}
+            />
           </div>
           <div className="right-column">
             <div className="apply-sticky-box">

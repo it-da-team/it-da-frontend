@@ -4,6 +4,7 @@
   width: 100%;
   max-width: 360px;
   margin: 0 auto;
+  padding-left: 4rem;
 }
 
 .apply-section .card {
@@ -15,7 +16,7 @@
   border-radius: 0.75rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   padding: 1rem 1.5rem;
-  width: 100%;
+  width: 80%;
   box-sizing: border-box;
   transition: box-shadow 0.3s ease;
 }
@@ -27,12 +28,13 @@
 }
 .info-table th,
 .info-table td {
-  padding: 0.7rem 1.2rem;
+  padding: 0.7rem 0.5rem; /* 좌우 여백을 0.5rem으로 줄임 */
   text-align: left;
   vertical-align: middle;
 }
 .info-table th {
-  width: 100px;
+  width: 70px; /* 폭을 더 줄임 */
+  margin-right: 2rem;
   font-weight: 600;
   color: #333;
   white-space: nowrap;
@@ -44,6 +46,14 @@
 }
 .info-table tr + tr {
   border-top: 1px solid #e0e0e0;
+}
+
+.apply-section .info-table th,
+.apply-section .info-table td {
+  padding: 0.7rem 0.4rem !important;
+}
+.apply-section .info-table th {
+  width: 80px !important;
 }
 
 .btn {
@@ -62,15 +72,17 @@
   text-decoration: none;
 }
 .btn-primary {
-  background-color: #FFC107;
+  background: linear-gradient(90deg, #fbbf24 0%, #f59e42 100%);
   color: white;
+  transition: background 0.3s;
 }
+
 .btn-primary:hover {
-  background-color: #FF6F00;
+  background: linear-gradient(90deg, #f59e42 0%, #fbbf24 100%);
 }
 .btn-block {
-  display: block;
-  width: 100%;
-  height: 4rem;
-  text-align: center;
+    display: block;
+    width: 80%;
+    height: 4rem;
+    text-align: center;
 }
