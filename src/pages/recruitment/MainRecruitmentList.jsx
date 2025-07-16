@@ -27,6 +27,7 @@ function useScrollRestoration(deps) {
 }
 
 export function MainRecruitmentListHeader({ tabIndex, setTabIndex, selectedKeywords, onSearchClick }) {
+  const isMobile = window.matchMedia('(max-width: 700px)').matches;
   return (
     <div className="tabs-header">
       <Tabs selectedIndex={tabIndex} onSelect={setTabIndex} className="tabs-container">
@@ -36,17 +37,20 @@ export function MainRecruitmentListHeader({ tabIndex, setTabIndex, selectedKeywo
         </TabList>
       </Tabs>
       <div className="search-keywords-button-row">
-        {/* 태그가 버튼 왼쪽에 오도록 순서 변경 */}
-        {selectedKeywords.length > 0 && (
+        {/* 모바일이 아닐 때만 태그 렌더링 */}
+        {!isMobile && selectedKeywords.length > 0 && (
           <div className="selected-keywords">
             {selectedKeywords.map((keyword, index) => (
               <span key={index} className="keyword-tag">#{keyword}</span>
             ))}
           </div>
         )}
-        <button onClick={onSearchClick} className="tab-action-button">
-          검색하기
-        </button>
+        {/* 모바일이 아닐 때만 검색하기 버튼 렌더링 */}
+        {!isMobile && (
+          <button onClick={onSearchClick} className="tab-action-button">
+            검색하기
+          </button>
+        )}
       </div>
     </div>
   );

@@ -58,6 +58,13 @@ function Map() {
   const [error, setError] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 700);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   // 카테고리 선택 핸들러
   const handleCategorySelect = (option) => {
@@ -114,6 +121,83 @@ function Map() {
       setIsLoading(false);
     }
   };
+
+  if (isMobile) {
+    return (
+      <div className="map-area-mobile" style={{ background: '#f9fafb', width: '100vw', minHeight: 1, padding: '1.2rem 0 2.5rem 0' }}>
+        <div className="mobile-map-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 1rem 0.7rem 1rem' }}>
+          <h2 className="search-title" style={{ margin: 0, fontSize: '1.2rem', fontWeight: 700 }}>지역별 채용공고</h2>
+          <button className="filter-btn" style={{ fontSize: '1rem', padding: '0.5rem 1.2rem', borderRadius: 8, background: '#ffc107', color: '#fff', border: 'none', fontWeight: 700 }} onClick={() => setIsFilterOpen(true)}>필터</button>
+        </div>
+        <section style={{ width: '100vw', maxWidth: '100vw', height: 220, background: '#fff', borderRadius: '1.1rem', boxShadow: '0 4px 16px rgba(0,0,0,0.07)', margin: '0 auto 1.2rem auto', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <SearchMap markers={searchResults} />
+        </section>
+        {isLoading && <div className="loading">검색 중...</div>}
+        {error && <div className="error">{error}</div>}
+        <SearchResultModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          searchResults={searchResults}
+        />
+        {/* 필터 모달 (슬라이드업) */}
+        {isFilterOpen && (
+          <div className="filter-modal" style={{ position: 'fixed', left: 0, right: 0, bottom: 0, zIndex: 9999, background: '#fff', borderTopLeftRadius: 18, borderTopRightRadius: 18, boxShadow: '0 -4px 24px rgba(0,0,0,0.13)', padding: '1.2rem 1.2rem 2.2rem 1.2rem', width: '100vw', maxWidth: '100vw', minHeight: 220, animation: 'slideUp 0.25s cubic-bezier(.4,0,.2,1)' }}>
+            <form className="search-form" style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%' }} onSubmit={e => { e.preventDefault(); handleSearch(); setIsFilterOpen(false); }}>
+              <div style={{ marginBottom: '10px', marginTop: '10px' }}>
+                <label className="search-label" style={{ fontSize: '1rem', fontWeight: 700, marginBottom: 6, display: 'block' }}>기관 유형</label>
+                <Select
+                  inputId="category-select"
+                  instanceId="category-select"
+                  options={CATEGORY_OPTIONS}
+                  value={CATEGORY_OPTIONS.find(opt => labelToEnum[opt.value] === selectedCategory) || null}
+                  onChange={handleCategorySelect}
+                  placeholder="기관 유형 선택"
+                  styles={{
+                    ...customStyles,
+                    menuPortal: base => ({ ...base, zIndex: 99999 })
+                  }}
+                  menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
+                  aria-label="기관 유형 선택"
+                />
+              </div>
+              <div>
+                <label className="search-label" style={{ fontSize: '1rem', fontWeight: 700, marginBottom: 6, display: 'block' }}>지역 선택</label>
+                <MapDropdown
+                  province={province}
+                  city={city}
+                  district={district}
+                  onProvinceChange={setProvince}
+                  onCityChange={setCity}
+                  onDistrictChange={setDistrict}
+                />
+              </div>
+              <button
+                className="search-button"
+                type="submit"
+                style={{
+                  height: 40,
+                  fontSize: '1.1rem',
+                  borderRadius: 8,
+                  marginTop: '10px',
+                  background: 'linear-gradient(90deg, #ffe082 0%, #ffc107 100%)',
+                  color: '#fff',
+                  fontWeight: 700,
+                  border: 'none',
+                  boxShadow: '0 1px 4px rgba(255,193,7,0.08)',
+                  transition: 'background 0.2s',
+                }}
+                onMouseOver={e => e.currentTarget.style.background = 'linear-gradient(90deg, #ffd54f 0%, #ffb300 100%)'}
+                onMouseOut={e => e.currentTarget.style.background = 'linear-gradient(90deg, #ffe082 0%, #ffc107 100%)'}
+              >
+                검색하기
+              </button>
+              <button type="button" style={{ marginTop: 10, fontSize: '1rem', color: '#888', background: 'none', border: 'none' }} onClick={() => setIsFilterOpen(false)}>닫기</button>
+            </form>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div style={{ background: '#f9fafb', width: '100%', paddingTop: '2.5rem', paddingBottom: '2.5rem' }}>

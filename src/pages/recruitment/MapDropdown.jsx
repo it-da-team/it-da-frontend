@@ -136,6 +136,11 @@ export default function MapDropdown({ province, city, district, onProvinceChange
     groupHeading: base => ({ ...base, color: '#888', fontSize: '1.1rem', fontWeight: 600, padding: '4px 8px' }),
   };
 
+  console.log('provinceOptions', provinceOptions);
+  console.log('cityOptions', cityOptions);
+  console.log('districtOptions', districtOptions);
+  console.log('province', province, 'city', city, 'district', district);
+
   return (
     <div className="map-dropdown" style={{ width: '100%' }}>
       <div className="map-filters" style={{ display: 'flex', gap: '0.7rem', width: '100%' }}>
@@ -147,7 +152,11 @@ export default function MapDropdown({ province, city, district, onProvinceChange
             value={province ? PROVINCES.find(p => p.value === province) : null}
             onChange={handleProvince}
             placeholder="시/도 선택"
-            styles={customStyles}
+            styles={{
+              ...customStyles,
+              menuPortal: base => ({ ...base, zIndex: 99999 })
+            }}
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
             isClearable
             aria-label="시/도 선택"
           />
@@ -160,9 +169,13 @@ export default function MapDropdown({ province, city, district, onProvinceChange
             value={city ? cityOptions.find(c => c.value === city) : null}
             onChange={handleCity}
             placeholder="시/군 선택"
-            styles={customStyles}
+            styles={{
+              ...customStyles,
+              menuPortal: base => ({ ...base, zIndex: 99999 })
+            }}
             isDisabled={!province || isNoCityProvince}
             isClearable
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
             aria-label="시/군 선택"
             noOptionsMessage={() => province ? '선택 가능한 시/군이 없습니다.' : '시/도를 먼저 선택하세요.'}
           />
@@ -175,9 +188,13 @@ export default function MapDropdown({ province, city, district, onProvinceChange
             value={district ? districtOptions.find(d => d.value === district) : null}
             onChange={handleDistrict}
             placeholder={isNoCityProvince ? "구 선택" : "구/군 선택"}
-            styles={customStyles}
+            styles={{
+              ...customStyles,
+              menuPortal: base => ({ ...base, zIndex: 99999 })
+            }}
             isDisabled={isNoCityProvince ? !province : !city}
             isClearable
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
             aria-label={isNoCityProvince ? "구 선택" : "구/군 선택"}
             noOptionsMessage={() => isNoCityProvince
               ? (province ? '선택 가능한 구가 없습니다.' : '시/도를 먼저 선택하세요.')

@@ -751,3 +751,18 @@
     min-width: 0 !important;
   }
 }
+
+.filter-modal,
+.filter-modal *,
+.map-dropdown,
+.map-filters {
+  overflow: visible !important;
+}
+
+.filter-modal {
+  min-height: 350px !important;
+}
+.map-dropdown,
+.map-filters {
+  min-height: 120px !important;
+}
