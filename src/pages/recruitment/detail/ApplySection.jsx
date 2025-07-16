@@ -60,7 +60,7 @@ function ApplySection( { company }) {
           오류 제보하기
         </button>
       </div>
-    </div>
+      </div>
   );
 }
 

@@ -509,8 +509,9 @@
   letter-spacing: -0.01em;
 }
 .search-title {
-  font-size: 1.13rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
   color: #222;
 }

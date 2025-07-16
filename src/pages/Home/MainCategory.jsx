@@ -20,34 +20,39 @@ const categories = [
   { label: "특별활동 센터", image: iconActivityCenter },
 ];
 
-function MainCategory({ onCategorySelect, selected, compact = false }) {
+function MainCategory({ onCategorySelect, selected, compact = false, variant = "home", iconClass = "category-icon" }) {
   const navigate = useNavigate();
 
   return (
-    <section className={`main-category ${compact ? "compact" : ""}`}>
-      {!compact && <h2>어떤 기관의 공고를 찾으시나요?</h2>}
-      <div className="main-category-list-fixed">
-        <ul className="main-category-list-wrapper">
-          {categories.map((cat, i) => (
-            <li
-              key={i}
-              onClick={() =>
-                compact
-                  ? onCategorySelect?.(cat.label)
-                  : navigate(`/recruitment?category=${labelToEnum[cat.label]}`)
-              }
-            >
-              <MainCategoryList
-                label={cat.label}
-                image={cat.image}
-                active={selected === cat.label}
-                compact={compact}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+    <>
+      <section className="main-title-section">
+        {!compact && <h2 className="section-title">어떤 기관의 공고를 찾으시나요?</h2>}
+      </section>
+      <section className={`main-category main-category--${variant} ${compact ? "compact" : ""}`}>
+        <div className="main-category-list-fixed">
+          <ul className="main-category-list-wrapper category-grid">
+            {categories.map((cat, i) => (
+              <li
+                key={i}
+                onClick={() =>
+                  compact
+                    ? onCategorySelect?.(cat.label)
+                    : navigate(`/recruitment?category=${labelToEnum[cat.label]}`)
+                }
+              >
+                <MainCategoryList
+                  label={cat.label}
+                  image={cat.image}
+                  active={selected === cat.label}
+                  compact={compact}
+                  iconClass={iconClass}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </>
   );
 }
 

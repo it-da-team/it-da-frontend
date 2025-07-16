@@ -3,6 +3,7 @@ import './RegionStatsSection.css';
 import { useNavigate } from 'react-router-dom';
 import Lottie from 'lottie-react';
 import graphDiagram from '../../assets/lottie/Graph Diagram Animation.json';
+import { useMediaQuery } from 'react-responsive';
 
 const regionStatsRaw = [
   { region: '서울', count: 32 },
@@ -130,12 +131,38 @@ function AnimatedBar({ value, max, delay = 0, region, fixed, setFixedIndex, inde
 export default function RegionStatsSection() {
   const [fixedIndex, setFixedIndex] = useState(null);
   const maxCount = Math.max(...regionStats.map(r => r.count));
+  const isMobile = useMediaQuery({ maxWidth: 700 });
+
+  // 상위 5개(공고 수 많은 순) 강조
+  const sortedStats = [...regionStats].sort((a, b) => b.count - a.count);
+  const top5 = sortedStats.slice(0, 5).map(r => r.region);
+
+  if (isMobile) {
+    // 모바일: 2열 그리드, 상위 5개 강조
+    return (
+      <section className="region-stats-section mobile">
+        <h2 className="section-title">지역별 최신 공고 통계</h2>
+        <div className="region-stats-card-list grid">
+          {regionStats.map((r) => (
+            <div
+              className={`region-stats-card${top5.includes(r.region) ? ' top' : ''}`}
+              key={r.region}
+              onClick={() => window.location.href = `/recruitment?region=${encodeURIComponent(r.region)}`}
+              style={{ cursor: 'pointer' }}
+            >
+              <span className="region-stats-card-region">{r.region}</span>
+              <span className="region-stats-card-count">{r.count}건</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="region-stats-section">
-      <h2 className="region-stats-title" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}>
-        <span style={{ display: 'flex', alignItems: 'center', marginRight: '0.2rem', position: 'relative', top: '4px' }}>
-          <Lottie animationData={graphDiagram} loop={true} style={{ width: 44, height: 44 }} />
-        </span>
+      <h2 className="section-title">
+        <Lottie animationData={graphDiagram} loop={true} style={{ width: 44, height: 44, display: 'inline-block', verticalAlign: 'middle', marginRight: '0.5rem', position: 'relative', top: '4px' }} />
         지역별 최신 공고 통계
       </h2>
       <div className="region-stats-graph-vertical">

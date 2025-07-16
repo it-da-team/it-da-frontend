@@ -1,5 +1,5 @@
 // src/pages/recruitment/MainRecruitmentList.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
 import { useSearchParams } from "react-router-dom";
 import "react-tabs/style/react-tabs.css";
@@ -9,11 +9,54 @@ import MainRecruitmentSearch from "../modal/MainRecruitmentSearch";
 import { useRecruitmentSearch } from "../../hooks/recruitment/useRecruitmentSearch";
 import { COMPANY_TYPE_KEYWORDS, TEACHER_DUTY_KEYWORDS } from "../modal/constants/keywords";
 
-export default function MainRecruitmentList({ categoryEnum }) {
+// 스크롤 위치 복원 커스텀 훅
+function useScrollRestoration(deps) {
+  const scrollY = useRef(window.scrollY);
+
+  useEffect(() => {
+    // deps가 바뀌기 직전에 스크롤 위치 저장
+    return () => {
+      scrollY.current = window.scrollY;
+    };
+  }, deps);
+
+  useEffect(() => {
+    // deps가 바뀐 후에 스크롤 위치 복원
+    window.scrollTo(0, scrollY.current);
+  }, deps);
+}
+
+export function MainRecruitmentListHeader({ tabIndex, setTabIndex, selectedKeywords, onSearchClick }) {
+  return (
+    <div className="tabs-header">
+      <Tabs selectedIndex={tabIndex} onSelect={setTabIndex} className="tabs-container">
+        <TabList className="search">
+          <Tab>전체 공고</Tab>
+          <Tab>관심 공고</Tab>
+        </TabList>
+      </Tabs>
+      <div className="search-keywords-button-row">
+        {/* 태그가 버튼 왼쪽에 오도록 순서 변경 */}
+        {selectedKeywords.length > 0 && (
+          <div className="selected-keywords">
+            {selectedKeywords.map((keyword, index) => (
+              <span key={index} className="keyword-tag">#{keyword}</span>
+            ))}
+          </div>
+        )}
+        <button onClick={onSearchClick} className="tab-action-button">
+          검색하기
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKeywords }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const { searchResults, loading, error, searchRecruitments } = useRecruitmentSearch(categoryEnum);
-  const [selectedKeywords, setSelectedKeywords] = useState([]);
+  // const [selectedKeywords, setSelectedKeywords] = useState([]); // 중복 선언 제거
 
   console.log('MainRecruitmentList categoryEnum:', categoryEnum);
 
@@ -45,7 +88,7 @@ export default function MainRecruitmentList({ categoryEnum }) {
       }
     });
 
-    setSelectedKeywords(keywords);
+    // setSelectedKeywords(keywords); // 중복 선언 제거
 
     // 검색 조건이 없으면 URL 파라미터 초기화하고 초기 카테고리로 돌아가기
     if (Object.keys(params).length === 0) {
@@ -57,6 +100,9 @@ export default function MainRecruitmentList({ categoryEnum }) {
       searchRecruitments(params);
     }
   }, [searchParams, categoryEnum]);
+
+  // 카테고리(혹은 검색 등) 값이 바뀌어도 스크롤 위치 유지
+  useScrollRestoration([categoryEnum]);
 
   const handleSearchClick = () => {
     setIsModalOpen(true);
@@ -83,50 +129,11 @@ export default function MainRecruitmentList({ categoryEnum }) {
 
   return (
     <div className="card-container">
-      <Tabs className="tabs-container">
-        <div className="tabs-header">
-          <TabList className="search">
-            <Tab>전체 공고</Tab>
-            <Tab>관심 공고</Tab>
-          </TabList>
-
-          <div className="search-keywords-button-row">
-            {selectedKeywords.length > 0 && (
-              <div className="selected-keywords">
-                {selectedKeywords.map((keyword, index) => (
-                  <span key={index} className="keyword-tag">#{getDisplayValue(keyword)}</span>
-                ))}
-              </div>
-            )}
-            <button 
-              onClick={handleSearchClick}
-              className="tab-action-button"
-            >
-              검색하기
-            </button>
-          </div>
-        </div>
-
-        <TabPanel>
-          <JopList 
-            type="all" 
-            categoryEnum={categoryEnum} 
-            searchResults={searchResults}
-            loading={loading}
-            error={error}
-          />
-        </TabPanel>
-        <TabPanel>
-          <JopList 
-            type="favorite" 
-            categoryEnum={categoryEnum}
-            searchResults={searchResults}
-            loading={loading}
-            error={error}
-          />
-        </TabPanel>
-      </Tabs>
-
+      <JopList
+        type={tabIndex === 0 ? "all" : "favorite"}
+        categoryEnum={categoryEnum}
+        {...(tabIndex === 0 ? { searchResults, loading, error } : {})}
+      />
       {isModalOpen && (
         <MainRecruitmentSearch 
           onClose={handleCloseModal} 
