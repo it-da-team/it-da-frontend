@@ -142,13 +142,16 @@
     font-size: 1rem;
   }
   .hot-job-title {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
   .hot-job-company {
-    font-size: 0.95rem;
+    font-size: 0.8rem;
+  }
+  .hot-job-location{
+    font-size: 0.8rem;
   }
   .hot-job-meta-row {
-    font-size: 0.95rem;
+    font-size: 0.3rem;
   }
   .hot-recruit-title {
     /* font-size: 1.13rem; */

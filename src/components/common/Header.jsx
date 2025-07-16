@@ -66,28 +66,10 @@ function Header() {
                 
                 <NavBar isOpen={isMenuOpen} />
                 
-                <div className="header-buttons">
-                    {isLoggedIn ? (
-                        <>
-                            <button className="header-button company-button" onClick={handleLogoutClick}>
-                                로그아웃
-                            </button>
-                        </>
-                    ) : (
-                        <>
-                            <button className="header-button company-button">기업 회원</button>
-                            <button 
-                                className="header-button login-button" 
-                                onClick={() => navigate('/login')}
-                            >
-                                로그인
-                            </button>
-                        </>
-                    )}
                     <button className="menu-toggle" onClick={toggleMenu}>
                         <span className={`hamburger ${isMenuOpen ? 'open' : ''}`}></span>
                     </button>
-                </div>
+            
             </header>
 
             <LogoutModal 

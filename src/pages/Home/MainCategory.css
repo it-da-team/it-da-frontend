@@ -63,12 +63,12 @@
 /* 태블릿 화면 (768px ~ 1023px) */
 @media screen and (max-width: 1023px) {
     .category-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
     }
 
     .category-header h2 {
-        font-size: 2rem;
+        font-size: 1rem;
     }
 
     .category-item {
