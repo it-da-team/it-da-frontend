@@ -93,4 +93,14 @@
   .test-content p, .long-content p {
     font-size: 1rem;
   }
+  .main-container, .home-container {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+  .section, .card-container, .banner, .category-list {
+    max-width: 100vw !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
 } 

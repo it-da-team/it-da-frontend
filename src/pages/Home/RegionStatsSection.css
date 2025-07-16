@@ -57,7 +57,7 @@
 .region-bar-count {
   margin-left: 0.5rem;
   color: #ffb300;
-  font-size: 1.01rem;
+  font-size: 0.8rem;
 }
 
 @keyframes fadeBar {
@@ -225,7 +225,7 @@
     font-size: 0.95rem;
   }
   .region-bar-tooltip-btn {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     padding: 0.2rem 0.7rem;
   }
   .region-stats-section.mobile {
@@ -258,17 +258,17 @@
     border-radius: 0.7rem;
     box-shadow: 0 2px 8px 0 rgba(30,34,90,0.07);
     padding: 1rem 1.2rem;
-    font-size: 1.08rem;
+    font-size: 0.8rem;
     font-weight: 500;
     color: #232323;
   }
   .region-stats-card-region {
-    font-size: 1.08rem;
+    font-size: 0.8rem;
     font-weight: 700;
     color: #232323;
   }
   .region-stats-card-count {
-    font-size: 1.08rem;
+    font-size: 0.8rem;
     font-weight: 600;
     color: #ffb300;
   }
