@@ -5,14 +5,6 @@
   text-align: center;
 }
 
-.region-stats-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 4.2rem;
-  letter-spacing: -0.01em;
-}
-
 .region-stats-graph {
   display: flex;
   flex-direction: column;
@@ -189,7 +181,7 @@
 
 @media (max-width: 700px) {
   .region-stats-section {
-    padding: 0 0.3rem;
+    padding: 0 0.1rem;
   }
   .region-stats-graph {
     max-width: 100%;
@@ -204,5 +196,80 @@
   .region-bar {
     font-size: 0.97rem;
     padding-left: 0.7rem;
+  }
+  .region-stats-graph-vertical {
+    gap: 0.7rem;
+    max-width: 100vw;
+    height: 120px;
+  }
+  .region-bar-col {
+    width: 28px;
+    min-width: 24px;
+  }
+  .region-bar-bg-vertical {
+    height: 80px;
+  }
+  .region-bar-count-vertical {
+    font-size: 0.85rem;
+    padding: 0.1rem 0.4rem;
+  }
+  .region-label-vertical {
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+  }
+  .region-bar-tooltip {
+    min-width: 80px;
+    padding: 0.4rem 0.7rem 0.5rem 0.7rem;
+  }
+  .region-bar-tooltip-title {
+    font-size: 0.95rem;
+  }
+  .region-bar-tooltip-btn {
+    font-size: 0.85rem;
+    padding: 0.2rem 0.7rem;
+  }
+  .region-stats-section.mobile {
+    padding: 0 0.7rem;
+  }
+  .region-stats-card-list.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 3rem;
+    padding: 0 2vw;
+  }
+  .region-stats-card {
+    margin: 0 2px;
+  }
+  .region-stats-card.top {
+    background: linear-gradient(90deg, #fffbe7 0%, #ffe082 100%);
+    border: 1.5px solid #ffe082;
+    box-shadow: 0 2px 8px 0 rgba(255, 193, 7, 0.09);
+    color: #232323;
+    font-weight: 700;
+    transform: scale(1.03);
+    z-index: 1;
+  }
+  .region-stats-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fffbe7;
+    border-radius: 0.7rem;
+    box-shadow: 0 2px 8px 0 rgba(30,34,90,0.07);
+    padding: 1rem 1.2rem;
+    font-size: 1.08rem;
+    font-weight: 500;
+    color: #232323;
+  }
+  .region-stats-card-region {
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: #232323;
+  }
+  .region-stats-card-count {
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: #ffb300;
   }
 } 

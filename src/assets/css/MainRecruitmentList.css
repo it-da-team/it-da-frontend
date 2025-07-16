@@ -8,6 +8,7 @@
     margin: 0 auto;
     padding: 1rem;
     gap: 1rem;
+    min-height: 1000px;
 }
 
 /* 반응형 스타일 추가 */
@@ -54,6 +55,9 @@
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 2px solid #eee;
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 /* TabList (탭 레이블 그룹) */
@@ -125,6 +129,8 @@
     align-items: center;
     gap: 1rem;
     flex-wrap: wrap;
+    justify-content: end;
+    width: 100%;
 }
   
 .selected-keywords {

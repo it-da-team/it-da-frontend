@@ -3,9 +3,9 @@
 @import url('https://fonts.googleapis.com/earlyaccess/nanumgothic.css');
 
 /* 기본 설정 */
-html {
+/* html {
   font-size: 11px !important;
-}
+} */
 
 /* 전역 폰트 설정 */
 html, body {
@@ -119,8 +119,9 @@ body {
   white-space: nowrap;
   transition: all 0.3s ease;
   position: relative;
-  padding: 2rem 0 2.5rem 0;
+  padding: 2rem 0 1.5rem 0;
   cursor: pointer;
+  text-align: center;
 }
 
 .nav-item:hover {

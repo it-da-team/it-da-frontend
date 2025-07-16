@@ -37,7 +37,7 @@ function CompanyDetail({ company }) {
       {/* 기존 내용 */}
       {company?.description && <h4>{company.description}</h4>}
       {/* 회사 URL */}
-     
+    
       {/* 로고 (클릭하면 모달 열림) */}
       {company?.imgUrl && (
         <div className="company-img-wrapper" onClick={() => setIsModalOpen(true)}>

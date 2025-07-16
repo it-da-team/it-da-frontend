@@ -68,16 +68,29 @@
   box-shadow: 0 2px 8px 0 rgba(30,34,90,0.07);
 }
 @media (max-width: 700px) {
+  .home {
+    padding: 0 0.5rem;
+  }
   .main-section {
-    margin-bottom: 3rem;
+    margin-bottom: 2.2rem;
   }
   .main-section.last-section {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
   .gap-hot-stat {
-    margin-bottom: 3rem;
+    margin-bottom: 0.4rem;
   }
   .divider-horizon {
-    margin: 3rem auto;
+    margin: 2.2rem auto;
+  }
+  .test-content, .long-content {
+    padding: 1rem 0.2rem;
+    max-width: 100%;
+  }
+  .test-content h2, .long-content h3 {
+    font-size: 1.2rem;
+  }
+  .test-content p, .long-content p {
+    font-size: 1rem;
   }
 } 

@@ -70,7 +70,7 @@ export default function HotRecruitSection() {
 
   return (
     <section className="hot-recruit-section">
-      <h2 className="hot-recruit-title">
+      <h2 className="section-title hot-recruit-title">
         <span className="hot-recruit-lottie">
           <Lottie
             animationData={fireFlame}

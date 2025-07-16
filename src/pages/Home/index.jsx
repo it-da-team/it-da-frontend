@@ -14,7 +14,7 @@ function Home() {
         <MainBanner />
       </div>
       <div className="main-section">
-        <MainCategory />
+        <MainCategory variant="home" />
       </div>
       <div className="main-section">
         <MainCategoryList />

@@ -8,7 +8,7 @@ function CompanyInfoSection({ company, isFavorite, onFavoriteToggle }){
     return(
         <div>
         <CompanyInfoHeader
-            title={company.title}
+        title={company.title}
             companyName={company.companyName}
             isFavorite={isFavorite}
             onFavoriteToggle={onFavoriteToggle}

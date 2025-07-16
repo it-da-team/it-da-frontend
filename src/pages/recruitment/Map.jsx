@@ -145,7 +145,7 @@ function Map() {
             overflow: 'auto',
           }}
         >
-          <h2 className="search-title" style={{ fontSize: '2rem', fontWeight: 900, letterSpacing: '-0.01em', marginBottom: '0.5rem' }}>지역별 채용공고</h2>
+          <h2 className="search-title">지역별 채용공고</h2>
           <div className="search-subtext" style={{ fontSize: '1rem', fontWeight: 500, color: '#666', marginBottom: '0.5rem' }}>채용 공고 확인하기</div>
           <form className="search-form" style={{ display: 'flex', flexDirection: 'column', height: '100%', gap: '14px', maxWidth: '100%' }} onSubmit={e => { e.preventDefault(); handleSearch(); }}>
             <div style={{ marginBottom: '18px', marginTop: '24px' }}>
@@ -189,15 +189,15 @@ function Map() {
             </div>
             <div>
               <label className="search-label" style={{ fontSize: '1rem', fontWeight: 700, marginBottom: 6, display: 'block' }}>지역 선택</label>
-              <MapDropdown
-                province={province}
-                city={city}
-                district={district}
-                onProvinceChange={setProvince}
-                onCityChange={setCity}
-                onDistrictChange={setDistrict}
-              />
-            </div>
+            <MapDropdown
+              province={province}
+              city={city}
+              district={district}
+              onProvinceChange={setProvince}
+              onCityChange={setCity}
+              onDistrictChange={setDistrict}
+            />
+          </div>
             <button
               className="search-button"
               type="submit"
@@ -216,18 +216,18 @@ function Map() {
               onMouseOver={e => e.currentTarget.style.background = 'linear-gradient(90deg, #ffd54f 0%, #ffb300 100%)'}
               onMouseOut={e => e.currentTarget.style.background = 'linear-gradient(90deg, #ffe082 0%, #ffc107 100%)'}
             >
-              검색하기
-            </button>
-            {searchResults.length > 0 && (
+            검색하기
+          </button>
+          {searchResults.length > 0 && (
               <div className="job-count" style={{ marginTop: '0.5rem' }}>
-                <span className="job-count-label">검색된 채용공고 총</span>
-                <span className="job-count-number">
-                  <CountUp start={0} end={searchResults.length} duration={2} />
-                </span>
-                <span className="job-count-unit">건</span>
-              </div>
-            )}
-          </form>
+              <span className="job-count-label">검색된 채용공고 총</span>
+              <span className="job-count-number">
+                <CountUp start={0} end={searchResults.length} duration={2} />
+              </span>
+              <span className="job-count-unit">건</span>
+            </div>
+          )}
+        </form>
         </section>
         <section
           style={{
@@ -244,15 +244,15 @@ function Map() {
             overflow: 'hidden',
           }}
         >
-          <SearchMap markers={searchResults} />
+        <SearchMap markers={searchResults} />
         </section>
-        {isLoading && <div className="loading">검색 중...</div>}
-        {error && <div className="error">{error}</div>}
-        <SearchResultModal 
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          searchResults={searchResults}
-        />
+      {isLoading && <div className="loading">검색 중...</div>}
+      {error && <div className="error">{error}</div>}
+      <SearchResultModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        searchResults={searchResults}
+      />
       </div>
     </div>
   );
