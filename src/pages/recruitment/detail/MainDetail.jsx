@@ -9,7 +9,18 @@ import "../../../assets/css/MainDetail.css";
 import "../../../assets/css/global.css";
 import EmptyState from '../../../components/common/EmptyState';
 import { addFavoriteRecruitment, removeFavoriteRecruitment, isFavoriteRecruitment } from "../../../utils/localStorage";
+import '../../../assets/css/MainDetail.mobile.css'; // 모바일 전용 스타일 (700px 이하)
 
+// 모바일 여부를 감지하는 훅
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1000);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 1000);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  return isMobile;
+}
 
 function MainDetail() {
   const { id } = useParams();
@@ -18,6 +29,7 @@ function MainDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const loadData = async () => {
@@ -72,14 +84,17 @@ function MainDetail() {
               isFavorite={isFavorite}
               onFavoriteToggle={handleFavoriteToggle}
             />
+            {/* 모바일일 때 ApplySection 렌더링 부분 제거 */}
           </div>
-          <div className="right-column">
-            <div className="apply-sticky-box">
-              <ApplySection company={companyData}/>
+          {/* PC일 때만 기존 위치에 ApplySection 렌더링 */}
+          {!isMobile && (
+            <div className="right-column">
+              <div className="apply-sticky-box">
+                <ApplySection company={companyData}/>
+              </div>
             </div>
-          </div>
+          )}
         </div>
-
         <div className="divider" />
         <SimilarJobSection />
       </div>

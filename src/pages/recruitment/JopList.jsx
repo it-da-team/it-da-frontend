@@ -6,6 +6,14 @@ import { getFavoriteRecruitments } from "../../utils/localStorage";
 import FavoriteGuide from "../../components/recruitment/FavoriteGuide";
 import "../../assets/css/JopList.css";
 
+// 안전하게 렌더링하는 함수 추가
+function safeRender(field) {
+  if (typeof field === "string" || typeof field === "number") return field;
+  if (Array.isArray(field)) return field.map(safeRender).join(", ");
+  if (field && typeof field === "object" && "label" in field) return field.label;
+  return "";
+}
+
 export default function JopList({ type, categoryEnum, searchResults, loading: searchLoading, error: searchError, selectedFilters, onFilterChange }) {
   const { data: jobsToShow, loading: listLoading, error: listError } = useRecruitmentList(categoryEnum);
   const [favoriteJobs, setFavoriteJobs] = useState([]);
@@ -64,19 +72,19 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
         </div>
         {selectedFilters?.region && (
           <div className="search-tag region">
-            {selectedFilters.region}
+            {safeRender(selectedFilters.region)}
             <button onClick={() => handleRemoveFilter('region')}>×</button>
           </div>
         )}
         {selectedFilters?.category && (
           <div className="search-tag category">
-            {selectedFilters.category}
+            {safeRender(selectedFilters.category)}
             <button onClick={() => handleRemoveFilter('category')}>×</button>
           </div>
         )}
         {selectedFilters?.jobType && (
           <div className="search-tag job-type">
-            {selectedFilters.jobType}
+            {safeRender(selectedFilters.jobType)}
             <button onClick={() => handleRemoveFilter('jobType')}>×</button>
           </div>
         )}
@@ -108,19 +116,19 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
       </div>
       {selectedFilters?.region && (
         <div className="search-tag region">
-          {selectedFilters.region}
+          {safeRender(selectedFilters.region)}
           <button onClick={() => handleRemoveFilter('region')}>×</button>
         </div>
       )}
       {selectedFilters?.category && (
         <div className="search-tag category">
-          {selectedFilters.category}
+          {safeRender(selectedFilters.category)}
           <button onClick={() => handleRemoveFilter('category')}>×</button>
         </div>
       )}
       {selectedFilters?.jobType && (
         <div className="search-tag job-type">
-          {selectedFilters.jobType}
+          {safeRender(selectedFilters.jobType)}
           <button onClick={() => handleRemoveFilter('jobType')}>×</button>
         </div>
       )}

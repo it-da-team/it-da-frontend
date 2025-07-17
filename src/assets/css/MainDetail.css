@@ -72,38 +72,69 @@
   }
 
 
-  @media (max-width: 1024px) {
-    .two-column-layout {
-      flex-direction: column;
-    }
+  /* (max-width: 1024px) 미디어 쿼리는 유지, 700px 이하 모바일 쿼리는 없음. 별도 모바일 CSS로 분리 예정 */
   
-    .right-column {
-      order: -1; /* ✅ 먼저 렌더링됨 */
-      width: 100%;
-      max-width: 100%;
-      flex: none;
-    }
-  
-    .left-column {
-      order: 0;
-      width: 100%;
-      max-width: 100%;
-      flex: none;
-    }
-  
-    .apply-section {
-      max-width: 100%;
-      padding: 0;
-    }
-  
-    .apply-sticky-box {
-      position: relative; /* sticky 해제 */
-      top: auto;
-      padding: 0;
-    }
-  
-    .card {
-      width: 100%;
-    }
-  }
+/* CompanyInfoHeader 공통/PC 스타일 */
+.company-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.company-title {
+  margin: 0;
+}
+.company-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-top: 1.5rem;
+}
+.company-name {
+  margin: 0;
+  font-weight: 400;
+}
+.company-favorite-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.company-favorite-label {
+  font-size: 1rem;
+  color: #e74c3c;
+  font-weight: 700;
+  user-select: none;
+  margin-left: 0.6rem;
+  line-height: 1.2;
+  position: relative;
+  top: 0.5rem;
+  background: #fff0f4;
+  border-radius: 12px;
+  padding: 0.15rem 0.8rem 0.15rem 0.6rem;
+  border: 1px solid #ffe0e0;
+  box-shadow: 0 1px 6px #ffd6d633;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: transform 0.15s;
+}
+.company-favorite-label.hover {
+  transform: scale(1.10);
+}
+.company-favorite-label-icon {
+  font-size: 1.1em;
+  margin-right: 0.1em;
+}
+.company-viewcount {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.company-viewcount-icon {
+  font-size: 1.1em;
+  color: #888;
+}
+.company-viewcount-number {
+  font-size: 1em;
+  color: #444;
+}
   
