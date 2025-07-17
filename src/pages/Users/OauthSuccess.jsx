@@ -50,7 +50,7 @@ const OauthSuccess = () => {
       <div style={{ padding: 40, textAlign: 'center' }}>
         <h2>로그인 실패</h2>
         <p style={{ color: 'red', marginBottom: 20 }}>{error}</p>
-        <button onClick={() => navigate('/login')}>로그인 페이지로 돌아가기</button>
+        {/* 로그인 페이지로 돌아가기 버튼 제거 */}
       </div>
     );
   }

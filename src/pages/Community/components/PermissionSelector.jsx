@@ -1,26 +1,11 @@
 import React from 'react';
 import './PermissionSelector.css';
 import { FaGlobeAsia, FaUserGraduate, FaUserTie, FaLock } from 'react-icons/fa';
-import { getUser } from '../../../utils/localStorage';
+// import { getUser } from '../../../utils/localStorage';
 
 const PermissionSelector = ({ selectedPermission, onPermissionChange }) => {
-  const user = getUser();
-  
+  // 인증 제거: 항상 기본 권한
   let userRole = 'basic';
-  if (user?.role) {
-    switch (user.role) {
-      case 'ROLE_TEACHER':
-        userRole = 'teacher';
-        break;
-      case 'ROLE_OWNER':
-        userRole = 'owner';
-        break;
-      case 'ROLE_BASIC':
-      default:
-        userRole = 'basic';
-        break;
-    }
-  }
 
   const permissions = [
     { id: 'all', label: '전체 공개', icon: <FaGlobeAsia />, description: '모든 사용자가 게시글을 볼 수 있습니다.', requiredRole: null },

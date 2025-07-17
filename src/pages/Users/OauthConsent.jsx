@@ -73,7 +73,7 @@ export default function OauthConsent() {
       <div style={{ padding: 40, textAlign: 'center' }}>
         <h2>오류</h2>
         <p style={{ color: 'red', marginBottom: 20 }}>{error}</p>
-        <button onClick={() => navigate('/login')}>로그인 페이지로 돌아가기</button>
+        {/* 로그인 페이지로 돌아가기 버튼 제거 */}
       </div>
     );
   }
@@ -120,7 +120,7 @@ export default function OauthConsent() {
         </ol>
       </div>
 
-      <form onSubmit={handleSubmit} style={{ marginTop: 24 }}>
+      {/* <form onSubmit={handleSubmit} style={{ marginTop: 24 }}> */}
         <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, cursor: 'pointer' }}>
           <input type="checkbox" checked={agree} onChange={e => setAgree(e.target.checked)} />
           위 내용을 모두 확인하였으며, 개인정보 수집 및 이용에 동의합니다.
@@ -144,7 +144,7 @@ export default function OauthConsent() {
         }}>
           {loading ? <LoadingSpinner small /> : '동의하고 계속하기'}
         </button>
-      </form>
+      {/* </form> */}
     </div>
   );
 } 
