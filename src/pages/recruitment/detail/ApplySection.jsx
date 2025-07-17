@@ -67,16 +67,9 @@ function ApplySection( { company }) {
         </table>
       </div>
 
-      {/* 버튼 영역: 지원하기 + 오류 제보하기를 하나의 flex column 박스에 묶음 */}
+      {/* 버튼 영역: 지원하기만 남기고 오류 제보하기 버튼은 제거 */}
       <div className="apply-actions-wrapper">
         <button className="btn btn-primary btn-block" onClick={handleApplyClick}>지원하기</button>
-        <button 
-          className="report-error-btn"
-          onClick={() => alert('오류 제보 기능은 준비 중입니다.')}
-        >
-          <FaExclamationTriangle className="report-error-icon" />
-          오류 제보하기
-        </button>
       </div>
       </div>
   );

@@ -13,9 +13,9 @@ import '../../../assets/css/MainDetail.mobile.css'; // 모바일 전용 스타�
 
 // 모바일 여부를 감지하는 훅
 function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1000);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 1000);
+    const handleResize = () => setIsMobile(window.innerWidth <= 700);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -84,9 +84,7 @@ function MainDetail() {
               isFavorite={isFavorite}
               onFavoriteToggle={handleFavoriteToggle}
             />
-            {/* 모바일일 때 ApplySection 렌더링 부분 제거 */}
           </div>
-          {/* PC일 때만 기존 위치에 ApplySection 렌더링 */}
           {!isMobile && (
             <div className="right-column">
               <div className="apply-sticky-box">
