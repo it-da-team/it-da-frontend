@@ -53,6 +53,13 @@ export default function MapDropdown({ province, city, district, onProvinceChange
     onProvinceChange(option ? option.value : "");
     onCityChange("");
     onDistrictChange("");
+    if (option) {
+      setRecentOption({
+        value: option.value,
+        label: option.label
+      });
+      setRecent(getRecentOptions());
+    }
   };
   // 시/군 변경
   const handleCity = (option) => {

@@ -80,6 +80,7 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
 
   // URL 쿼리 파라미터가 있으면 검색 실행
   useEffect(() => {
+    if (tabIndex !== 0) return; // 전체 공고 탭에서만 서버 요청
     const params = {};
     const keywords = [];
     searchParams.forEach((value, key) => {
@@ -103,7 +104,7 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
     } else {
       searchRecruitments(params);
     }
-  }, [searchParams, categoryEnum]);
+  }, [searchParams, categoryEnum, tabIndex]);
 
   // 카테고리(혹은 검색 등) 값이 바뀌어도 스크롤 위치 유지
   useScrollRestoration([categoryEnum]);
@@ -128,7 +129,10 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
     });
     setSearchParams(newSearchParams);
 
-    await searchRecruitments(searchParams);
+    // 전체 공고 탭에서만 서버 요청
+    if (tabIndex === 0) {
+      await searchRecruitments(searchParams);
+    }
   };
 
   return (

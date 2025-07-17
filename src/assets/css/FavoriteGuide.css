@@ -58,3 +58,21 @@
   margin: 0;
   padding-left: 10px;
 } 
+
+@media (max-width: 700px) {
+  .favorite-guide {
+    padding: 12px 8px;
+    font-size: 0.97rem;
+    border-radius: 10px;
+    margin-bottom: 12px;
+  }
+  .favorite-guide .guide-header h3 {
+    font-size: small;
+  }
+  .guide-item,
+  .guide-item p,
+  .guide-item h4 {
+    font-size: small !important;
+  }
+  /* 필요시 내부 요소도 조절 */
+}

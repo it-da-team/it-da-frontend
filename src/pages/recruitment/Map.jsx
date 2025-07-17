@@ -10,6 +10,7 @@ import SearchResultModal from "./modal/SearchResultModal";
 import "../../assets/css/Map.css";
 import "../../assets/css/MapDropdown.css";
 import "../../assets/css/Map.mobile.css";
+import JopListItem from "./JopListItem";
 
 const CATEGORY_OPTIONS = [
   { value: "유치원", label: "유치원" },
@@ -60,9 +61,16 @@ function Map() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
+  const [isTablet, setIsTablet] = useState(window.innerWidth > 700 && window.innerWidth <= 1023);
+
+  // 디버깅용 로그
+  console.log("searchResults:", searchResults);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 700);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 700);
+      setIsTablet(window.innerWidth > 700 && window.innerWidth <= 1023);
+    };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -93,16 +101,25 @@ function Map() {
       console.log("Search params:", searchParams);
       const response = await fetchMapRecruitments(searchParams);
       if (response && response.data) {
-        const processedData = response.data.map(item => ({
-          ...item,
-          fullAddress: item.fullAddress || '',
-          recruitmentIdHash: item.recruitmentIdHash || item.id,
-          title: item.title || '제목 없음',
-          workType: item.workType || item.workSubType || '',
-          dDay: item.dDay || 0,
-          category: item.category || selectedCategory,
-          companyName: item.companyName || '기관명 없음'
-        }));
+        // 중복 제거: recruitmentIdHash 또는 id 기준
+        const seen = new Set();
+        const processedData = response.data
+          .map(item => ({
+            ...item,
+            fullAddress: item.fullAddress || '',
+            recruitmentIdHash: item.recruitmentIdHash || item.id,
+            title: item.title || '제목 없음',
+            workType: item.workType || item.workSubType || '',
+            dDay: item.dDay || 0,
+            category: item.category || selectedCategory,
+            companyName: item.companyName || '기관명 없음'
+          }))
+          .filter(item => {
+            const key = item.recruitmentIdHash || item.id;
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          });
         setSearchResults(processedData);
         const recruitmentIds = processedData.map(item => item.recruitmentIdHash);
         await sendTotalRecruitments(recruitmentIds);
@@ -114,7 +131,7 @@ function Map() {
     }
   };
 
-  if (isMobile) {
+  if (isMobile || isTablet) {
     return (
       <div className="map-area-mobile">
         <div className="mobile-map-header">
@@ -124,13 +141,46 @@ function Map() {
         <section className="mobile-map-section">
           <SearchMap markers={searchResults} />
         </section>
+        {/* 검색 결과 개수 + 리스트: 화이트 배경 카드 효과 */}
+        {isMobile && searchResults && searchResults.length > 0 && (
+          <div className="mobile-search-results-card">
+            <div className="mobile-search-results-header">
+              <span className="mobile-search-results-count">
+                총 <span className="mobile-search-results-count-number">{searchResults.length}</span>건 검색됨
+              </span>
+            </div>
+            <div className="mobile-search-results-list">
+              {searchResults.map((result) => {
+                const job = {
+                  id: result.recruitmentIdHash || result.id,
+                  title: result.title,
+                  companyName: result.companyName,
+                  region: result.region,
+                  district: result.district,
+                  category: result.category,
+                  workType: result.workType,
+                  dDay: result.dDay,
+                };
+                return (
+                  <div key={job.id} className="mobile-search-result-item">
+                    <JopListItem job={job} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+        {isMobile && searchResults && searchResults.length === 0 && !isLoading && !error && (
+          <div className="empty-list-guide">
+            <p>앗! 조건에 맞는 채용공고가 아직 없어요.</p>
+            <p className="empty-list-sub">필터를 조정하면 다양한 지역의 공고를 확인할 수 있어요.</p>
+            <button className="open-filter-btn" onClick={() => setIsFilterOpen(true)}>
+              필터 다시 설정하기
+            </button>
+          </div>
+        )}
         {isLoading && <div className="loading">검색 중...</div>}
         {error && <div className="error">{error}</div>}
-        <SearchResultModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          searchResults={searchResults}
-        />
         {/* 필터 모달 (슬라이드업) */}
         {isFilterOpen && (
           <div className="filter-modal mobile-filter-modal">
@@ -256,11 +306,14 @@ function Map() {
         </section>
         {isLoading && <div className="loading">검색 중...</div>}
         {error && <div className="error">{error}</div>}
-        <SearchResultModal 
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          searchResults={searchResults}
-        />
+        {/* 데스크탑에서만 모달 렌더링 */}
+        {!isMobile && (
+          <SearchResultModal 
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            searchResults={searchResults}
+          />
+        )}
       </div>
     </div>
   );
