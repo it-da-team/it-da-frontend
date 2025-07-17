@@ -6,7 +6,7 @@ import PostActions from './components/PostActions';
 import CommentSection from './components/CommentSection';
 import PermissionDenied from './components/PermissionDenied';
 import { fetchPostDetail } from '../../api/community/communityApi';
-import { getToken, getUser } from '../../utils/localStorage';
+// import { getToken, getUser } from '../../utils/localStorage';
 
 const PostDetail = () => {
     const { postId } = useParams(); // 실제로는 postHash
@@ -20,17 +20,17 @@ const PostDetail = () => {
             console.log('PostDetail - 게시글 조회 시작:', { postId });
             
             try {
-                const token = getToken();
-                console.log('PostDetail - 토큰 확인:', { hasToken: !!token, tokenLength: token?.length });
+                // const token = getToken();
+                // console.log('PostDetail - 토큰 확인:', { hasToken: !!token, tokenLength: token?.length });
                 
-                if (!token) {
-                    setError('로그인이 필요합니다.');
-                    setLoading(false);
-                    return;
-                }
+                // if (!token) {
+                //     setError('로그인이 필요합니다.');
+                //     setLoading(false);
+                //     return;
+                // }
 
                 console.log('PostDetail - API 호출 시작');
-                const data = await fetchPostDetail(postId, token);
+                const data = await fetchPostDetail(postId, null); // null로 변경
                 console.log('PostDetail - API 호출 성공:', data);
                 
                 setPost(data);
@@ -105,24 +105,24 @@ const PostDetail = () => {
                         requiredRole = 'owner';
                     } else {
                         // 기본 로직: 현재 사용자 정보에서 권한 확인
-                        const user = getUser();
-                        if (user?.role) {
-                            switch (user.role) {
-                                case 'ROLE_TEACHER':
-                                    currentRole = 'teacher';
-                                    requiredRole = 'owner';
-                                    break;
-                                case 'ROLE_OWNER':
-                                    currentRole = 'owner';
-                                    requiredRole = 'owner';
-                                    break;
-                                case 'ROLE_BASIC':
-                                default:
-                                    currentRole = 'basic';
-                                    requiredRole = 'teacher';
-                                    break;
-                            }
-                        }
+                        // const user = getUser();
+                        // if (user?.role) {
+                        //     switch (user.role) {
+                        //         case 'ROLE_TEACHER':
+                        //             currentRole = 'teacher';
+                        //             requiredRole = 'owner';
+                        //             break;
+                        //         case 'ROLE_OWNER':
+                        //             currentRole = 'owner';
+                        //             requiredRole = 'owner';
+                        //             break;
+                        //         case 'ROLE_BASIC':
+                        //         default:
+                        //             currentRole = 'basic';
+                        //             requiredRole = 'teacher';
+                        //             break;
+                        //     }
+                        // }
                     }
                 }
                 
@@ -152,14 +152,12 @@ const PostDetail = () => {
     if (!post) return <div>게시물을 찾을 수 없습니다.</div>;
 
     // 현재 사용자 정보
-    const user = getUser();
-    const currentUser = {
-        name: user?.sub || '로그인한사용자',
-        role: user?.role || 'ROLE_BASIC'
-    };
-
-    // 현재 사용자가 게시물 작성자인지 확인
-    const isAuthor = currentUser.name === post.author;
+    // const user = getUser();
+    // const currentUser = {
+    //     name: user?.sub || '로그인한사용자',
+    //     role: user?.role || 'ROLE_BASIC'
+    // };
+    const isAuthor = false;
 
     return (
         <div className="post-detail-container">

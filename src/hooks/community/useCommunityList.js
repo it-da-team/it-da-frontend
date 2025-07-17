@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { fetchCommunityPosts } from '../../api/community/communityApi';
-import { getToken, getUser } from '../../utils/localStorage';
+// import { getToken, getUser } from '../../utils/localStorage';
 
 export default function useCommunityList(category) {
   const [posts, setPosts] = useState([]);
@@ -13,37 +13,37 @@ export default function useCommunityList(category) {
       setError(null);
 
       try {
-        const token = getToken();
-        const user = getUser();
+        // const token = getToken();
+        // const user = getUser();
         
-        if (!token) {
-          setError('로그인이 필요합니다.');
-          setLoading(false);
-          return;
-        }
+        // if (!token) {
+        //   setError('로그인이 필요합니다.');
+        //   setLoading(false);
+        //   return;
+        // }
 
         // 사용자 권한 매핑 (서버의 UserType에 맞춤)
-        let userRole = 'basic';
-        if (user?.role) {
-          switch (user.role) {
-            case 'ROLE_TEACHER':
-              userRole = 'teacher';
-              break;
-            case 'ROLE_OWNER':
-              userRole = 'owner';
-              break;
-            case 'ROLE_BASIC':
-            default:
-              userRole = 'basic';
-              break;
-          }
-        }
+        const userRole = 'basic';
+        // if (user?.role) {
+        //   switch (user.role) {
+        //     case 'ROLE_TEACHER':
+        //       userRole = 'teacher';
+        //       break;
+        //     case 'ROLE_OWNER':
+        //       userRole = 'owner';
+        //       break;
+        //     case 'ROLE_BASIC':
+        //     default:
+        //       userRole = 'basic';
+        //       break;
+        //   }
+        // }
 
         const data = await fetchCommunityPosts({ 
           category, 
           role: userRole, 
-          token, 
-          isAuthenticated: true 
+          // token, 
+          // isAuthenticated: true 
         });
         
         setPosts(data || []);

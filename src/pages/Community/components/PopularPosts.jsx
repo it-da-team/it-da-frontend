@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './PopularPosts.css';
 import { FaFire } from 'react-icons/fa';
 import { fetchPopularPosts } from '../../../api/community/communityApi';
-import { getToken } from '../../../utils/localStorage';
+// import { getToken } from '../../../utils/localStorage';
 
 const PopularPosts = () => {
   const [popularPosts, setPopularPosts] = useState([]);
@@ -12,14 +12,14 @@ const PopularPosts = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const token = getToken();
-        if (!token) {
-          setError('로그인이 필요합니다.');
-          setLoading(false);
-          return;
-        }
+        // const token = getToken();
+        // if (!token) {
+        //   setError('로그인이 필요합니다.');
+        //   setLoading(false);
+        //   return;
+        // }
 
-        const data = await fetchPopularPosts(token);
+        const data = await fetchPopularPosts();
         setPopularPosts(data || []);
         setLoading(false);
       } catch (err) {

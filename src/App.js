@@ -32,7 +32,8 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route element={<ProtectedRoute><DefaultLayout /></ProtectedRoute>}>
+        {/* <Route element={<ProtectedRoute><DefaultLayout /></ProtectedRoute>}> */}
+        <Route element={<DefaultLayout />}> 
           <Route path="/" element={<Home />} />
           <Route path="/region" element={<RegionSearchMobile />} />
           <Route path="/recruitment" element={<Recruitment />} />
@@ -48,6 +49,7 @@ function App() {
           <Route path="/community/post/:postId" element={<PostDetail />} />
           <Route path="*" element={<NotFound />} />
         </Route>
+        {/* </Route> */}
       </Routes>
     </BrowserRouter>
   );

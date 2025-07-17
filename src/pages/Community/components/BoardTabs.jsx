@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './BoardTabs.css';
 import { FaLock } from 'react-icons/fa';
-import { getUser, getToken } from '../../../utils/localStorage';
+// import { getUser, getToken } from '../../../utils/localStorage';
 
 const BoardTabs = ({ selectedCategory, onCategoryChange }) => {
-  const user = getUser();
-  const token = getToken();
+  // const user = getUser();
+  // const token = getToken();
   
   // 디버깅을 위한 로그
   console.log('BoardTabs - Token exists:', !!token);
@@ -14,25 +14,26 @@ const BoardTabs = ({ selectedCategory, onCategoryChange }) => {
   console.log('BoardTabs - User role from token:', user?.role);
   
   // 사용자 권한 매핑 (서버의 UserType에 맞춤)
-  let userRole = 'basic';
-  if (user?.role) {
-    switch (user.role) {
-      case 'ROLE_TEACHER':
-        userRole = 'teacher';
-        break;
-      case 'ROLE_OWNER':
-        userRole = 'owner';
-        break;
-      case 'ROLE_BASIC':
-      default:
-        userRole = 'basic';
-        break;
-    }
-  } else {
-    // 토큰에 권한 정보가 없는 경우, 임시로 basic으로 설정
-    console.log('토큰에 권한 정보가 없어 basic 권한으로 설정합니다.');
-    userRole = 'basic';
-  }
+  // let userRole = 'basic';
+  // if (user?.role) {
+  //   switch (user.role) {
+  //     case 'ROLE_TEACHER':
+  //       userRole = 'teacher';
+  //       break;
+  //     case 'ROLE_OWNER':
+  //       userRole = 'owner';
+  //       break;
+  //     case 'ROLE_BASIC':
+  //     default:
+  //       userRole = 'basic';
+  //       break;
+  //   }
+  // } else {
+  //   // 토큰에 권한 정보가 없는 경우, 임시로 basic으로 설정
+  //   console.log('토큰에 권한 정보가 없어 basic 권한으로 설정합니다.');
+  //   userRole = 'basic';
+  // }
+  const userRole = 'basic';
   
   // 디버깅을 위한 로그
   console.log('BoardTabs - Final userRole:', userRole);

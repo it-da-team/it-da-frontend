@@ -14,62 +14,59 @@ export default function OauthConsent() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  useEffect(() => {
-    const token = location.state?.tempToken;
-    if (token) {
-      setTempToken(token);
-      // Decode the JWT to get the email (sub claim)
-      try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        setUserEmail(payload.sub || '');
-      } catch (e) {
-        console.error('Failed to decode token:', e);
-        setError('인증 정보를 확인할 수 없습니다.');
-      }
-    } else {
-      setError('유효하지 않은 접근입니다. 인증 정보가 없습니다.');
-    }
-  }, [location.state]);
+  // useEffect(() => {
+  //   const token = location.state?.tempToken;
+  //   if (token) {
+  //     setTempToken(token);
+  //     // Decode the JWT to get the email (sub claim)
+  //     try {
+  //       const payload = JSON.parse(atob(token.split('.')[1]));
+  //       setUserEmail(payload.sub || '');
+  //     } catch (e) {
+  //       console.error('Failed to decode token:', e);
+  //       setError('인증 정보를 확인할 수 없습니다.');
+  //     }
+  //   } else {
+  //     setError('유효하지 않은 접근입니다. 인증 정보가 없습니다.');
+  //   }
+  // }, [location.state]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!agree || !tempToken) return;
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_RECRUITMENT_API_BASE_URL}/user/oauth/signup`,
-        { agree: true },
-        {
-          headers: {
-            'Authorization': `Bearer ${tempToken}`,
-            'Content-Type': 'application/json'
-          },
-          withCredentials: true
-        }
-      );
-
-      if (response.data?.token) {
-        saveToken(response.data.token);
-        alert('회원가입이 완료되었습니다!');
-        navigate('/', { replace: true });
-      } else {
-        throw new Error('최종 토큰을 받지 못했습니다.');
-      }
-    } catch (err) {
-      console.error('회원가입 요청 실패:', err);
-      if (err.response?.status === 401) {
-        setError('인증이 만료되었습니다. 다시 로그인해 주세요.');
-        setTimeout(() => navigate('/login', { replace: true }), 2000);
-      } else {
-        setError('회원가입 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!agree || !tempToken) return;
+  //   setLoading(true);
+  //   setError(null);
+  //   try {
+  //     const response = await axios.post(
+  //       `${process.env.REACT_APP_RECRUITMENT_API_BASE_URL}/user/oauth/signup`,
+  //       { agree: true },
+  //       {
+  //         headers: {
+  //           'Authorization': `Bearer ${tempToken}`,
+  //           'Content-Type': 'application/json'
+  //         },
+  //         withCredentials: true
+  //       }
+  //     );
+  //     if (response.data?.token) {
+  //       saveToken(response.data.token);
+  //       alert('회원가입이 완료되었습니다!');
+  //       navigate('/', { replace: true });
+  //     } else {
+  //       throw new Error('최종 토큰을 받지 못했습니다.');
+  //     }
+  //   } catch (err) {
+  //     console.error('회원가입 요청 실패:', err);
+  //     if (err.response?.status === 401) {
+  //       setError('인증이 만료되었습니다. 다시 로그인해 주세요.');
+  //       setTimeout(() => navigate('/login', { replace: true }), 2000);
+  //     } else {
+  //       setError('회원가입 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+  //     }
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   if (error) {
     return (

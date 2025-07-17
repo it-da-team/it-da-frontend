@@ -4,7 +4,7 @@ import './CreatePost.css';
 import PostEditor from './components/PostEditor';
 import PermissionSelector from './components/PermissionSelector';
 import { createPost } from '../../api/community/communityApi';
-import { getToken } from '../../utils/localStorage';
+// import { getToken } from '../../utils/localStorage';
 import ErrorMessage from '../../components/common/ErrorMessage';
 
 const CreatePost = () => {
@@ -26,12 +26,12 @@ const CreatePost = () => {
         setIsLoading(true);
         setError(null);
         
-        const token = getToken();
-        if (!token) {
-            setError('로그인이 필요합니다.');
-            setIsLoading(false);
-            return;
-        }
+        // const token = getToken();
+        // if (!token) {
+        //     setError('로그인이 필요합니다.');
+        //     setIsLoading(false);
+        //     return;
+        // }
 
         const permissionMap = {
             all: 'BASIC',
