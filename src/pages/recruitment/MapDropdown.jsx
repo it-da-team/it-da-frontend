@@ -3,46 +3,21 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import "../../assets/css/Map.css";
 import "../../assets/css/MapDropdown.css";
+import { KOREA_REGIONS } from "../../data/koreaRegions";
 
-// 예시 지역 데이터 (실제 서비스에서는 더 많은 데이터 필요)
-const PROVINCES = [
-  { value: "서울특별시", label: "서울특별시" },
-  { value: "부산광역시", label: "부산광역시" },
-  { value: "경기도", label: "경기도" },
-];
-const CITIES = {
-  "서울특별시": [
-    { value: "강남구", label: "강남구" },
-    { value: "강동구", label: "강동구" },
-    { value: "강북구", label: "강북구" },
-    // ...
-  ],
-  "부산광역시": [
-    { value: "중구", label: "중구" },
-    { value: "서구", label: "서구" },
-    // ...
-  ],
-  "경기도": [
-    { value: "수원시", label: "수원시" },
-    { value: "성남시", label: "성남시" },
-    { value: "고양시", label: "고양시" },
-    // ...
-  ],
-};
-const DISTRICTS = {
-  "수원시": [
-    { value: "장안구", label: "장안구" },
-    { value: "권선구", label: "권선구" },
-    { value: "팔달구", label: "팔달구" },
-    { value: "영통구", label: "영통구" },
-  ],
-  "성남시": [
-    { value: "분당구", label: "분당구" },
-    { value: "중원구", label: "중원구" },
-    { value: "수정구", label: "수정구" },
-  ],
-  // ...
-};
+// PROVINCES, CITIES, DISTRICTS 삭제
+
+const PROVINCES = Object.keys(KOREA_REGIONS).map(province => ({ value: province, label: province }));
+
+function getCities(province) {
+  if (!province || !KOREA_REGIONS[province]) return [];
+  return Object.keys(KOREA_REGIONS[province]).map(city => ({ value: city, label: city }));
+}
+
+function getDistricts(province, city) {
+  if (!province || !city || !KOREA_REGIONS[province] || !KOREA_REGIONS[province][city]) return [];
+  return KOREA_REGIONS[province][city].map(district => ({ value: district, label: district }));
+}
 
 const RECENT_KEY = "recentRegionSelect";
 
@@ -62,7 +37,9 @@ function setRecentOption(regionObj) {
   localStorage.setItem(RECENT_KEY, JSON.stringify(next));
 }
 
-const NO_CITY_PROVINCES = ["서울특별시", "부산광역시", "대구광역시", "인천광역시", "광주광역시", "대전광역시", "울산광역시", "세종특별자치시"];
+const NO_CITY_PROVINCES = [
+  "서울특별시", "부산광역시", "대구광역시", "인천광역시", "광주광역시", "대전광역시", "울산광역시", "세종특별자치시"
+];
 
 export default function MapDropdown({ province, city, district, onProvinceChange, onCityChange, onDistrictChange }) {
   // 최근 선택
@@ -101,10 +78,10 @@ export default function MapDropdown({ province, city, district, onProvinceChange
   ];
   // 시/군 없는 광역시/특별시/세종 처리
   const isNoCityProvince = NO_CITY_PROVINCES.includes(province);
-  const cityOptions = isNoCityProvince ? [] : (province && CITIES[province] ? CITIES[province] : []);
+  const cityOptions = isNoCityProvince ? [] : getCities(province);
   const districtOptions = isNoCityProvince
-    ? (province && CITIES[province] ? CITIES[province].map(c => ({ value: c.value, label: c.label })) : [])
-    : (city && DISTRICTS[city] ? DISTRICTS[city] : []);
+    ? getCities(province)
+    : getDistricts(province, city);
 
   // 스타일 (react-select customStyles)
   const customStyles = {
@@ -135,11 +112,6 @@ export default function MapDropdown({ province, city, district, onProvinceChange
     singleValue: base => ({ ...base, color: '#222', fontWeight: 500, fontSize: '1.1rem' }),
     groupHeading: base => ({ ...base, color: '#888', fontSize: '1.1rem', fontWeight: 600, padding: '4px 8px' }),
   };
-
-  console.log('provinceOptions', provinceOptions);
-  console.log('cityOptions', cityOptions);
-  console.log('districtOptions', districtOptions);
-  console.log('province', province, 'city', city, 'district', district);
 
   return (
     <div className="map-dropdown" style={{ width: '100%' }}>

@@ -200,37 +200,6 @@
 }
 
 /* 📱 반응형 */
-@media (max-width: 768px) {
-  .map-section {
-    flex-direction: column;
-    padding: 1.5rem;
-  }
-
-  .map-left-panel {
-    width: 100%;
-    display: flex;
-    overflow-x: auto;
-    gap: 1rem;
-  }
-
-  .map-right-panel {
-    width: 100%;
-  }
-
-  .map-filters {
-    flex-direction: column;
-  }
-
-  .map-filters select,
-  .search-button {
-    width: 100%;
-  }
-
-  .map-wrapper {
-    height: 300px;
-  }
-}
-
 /* 카테고리 설정 버튼 */
 .category-filter-button {
   display: none;
@@ -678,13 +647,6 @@
 .map-filters {
   gap: 0.5rem !important;
 }
-@media (max-width: 900px) {
-  .map-filters {
-    flex-direction: column !important;
-    gap: 0.7rem !important;
-    align-items: stretch !important;
-  }
-}
 
 /* --- MapDropdown 드롭다운 동적 개수(2~3개) 예쁘게 정렬/사이즈 최적화 --- */
 .map-filters {
@@ -740,18 +702,6 @@
 .map-filters select:nth-child(3) {
   margin-right: 0 !important;
 }
-@media (max-width: 600px) {
-  .map-filters {
-    flex-direction: column !important;
-    gap: 0.5rem !important;
-    align-items: stretch !important;
-  }
-  .map-filters select {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-  }
-}
 
 .filter-modal,
 .filter-modal *,
@@ -775,4 +725,103 @@
   .map-area-mobile{
     background-color: #fff !important;
   }
+}
+
+/* 데스크탑 map-area 전체 배경 및 패딩 */
+.map-area-desktop {
+  background: #f9fafb;
+  width: 100%;
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.map-desktop-container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 0;
+  box-sizing: border-box;
+}
+
+.map-desktop-section {
+  flex: 0 0 400px;
+  min-width: 260px;
+  background: #fff;
+  border-radius: 1.1rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+  padding: 2rem 1.5rem;
+  height: 405px;
+  min-height: 405px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.map-desktop-search-title {
+  /* .search-title 공통 스타일 + 데스크탑 전용 */
+}
+
+.map-desktop-search-subtext {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.map-desktop-search-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 14px;
+  max-width: 100%;
+}
+
+.map-desktop-category-select-wrapper {
+  margin-bottom: 18px;
+  margin-top: 24px;
+}
+
+.map-desktop-search-label {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.map-desktop-search-button {
+  height: 36px;
+  font-size: 1rem;
+  border-radius: 6px;
+  margin-top: 12px;
+  background: linear-gradient(90deg, #ffe082 0%, #ffc107 100%);
+  color: #fff;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 1px 4px rgba(255,193,7,0.08);
+  transition: background 0.2s;
+}
+.map-desktop-search-button:hover {
+  background: linear-gradient(90deg, #ffd54f 0%, #ffb300 100%);
+}
+
+.map-desktop-job-count {
+  margin-top: 0.5rem;
+}
+
+.map-desktop-map-section {
+  flex: 1;
+  min-width: 650px;
+  background: #fff;
+  border-radius: 1.1rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+  height: 450px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
