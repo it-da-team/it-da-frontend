@@ -46,7 +46,7 @@ const CreatePost = () => {
         };
         
         try {
-            const response = await createPost(postData, token);
+            const response = await createPost(postData);
             console.log('게시글 생성 성공:', response);
             // 성공 시, 생성된 게시글 상세 페이지로 이동하거나 목록으로 이동
             // 여기서는 목록으로 이동하도록 구현

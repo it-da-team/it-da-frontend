@@ -120,7 +120,7 @@ export default function OauthConsent() {
         </ol>
       </div>
 
-      <form onSubmit={handleSubmit} style={{ marginTop: 24 }}>
+      {/* <form onSubmit={handleSubmit} style={{ marginTop: 24 }}> */}
         <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 500, cursor: 'pointer' }}>
           <input type="checkbox" checked={agree} onChange={e => setAgree(e.target.checked)} />
           위 내용을 모두 확인하였으며, 개인정보 수집 및 이용에 동의합니다.
@@ -144,7 +144,7 @@ export default function OauthConsent() {
         }}>
           {loading ? <LoadingSpinner small /> : '동의하고 계속하기'}
         </button>
-      </form>
+      {/* </form> */}
     </div>
   );
 } 
