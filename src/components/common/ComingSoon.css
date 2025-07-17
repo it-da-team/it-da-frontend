@@ -18,7 +18,7 @@
 }
 
 .coming-soon-title {
-  font-size: 2rem;
+  font-size: large;
   font-weight: 700;
   color: #333;
   margin-bottom: 1rem;
@@ -27,7 +27,7 @@
 }
 
 .coming-soon-desc {
-  font-size: 1.1rem;
+  font-size: medium;
   color: #666;
   margin-bottom: 2.5rem;
   text-align: center;

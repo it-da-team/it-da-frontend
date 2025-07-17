@@ -4,14 +4,11 @@ import CompanyDetail from "./CompanyDetail"
 import ApplySection from "./ApplySection";
 import { enumToLabel } from '../../../utils/categoryMap';
 
-// 채용공고 헤드 
-// 본문
-
 // 모바일 여부를 감지하는 훅
 function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1000);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 1000);
+    const handleResize = () => setIsMobile(window.innerWidth <= 700);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -36,9 +33,7 @@ function CompanyInfoSection({ company, isFavorite, onFavoriteToggle }){
             company={company}
           />
           <div className="divider" />
-          {/* 모바일일 때만 ApplySection을 CompanyInfoHeader 아래에 렌더링 */}
           {isMobile && <ApplySection company={company} />}
-          
           <CompanyDetail company={company} />
         </div>
     )

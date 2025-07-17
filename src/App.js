@@ -18,6 +18,8 @@ import PostDetail from './pages/Community/PostDetail.jsx';
 import TalkDetail from './pages/Talk/Detail.jsx';
 import OauthConsent from './pages/Users/OauthConsent';
 import OauthSuccess from './pages/Users/OauthSuccess';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import RegionSearchMobile from './pages/RegionSearchMobile';
 
 const config = defineConfig({
   initialColorMode: 'light',
@@ -28,24 +30,25 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <DefaultLayout>
-        <Routes>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route element={<ProtectedRoute><DefaultLayout /></ProtectedRoute>}>
           <Route path="/" element={<Home />} />
+          <Route path="/region" element={<RegionSearchMobile />} />
           <Route path="/recruitment" element={<Recruitment />} />
           <Route path="/recruitment/detail/:id" element={<MainDetail />} />
           <Route path="/story" element={<Story />} />
           <Route path="/talk" element={<Talk />} />
           <Route path="/talk/:id" element={<TalkDetail />} />
           <Route path="/play" element={<Play />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/oauth-success" element={<OauthSuccess />} />
           <Route path="/oauth-consent" element={<OauthConsent />} />
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/community/create" element={<CreatePost />} />
           <Route path="/community/post/:postId" element={<PostDetail />} />
           <Route path="*" element={<NotFound />} />
-        </Routes>
-      </DefaultLayout>
+        </Route>
+      </Routes>
     </BrowserRouter>
   );
 }

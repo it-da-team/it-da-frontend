@@ -248,4 +248,55 @@
 
 .search-tag button:hover {
   color: #333;
+}
+
+.empty-list-guide {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(30,34,90,0.06);
+  padding: 2.2rem 1.2rem 1.5rem 1.2rem;
+  text-align: center;
+  margin: 2.5rem 0 1.5rem 0;
+}
+.empty-list-guide p {
+  color: #333;
+  font-size: small;
+  margin-bottom: 4%;
+}
+.empty-list-sub {
+  color: #888;
+  font-size: 0.98rem;
+  margin-bottom: 1.2rem;
+}
+.open-filter-btn {
+  background: #f7f7f8;
+  color: #333;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 0.7em 1.5em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.open-filter-btn:hover {
+  background: #ededed;
+}
+
+.center-guide-wrapper {
+  min-height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.center-guide {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  color: #888;
+  font-size: small;
+  font-weight: 500;
 } 

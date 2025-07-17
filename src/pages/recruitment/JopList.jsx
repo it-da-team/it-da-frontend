@@ -54,7 +54,11 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
   if (searchResults !== undefined) {
     if (searchLoading) return <p>검색 중...</p>;
     if (searchError) return <p>검색 중 오류가 발생했습니다: {searchError}</p>;
-    if (!searchResults.length) return <p>검색 결과가 없습니다.</p>;
+    if (!searchResults.length) return (
+      <div className="jop-list-container center-guide-wrapper">
+        <p className="center-guide">검색 결과가 없습니다.</p>
+      </div>
+    );
 
     const filtered = type === "favorite"
       ? favoriteJobs
@@ -101,7 +105,22 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
     : jobsToShow;
 
   if (!filtered.length) {
-    return <p>표시할 공고가 없습니다.</p>;
+    if (type === "favorite") {
+      return (
+        <div className="jop-list-container">
+          <FavoriteGuide />
+        </div>
+      );
+    }
+    return (
+      <div className="empty-list-guide">
+        <p>조건에 맞는 채용공고가 없습니다.</p>
+        <p className="empty-list-sub">필터를 변경해 더 다양한 공고를 찾아보세요!</p>
+        {onFilterChange && (
+          <button className="open-filter-btn" onClick={() => onFilterChange('open')}>필터 검색하기</button>
+        )}
+      </div>
+    );
   }
 
   return (

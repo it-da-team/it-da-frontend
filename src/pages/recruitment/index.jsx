@@ -75,8 +75,9 @@ function Recruitment() {
 
   return (
     <div className="main-container recruitment-page">
-      <Map label={label} />
+      {!isMobile && <Map label={label} />}
       {/* 모바일 전용 UI: isMobile일 때만 렌더링 */}
+      {/* 모바일에서는 Map을 렌더링하지 않음. /region에서만 Map 사용 */}
       {isMobile && (
         <>
           {/* 모바일 필터/조건 검색 바 */}
@@ -130,7 +131,7 @@ function Recruitment() {
       )}
       {/* PC/태블릿용 기존 UI */}
       {/* 1. 원래 위치(스크롤 전) */}
-      {!isCategorySticky && (
+      {!isMobile && !isCategorySticky && (
         <section className="main-category main-category--recruitment compact">
           <div className="main-category-list-fixed">
             <MainCategory
@@ -152,7 +153,7 @@ function Recruitment() {
           onSearchClick={handleSearchClick}
         />
         {/* 3. sticky 위치(스크롤 후) */}
-        {isCategorySticky && (
+        {isCategorySticky && !isMobile && (
           <div className="sticky-category-bar">
             <section className="main-category main-category--recruitment compact">
               <div className="main-category-list-fixed">

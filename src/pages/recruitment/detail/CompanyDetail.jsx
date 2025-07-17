@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import EmptyState from '../../../components/common/EmptyState';
+import { FaExclamationTriangle } from 'react-icons/fa';
 import "../../../assets/css/Company.css";
 
 function CompanyDetail({ company }) {
@@ -42,6 +43,16 @@ function CompanyDetail({ company }) {
         showButton={true}
         sourceName={company?.sourceName}
       />
+      {/* 오류 제보하기 버튼을 EmptyState 바로 아래에 추가 */}
+      <div style={{ margin: '1rem 0', display: 'flex', justifyContent: 'flex-end' }}>
+        <button 
+          className="report-error-btn"
+          onClick={() => alert('오류 제보 기능은 준비 중입니다.')}
+        >
+          <FaExclamationTriangle className="report-error-icon" />
+          오류 제보하기
+        </button>
+      </div>
       {/* 기존 내용 */}
       {company?.description && <h4>{company.description}</h4>}
       {/* 회사 URL */}
