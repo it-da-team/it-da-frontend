@@ -221,9 +221,9 @@
     display: none;
   }
 
-  .map-dropdown {
+  /* .map-dropdown {
     display: none;
-  }
+  } */
 
   .filter-panel .map-dropdown {
     display: flex;

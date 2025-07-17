@@ -97,7 +97,7 @@ export default function MapDropdown({ province, city, district, onProvinceChange
       color: '#222',
       cursor: state.isDisabled ? 'not-allowed' : 'pointer',
     }),
-    menu: base => ({ ...base, zIndex: 20 }),
+    menu: base => ({ ...base, zIndex: 20, maxHeight: 250, overflowY: 'auto' }),
     option: (base, state) => ({
       ...base,
       fontSize: '1.1rem',
@@ -128,9 +128,10 @@ export default function MapDropdown({ province, city, district, onProvinceChange
               ...customStyles,
               menuPortal: base => ({ ...base, zIndex: 99999 })
             }}
-            menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
             isClearable
             aria-label="시/도 선택"
+            menuPosition="fixed"
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
           />
         </div>
         <div style={{ flex: 1, minWidth: 120 }}>
@@ -147,9 +148,10 @@ export default function MapDropdown({ province, city, district, onProvinceChange
             }}
             isDisabled={!province || isNoCityProvince}
             isClearable
-            menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
             aria-label="시/군 선택"
             noOptionsMessage={() => province ? '선택 가능한 시/군이 없습니다.' : '시/도를 먼저 선택하세요.'}
+            menuPosition="fixed"
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
           />
         </div>
         <div style={{ flex: 1, minWidth: 120 }}>
@@ -166,11 +168,12 @@ export default function MapDropdown({ province, city, district, onProvinceChange
             }}
             isDisabled={isNoCityProvince ? !province : !city}
             isClearable
-            menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
             aria-label={isNoCityProvince ? "구 선택" : "구/군 선택"}
             noOptionsMessage={() => isNoCityProvince
               ? (province ? '선택 가능한 구가 없습니다.' : '시/도를 먼저 선택하세요.')
               : (city ? '선택 가능한 구/군이 없습니다.' : '시/군을 먼저 선택하세요.')}
+            menuPosition="fixed"
+            menuPortalTarget={typeof window !== 'undefined' ? document.body : null}
           />
         </div>
       </div>
