@@ -8,6 +8,14 @@ function CompanyDetail({ company }) {
   // 우선순위: externalUrl > siteUrl > applyUrl 등
   const externalUrl = company?.externalUrl || company?.siteUrl || company?.applyUrl || '';
 
+  // 안전하게 렌더링하는 함수
+  function safeRender(field) {
+    if (typeof field === "string" || typeof field === "number") return field;
+    if (Array.isArray(field)) return field.map(safeRender).join(", ");
+    if (field && typeof field === "object" && "label" in field) return field.label;
+    return "";
+  }
+
   return (
     <>
       {/* Always show the EmptyState at the top, with externalUrl if present */}

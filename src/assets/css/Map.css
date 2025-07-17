@@ -641,7 +641,8 @@
     border-radius: 0.5rem;
   }
   .search-title {
-    font-size: 1rem;
+    margin-left: 0% !important;
+    font-size: 90% !important;
   }
   .search-label {
     font-size: 0.93rem;
@@ -765,4 +766,13 @@
 .map-dropdown,
 .map-filters {
   min-height: 120px !important;
+}
+
+@media (max-width: 1000px) {
+  .mobile-map-header {
+   padding-left: 0 !important;
+  }
+  .map-area-mobile{
+    background-color: #fff !important;
+  }
 }

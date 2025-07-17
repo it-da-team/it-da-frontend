@@ -79,10 +79,6 @@ function Recruitment() {
       {/* 모바일 전용 UI: isMobile일 때만 렌더링 */}
       {isMobile && (
         <>
-          {/* 모바일 카테고리 바 */}
-          <div className="mobile-category-bar">
-            <span className="category-chip"># {label}</span>
-          </div>
           {/* 모바일 필터/조건 검색 바 */}
           <div className="mobile-filter-bar">
             <div className="mobile-filter-tags">

@@ -13,9 +13,9 @@
 
 .card {
   background-color: #f9f9f9;
-  border-radius: 0.75rem;
+  border-radius: 5%;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  padding: 1rem 1.5rem;
+  padding: 5% 4%;
   width: 80%;
   box-sizing: border-box;
   transition: box-shadow 0.3s ease;
@@ -24,17 +24,17 @@
 .info-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 1.5rem;
+  margin-bottom: 10%;
 }
 .info-table th,
 .info-table td {
-  padding: 0.7rem 0.5rem; /* 좌우 여백을 0.5rem으로 줄임 */
+  padding: 1% 1%; /* 좌우 여백을 0.5rem으로 줄임 */
   text-align: left;
   vertical-align: middle;
 }
 .info-table th {
-  width: 70px; /* 폭을 더 줄임 */
-  margin-right: 2rem;
+  width: 50%; /* 폭을 더 줄임 */
+  margin-right: 2%;
   font-weight: 600;
   color: #333;
   white-space: nowrap;
@@ -104,7 +104,7 @@
   background: none;
   border: none;
   color: #e57300;
-  font-size: 1.1rem;
+  font-size: 100%;
   cursor: pointer;
   font-weight: 500;
   gap: 0.5rem;
@@ -116,4 +116,65 @@
   margin-right: 4px;
   font-size: 1.2em;
   color: #e57300;
+}
+
+@media (max-width: 1000px) {
+  .btn-primary {
+    display: none !important;
+  }
+  .apply-section{
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .coming-soon-container .btn-primary {
+    display: inline-block !important;
+  }
+  .card {
+    background-color: #f9f9f9;
+    border-radius: 5%;
+    margin: 0 !important;
+    margin-bottom: 5% !important;
+    padding-top: 0% !important;
+    padding-bottom: 0% !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    padding: 5% 4%;
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+  }
+  .info-table th,
+  .info-table td {
+    padding: 1% 1%;
+    text-align: left;
+    vertical-align: middle;
+  }
+  .info-table th {
+    width: 50%;
+    margin-right: 2%;
+    font-weight: 600;
+    color: #333;
+    white-space: nowrap;
+  }
+  .info-table td {
+    color: #222;
+    margin-left: 2% !important;
+    line-height: 1.8;
+    word-break: keep-all;
+  }
+  .info-table tr + tr {
+    border-top: 1px solid #e0e0e0;
+  }
+  .apply-section .info-table th,
+  .apply-section .info-table td {
+    padding: 1.5% 3% !important;
+  }
+  .apply-section .info-table th {
+    width: 80px !important;
+  }
+  .apply-section .info-table td {
+    padding-left: 10% !important;
+  }
 }

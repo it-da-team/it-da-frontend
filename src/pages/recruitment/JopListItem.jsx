@@ -5,6 +5,14 @@ import { addFavoriteRecruitment, removeFavoriteRecruitment, isFavoriteRecruitmen
 import "../../assets/css/RecruitmentListItem.css";
 import "../../assets/css/global.css";
 
+// 안전하게 렌더링하는 함수 추가
+function safeRender(field) {
+  if (typeof field === "string" || typeof field === "number") return field;
+  if (Array.isArray(field)) return field.map(safeRender).join(", ");
+  if (field && typeof field === "object" && "label" in field) return field.label;
+  return "";
+}
+
 export default function RecruitmentListItem({ job }) {
     const navigate = useNavigate();
     const [isFavorite, setIsFavorite] = useState(false);
@@ -81,10 +89,10 @@ export default function RecruitmentListItem({ job }) {
           </div>
         </div>
         <div className="jop-item-type">
-          <h4>{`${job.region} ${job.district}`}</h4>
-          <h4>{job.category.label}</h4>
-          <h4>{job.workType}</h4>
-          <h4>{`D - ${job.dDay}`}</h4>
+          <h4>{`${safeRender(job.region)} ${safeRender(job.district)}`}</h4>
+          <h4>{safeRender(job.category)}</h4>
+          <h4>{safeRender(job.workType)}</h4>
+          <h4>{`D - ${safeRender(job.dDay)}`}</h4>
         </div>
       </div>
     );
