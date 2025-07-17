@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './SearchBar.css';
 import { FaSearch } from 'react-icons/fa';
 import { searchPosts } from '../../../api/community/communityApi';
-import { getToken } from '../../../utils/localStorage';
+// import { getToken } from '../../../utils/localStorage';
 
 const SearchBar = ({ onSearchResults }) => {
   const [keyword, setKeyword] = useState('');
@@ -14,13 +14,13 @@ const SearchBar = ({ onSearchResults }) => {
 
     setLoading(true);
     try {
-      const token = getToken();
-      if (!token) {
-        alert('로그인이 필요합니다.');
-        return;
-      }
+      // const token = getToken();
+      // if (!token) {
+      //   alert('로그인이 필요합니다.');
+      //   return;
+      // }
 
-      const results = await searchPosts(keyword, token);
+      const results = await searchPosts(keyword, null); // Pass null or a placeholder token
       onSearchResults && onSearchResults(results);
     } catch (error) {
       console.error('검색 실패:', error);

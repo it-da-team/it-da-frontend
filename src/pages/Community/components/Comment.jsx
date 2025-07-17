@@ -3,7 +3,7 @@ import './Comment.css';
 import { FaUserGraduate, FaUserTie, FaRegHeart, FaHeart, FaShare, FaEdit, FaReply } from 'react-icons/fa';
 import CommentForm from './CommentForm'; // 답글 작성 시 재사용
 import { fetchReplies } from '../../../api/community/communityApi';
-import { getToken } from '../../../utils/localStorage';
+// import { getToken } from '../../../utils/localStorage';
 
 const AuthorBadge = ({ badge }) => {
     // PostView.jsx와 동일한 컴포넌트
@@ -54,13 +54,13 @@ const Comment = ({ comment, depth = 0 }) => {
         if (!showReplies && comment.hasReplies) {
             setLoadingReplies(true);
             try {
-                const token = getToken();
-                if (!token) {
-                    alert('로그인이 필요합니다.');
-                    return;
-                }
+                // const token = getToken();
+                // if (!token) {
+                //     alert('로그인이 필요합니다.');
+                //     return;
+                // }
 
-                const replyData = await fetchReplies(comment.id, token);
+                const replyData = await fetchReplies(comment.id, null); // null로 변경
                 setReplies(replyData);
                 setShowReplies(true);
             } catch (error) {
