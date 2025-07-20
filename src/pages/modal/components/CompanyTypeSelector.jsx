@@ -28,11 +28,16 @@ export default function CompanyTypeSelector({ selectedItems = [], onChange, onKe
   return (
     <div className="search-section">
       <h4>기관 유형</h4>
-      <ButtonList
-        items={companyTypes}
-        selectedItems={selectedKeywords}
-        onKeywordChange={handleCompanyTypeChange}
-      />
+      <div className="company-type-guide">
+        어린이집, 유치원을 선택하면 기관의 유형을 더 상세히 선택할 수 있습니다.
+      </div>
+      <div className="button-list company-type-list">
+        <ButtonList
+          items={companyTypes}
+          selectedItems={selectedKeywords}
+          onKeywordChange={handleCompanyTypeChange}
+        />
+      </div>
       <div className="divider" />
     </div>
   );

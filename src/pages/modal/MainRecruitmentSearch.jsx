@@ -108,7 +108,7 @@ export function MainRecruitmentSearch({ onClose, onSearch, initialCategory, sele
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={e => e.stopPropagation()}>
-        <SearchHeader onClose={onClose} />
+        <SearchHeader onClose={onClose} onReset={handleReset} />
         <SelectedKeywordTags keywords={selectedKeywords} />
         <RegionSelector
           selectedKeywords={selectedKeywords}
@@ -147,7 +147,6 @@ export function MainRecruitmentSearch({ onClose, onSearch, initialCategory, sele
         </AnimatePresence>
         <div className="search-actions">
           <button className="search-button" onClick={handleSearch}>검색</button>
-          <button className="reset-button" onClick={handleReset}>초기화</button>
           <button className="cancel-button" onClick={onClose}>취소</button>
         </div>
       </div>
