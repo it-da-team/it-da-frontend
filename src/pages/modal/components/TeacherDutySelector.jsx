@@ -15,9 +15,14 @@ export default function TeacherDutySelector({ onKeywordChange, selectedKeywords 
     }, [selectedKeywords]);
 
     const handleDutyChange = (item, isSelected) => {
+        // selectedKeywords에 코드가 들어있으면 라벨로 변환
+        const normalized = selectedKeywords.map(k => {
+          const found = Object.values(TEACHER_DUTY_KEYWORDS).includes(k) ? k : TEACHER_DUTY_KEYWORDS[k];
+          return found || k;
+        });
         const newSelected = isSelected
-            ? [...selectedDuties, item]
-            : selectedDuties.filter(duty => duty !== item);
+            ? [...normalized, item]
+            : normalized.filter(duty => duty !== item);
         setSelectedDuties(newSelected);
         onKeywordChange?.(item, isSelected);
     };
@@ -27,7 +32,7 @@ export default function TeacherDutySelector({ onKeywordChange, selectedKeywords 
             <h4>상세 직군</h4>
             <ButtonList
                 items={teacherDutyTypes}
-                selectedItems={selectedDuties}
+                selectedItems={selectedKeywords}
                 onKeywordChange={handleDutyChange}
             />
             <div className="divider" />

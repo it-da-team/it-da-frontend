@@ -1,23 +1,32 @@
 import React, { useState, useEffect } from "react";
 import ButtonList from "./ButtonList";
+import { PROVINCE_FULLNAME_MAP } from "../constants/keywords";
 
-export default function RegionSelector({ onKeywordChange, selectedKeywords = [] }) {
+const FULLNAME_TO_SHORT = Object.fromEntries(
+  Object.entries(PROVINCE_FULLNAME_MAP).map(([short, full]) => [full, short])
+);
+
+export default function RegionSelector({ onKeywordChange, selectedKeywords = [], setSelectedKeywords = () => {} }) {
     const [selectedRegions, setSelectedRegions] = useState([]);
-    const regions = ["서울", "경기", "인천", "강원", "충청", "전라", "경상", "제주"];
+    const regions = Object.keys(PROVINCE_FULLNAME_MAP);
 
-    // selectedKeywords가 변경될 때마다 선택된 지역 업데이트
     useEffect(() => {
-        const regions = selectedKeywords.filter(keyword => 
-            ["서울", "경기", "인천", "강원", "충청", "전라", "경상", "제주"].includes(keyword)
-        );
-        setSelectedRegions(regions);
+        // selectedKeywords에 풀네임이 들어있으면 축약명으로 변환
+        const normalized = selectedKeywords.map(k => FULLNAME_TO_SHORT[k] || k);
+        const filtered = normalized.filter(keyword => regions.includes(keyword));
+        setSelectedRegions(filtered);
+        // selectedKeywords가 축약명이 아니면 축약명으로 덮어쓰기
+        if (JSON.stringify(selectedKeywords) !== JSON.stringify(normalized)) {
+            setSelectedKeywords(normalized);
+        }
     }, [selectedKeywords]);
 
     const handleRegionChange = (item, isSelected) => {
+        const normalized = selectedKeywords.map(k => FULLNAME_TO_SHORT[k] || k);
         const newSelected = isSelected
-            ? [...selectedRegions, item]
-            : selectedRegions.filter(region => region !== item);
-        setSelectedRegions(newSelected);
+            ? [...normalized, item]
+            : normalized.filter(region => region !== item);
+        setSelectedKeywords(Array.from(new Set(newSelected)));
         onKeywordChange?.(item, isSelected);
     };
 
