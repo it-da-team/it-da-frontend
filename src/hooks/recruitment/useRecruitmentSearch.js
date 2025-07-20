@@ -11,6 +11,7 @@ export const useRecruitmentSearch = (categoryEnum) => {
       setLoading(true);
       setError(null);
 
+      console.log('searchRecruitments 진입:', searchParams, Array.isArray(searchParams.province));
       console.log('전송할 DTO:', searchParams); // 디버깅용
       const results = await fetchFilteredRecruitments(searchParams);
       setSearchResults(results);

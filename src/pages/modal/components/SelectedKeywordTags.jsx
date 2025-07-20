@@ -1,4 +1,5 @@
 import React from "react";
+import { INSTITUTION_SUB_TYPE_KEYWORDS } from "../constants/keywords";
 // SelectedKeywordTags.jsx
 export function SelectedKeywordTags({ keywords }) {
     if (keywords.length === 0) return null;
@@ -6,7 +7,9 @@ export function SelectedKeywordTags({ keywords }) {
     return (
       <div className="selected-keyword-tags">
         {keywords.map((word, idx) => (
-          <span className="keyword-tag" key={idx}>#{word}</span>
+          <span className="keyword-tag" key={idx}>#
+            {INSTITUTION_SUB_TYPE_KEYWORDS[word] || word}
+          </span>
         ))}
       </div>
     );

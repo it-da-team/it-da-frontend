@@ -39,30 +39,40 @@ export const fetchRecruitmentDetail = async (id) => {
 
 export const fetchFilteredRecruitments = async (filterDto) => {
     try {
-      console.log('필터 검색 요청 시작:', {
-        url: '/recruitment/filter',
-        method: 'POST',
-        data: filterDto
+      // undefined 값 제거 후 JSON 직렬화/역직렬화로 배열 보장
+      const safeDto = JSON.parse(JSON.stringify(filterDto));
+      console.log('AXIOS POST safeDto:', safeDto, Array.isArray(safeDto.province));
+      console.log('AXIOS POST 전체 DTO:', safeDto);
+      console.log('=== 필터 검색 요청 시작 ===');
+      console.log('URL:', '/recruitment/filter');
+      console.log('Method:', 'POST');
+      console.log('전송할 데이터:', JSON.stringify(safeDto, null, 2));
+      console.log('데이터 타입:', typeof safeDto);
+      console.log('========================');
+      
+      const response = await axios.post(`/recruitment/filter`, safeDto, {
+        headers: { 'Content-Type': 'application/json' }
       });
       
-      const response = await axios.post(`/recruitment/filter`, filterDto);
-      
-      console.log('필터 검색 응답:', {
-        status: response.status,
-        data: response.data
-      });
+      console.log('=== 필터 검색 응답 성공 ===');
+      console.log('Status:', response.status);
+      console.log('Response Data:', response.data);
+      console.log('==========================');
       
       return response.data.data || [];
     } catch (error) {
-      console.error("필터 검색 에러:", {
-        message: error.message,
-        status: error.response?.status,
-        data: error.response?.data,
-        config: error.config,
+      console.error("=== 필터 검색 에러 상세 ===");
+      console.error("Error Message:", error.message);
+      console.error("Status:", error.response?.status);
+      console.error("Status Text:", error.response?.statusText);
+      console.error("Response Data:", error.response?.data);
+      console.error("Request Config:", {
         url: error.config?.url,
         method: error.config?.method,
-        requestData: error.config?.data
+        headers: error.config?.headers,
+        data: error.config?.data
       });
+      console.error("==========================");
       throw error;
     }
 };

@@ -8,6 +8,7 @@ import MainCategory from "../Home/MainCategory";
 import MainRecruitmentSearch from "../modal/MainRecruitmentSearch";
 import "./Recruitment.css";
 import { useMediaQuery } from "react-responsive";
+import { PROVINCE_FULLNAME_MAP, COMPANY_TYPE_KEYWORDS, TEACHER_DUTY_KEYWORDS } from "../modal/constants/keywords";
 
 function Recruitment() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -40,7 +41,22 @@ function Recruitment() {
       }
     });
     setSearchParams(newSearchParams);
-    setSelectedKeywords(keywords);
+    // 변환: 코드/풀네임이 있으면 한글/축약명으로 변환
+    const normalized = keywords.map(k => {
+      // 지역
+      const short = Object.entries(PROVINCE_FULLNAME_MAP).find(([short, full]) => full === k);
+      if (short) return short[0];
+      // 기관유형: 코드가 들어오면 라벨로 변환
+      const companyLabel = Object.values(COMPANY_TYPE_KEYWORDS).includes(k)
+        ? k
+        : Object.entries(COMPANY_TYPE_KEYWORDS).find(([code, label]) => code === k)?.[1];
+      if (companyLabel) return companyLabel;
+      // 직무
+      const duty = Object.values(TEACHER_DUTY_KEYWORDS).includes(k) ? k : TEACHER_DUTY_KEYWORDS[k];
+      if (duty) return duty;
+      return k;
+    });
+    setSelectedKeywords(Array.from(new Set(normalized)));
     setIsModalOpen(false);
   };
 
@@ -122,6 +138,8 @@ function Recruitment() {
                   onClose={() => setIsMobileFilterOpen(false)}
                   onSearch={handleSearch}
                   initialCategory={categoryEnum}
+                  selectedKeywords={selectedKeywords}
+                  setSelectedKeywords={setSelectedKeywords}
                 />
                 <button className="change-category-btn" style={{marginTop: '1.5rem'}} onClick={() => setIsMobileFilterOpen(false)}>닫기</button>
               </div>
@@ -180,6 +198,8 @@ function Recruitment() {
           onClose={handleCloseModal}
           onSearch={handleSearch}
           initialCategory={categoryEnum}
+          selectedKeywords={selectedKeywords}
+          setSelectedKeywords={setSelectedKeywords}
         />
       )}
     </div>

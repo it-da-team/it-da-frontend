@@ -63,6 +63,7 @@
   .sub-type-section {
     flex: 1;
   }
+
   
   .sub-type-section h5 {
     font-size: 0.9rem;
@@ -73,28 +74,39 @@
   /* 버튼 리스트 공통 스타일 */
   .button-list {
     display: flex;
+    margin-top: 4%;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.8rem;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
   
   .list-button {
-    padding: 0.5rem 1rem;
-    border-radius: 999px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    padding: 0.7rem 1.3rem;
+    border-radius: 12px;
+    border: 1.5px solid #ccc;
+    background: #f5f5f5;
+    font-size: 4%;
+    font-weight: 500;
+    color: #333;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    transition: all 0.18s cubic-bezier(.4,0,.2,1);
   }
   
   .list-button.selected {
-    background-color: #FFC107;
-    color: white;
-    border-color: #FFC107;
+    background: #FFC107;
+    color: #222;
+    border: 2px solid #FFA000;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(255,193,7,0.18);
+    border-radius: 12px;
   }
   
   .list-button:hover {
-    background-color: #e0e0e0;
+    background: #ffe082;
+    border-color: #FFC107;
   }
   
   /* 구분선 */
@@ -111,25 +123,39 @@
     justify-content: flex-end;
     gap: 0.75rem;
     margin-top: 1.5rem;
+    align-items: stretch;
   }
   
   .search-button,
-  .cancel-button {
-    padding: 0.6rem 1.5rem;
+  .cancel-button,
+  .reset-button.icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
+    min-width: 80px;
+    padding: 0.9rem 1.5rem;
     font-size: 0.95rem;
     border-radius: 8px;
     border: none;
     cursor: pointer;
     transition: background 0.2s ease;
+    white-space: nowrap;
+    line-height: 1;
+    box-sizing: border-box;
+    vertical-align: middle;
+    margin: 0;
+    align-self: stretch;
   }
   
   .search-button {
-    background-color: #FFC107;
-    color: white;
+    background: #FFC107;
+    color: #fff;
   }
   
   .search-button:hover {
-    background-color: #FF6F00;
+    background: linear-gradient(90deg, #ffd54f 0%, #ffb300 100%);
+    color: #fff;
   }
   
   .cancel-button {
@@ -144,7 +170,7 @@
 .search-section h4 {
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: 1.7rem; /* 기존: 0.75rem → 늘림 */
+  margin-bottom: 0.2rem;
 }
 
 .institution-section h4 {
@@ -175,6 +201,7 @@
   .close-button {
     background: none;
     border: none;
+    margin-right: 1rem;
     font-size: 1.5rem;
     cursor: pointer;
     padding: 0;
@@ -188,6 +215,7 @@
   
 
   .selected-keyword-tags {
+    
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
@@ -195,10 +223,74 @@
   }
   
   .keyword-tag {
+    font-size: 5% !important;
     background-color: #FFE082;
     color: #333;
     padding: 0.4rem 0.8rem;
     border-radius: 999px;
-    font-size: 0.85rem;
   }
+
+.company-type-guide {
+  font-size: 70% !important;
+  color: #888;
+}
+.reset-button{
+  margin-right: 1rem !important;
+}
+.reset-button.icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  background: #fffbe7;
+  color: #e99a19;
+  border: 1.5px solid #ffe082;
+  font-weight: 600;
+  font-size: 4%;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  transition: background 0.18s, color 0.18s, border 0.18s;
+}
+.reset-button.icon:hover {
+  background: #ffe082;
+  color: #FF6F00;
+  border-color: #FFC107;
+}
+
+.search-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+}
+.search-header-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.search-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.company-type-list {
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: 0.8rem;
+}
+.company-type-list .list-button {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 700px) {
+  .search-section h4 {
+    text-align: left !important;
+  }
+  .company-type-guide {
+    text-align: left !important;
+  }
+}
   

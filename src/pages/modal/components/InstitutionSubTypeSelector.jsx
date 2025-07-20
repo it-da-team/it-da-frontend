@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ButtonList from "./ButtonList";
 import { INSTITUTION_SUB_TYPE_KEYWORDS } from "../constants/keywords";
 
-export default function InstitutionSubTypeSelector({ showKindergarten, showDaycare, onKeywordChange, selectedKeywords = [] }) {
+export default function InstitutionSubTypeSelector({ showKindergarten, showDaycare, onKeywordChange, selectedKeywords = [], setSelectedKeywords = () => {} }) {
   const [selectedKindergartenTypes, setSelectedKindergartenTypes] = useState([]);
   const [selectedDaycareTypes, setSelectedDaycareTypes] = useState([]);
 
@@ -55,18 +55,26 @@ export default function InstitutionSubTypeSelector({ showKindergarten, showDayca
   }, [showKindergarten, showDaycare]);
 
   const handleKindergartenTypeChange = (item, isSelected) => {
+    const normalized = selectedKeywords.map(k => {
+      const found = Object.values(INSTITUTION_SUB_TYPE_KEYWORDS).includes(k) ? k : INSTITUTION_SUB_TYPE_KEYWORDS[k];
+      return found || k;
+    });
     const newSelected = isSelected
-      ? [...selectedKindergartenTypes, item]
-      : selectedKindergartenTypes.filter(type => type !== item);
-    setSelectedKindergartenTypes(newSelected);
+      ? [...normalized, item]
+      : normalized.filter(type => type !== item);
+    setSelectedKeywords(Array.from(new Set(newSelected)));
     onKeywordChange?.(item, isSelected);
   };
 
   const handleDaycareTypeChange = (item, isSelected) => {
+    const normalized = selectedKeywords.map(k => {
+      const found = Object.values(INSTITUTION_SUB_TYPE_KEYWORDS).includes(k) ? k : INSTITUTION_SUB_TYPE_KEYWORDS[k];
+      return found || k;
+    });
     const newSelected = isSelected
-      ? [...selectedDaycareTypes, item]
-      : selectedDaycareTypes.filter(type => type !== item);
-    setSelectedDaycareTypes(newSelected);
+      ? [...normalized, item]
+      : normalized.filter(type => type !== item);
+    setSelectedKeywords(Array.from(new Set(newSelected)));
     onKeywordChange?.(item, isSelected);
   };
 
@@ -81,7 +89,7 @@ export default function InstitutionSubTypeSelector({ showKindergarten, showDayca
             <h5>유치원 유형</h5>
             <ButtonList
               items={kindergartenTypes}
-              selectedItems={selectedKindergartenTypes}
+              selectedItems={selectedKeywords}
               onKeywordChange={handleKindergartenTypeChange}
             />
           </div>
@@ -91,7 +99,7 @@ export default function InstitutionSubTypeSelector({ showKindergarten, showDayca
             <h5>어린이집 유형</h5>
             <ButtonList
               items={daycareTypes}
-              selectedItems={selectedDaycareTypes}
+              selectedItems={selectedKeywords}
               onKeywordChange={handleDaycareTypeChange}
             />
           </div>

@@ -7,7 +7,8 @@ import "../../assets/css/MainRecruitmentList.css";
 import JopList from "./JopList";
 import MainRecruitmentSearch from "../modal/MainRecruitmentSearch";
 import { useRecruitmentSearch } from "../../hooks/recruitment/useRecruitmentSearch";
-import { COMPANY_TYPE_KEYWORDS, TEACHER_DUTY_KEYWORDS } from "../modal/constants/keywords";
+import { COMPANY_TYPE_KEYWORDS, TEACHER_DUTY_KEYWORDS, INSTITUTION_SUB_TYPE_KEYWORDS } from "../modal/constants/keywords";
+import { PROVINCE_FULLNAME_MAP } from "../modal/constants/keywords";
 
 // 스크롤 위치 복원 커스텀 훅
 function useScrollRestoration(deps) {
@@ -41,7 +42,9 @@ export function MainRecruitmentListHeader({ tabIndex, setTabIndex, selectedKeywo
         {!isMobile && selectedKeywords.length > 0 && (
           <div className="selected-keywords">
             {selectedKeywords.map((keyword, index) => (
-              <span key={index} className="keyword-tag">#{keyword}</span>
+              <span key={index} className="keyword-tag">#
+                {INSTITUTION_SUB_TYPE_KEYWORDS[keyword] || COMPANY_TYPE_KEYWORDS[keyword] || TEACHER_DUTY_KEYWORDS[keyword] || keyword}
+              </span>
             ))}
           </div>
         )}
@@ -56,11 +59,15 @@ export function MainRecruitmentListHeader({ tabIndex, setTabIndex, selectedKeywo
   );
 }
 
-export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKeywords }) {
+export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKeywords: propSelectedKeywords, setSelectedKeywords: propSetSelectedKeywords }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const { searchResults, loading, error, searchRecruitments } = useRecruitmentSearch(categoryEnum);
-  // const [selectedKeywords, setSelectedKeywords] = useState([]); // 중복 선언 제거
+  const [localSelectedKeywords, localSetSelectedKeywords] = useState([]);
+
+  // props가 있으면 props 사용, 없으면 local state 사용
+  const selectedKeywords = propSelectedKeywords !== undefined ? propSelectedKeywords : localSelectedKeywords;
+  const setSelectedKeywords = propSetSelectedKeywords !== undefined ? propSetSelectedKeywords : localSetSelectedKeywords;
 
   console.log('MainRecruitmentList categoryEnum:', categoryEnum);
 
@@ -84,7 +91,13 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
     const params = {};
     const keywords = [];
     searchParams.forEach((value, key) => {
-      if (key === 'category' || key === 'region' || key === 'dutyTypes') {
+      if (
+        key === 'category' ||
+        key === 'region' ||
+        key === 'dutyTypes' ||
+        key === 'province' ||
+        key === 'companyWorkType'
+      ) {
         params[key] = value.split(',');
         keywords.push(...value.split(','));
       } else {
@@ -93,7 +106,22 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
       }
     });
 
-    // setSelectedKeywords(keywords); // 중복 선언 제거
+    // 변환: 코드/풀네임이 있으면 한글/축약명으로 변환
+    const normalized = keywords.map(k => {
+      // 지역
+      const short = Object.entries(PROVINCE_FULLNAME_MAP).find(([short, full]) => full === k);
+      if (short) return short[0];
+      // 기관유형: 코드가 들어오면 라벨로 변환
+      const companyLabel = Object.values(COMPANY_TYPE_KEYWORDS).includes(k)
+        ? k
+        : Object.entries(COMPANY_TYPE_KEYWORDS).find(([code, label]) => code === k)?.[1];
+      if (companyLabel) return companyLabel;
+      // 직무
+      const duty = Object.values(TEACHER_DUTY_KEYWORDS).includes(k) ? k : TEACHER_DUTY_KEYWORDS[k];
+      if (duty) return duty;
+      return k;
+    });
+    setSelectedKeywords(Array.from(new Set(normalized)));
 
     // 검색 조건이 없으면 URL 파라미터 초기화하고 초기 카테고리로 돌아가기
     if (Object.keys(params).length === 0) {
@@ -129,6 +157,29 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
     });
     setSearchParams(newSearchParams);
 
+    // 모든 필터 값을 selectedKeywords로 갱신 (항상 한글/축약명만)
+    const keywords = [];
+    Object.entries(searchParams).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        keywords.push(...value);
+      } else if (value) {
+        keywords.push(value);
+      }
+    });
+    const normalized = keywords.map(k => {
+      // 지역
+      const short = Object.entries(PROVINCE_FULLNAME_MAP).find(([short, full]) => full === k);
+      if (short) return short[0];
+      // 기관유형
+      const label = Object.values(COMPANY_TYPE_KEYWORDS).includes(k) ? k : COMPANY_TYPE_KEYWORDS[k];
+      if (label) return label;
+      // 직무
+      const duty = Object.values(TEACHER_DUTY_KEYWORDS).includes(k) ? k : TEACHER_DUTY_KEYWORDS[k];
+      if (duty) return duty;
+      return k;
+    });
+    setSelectedKeywords(Array.from(new Set(normalized)));
+
     // 전체 공고 탭에서만 서버 요청
     if (tabIndex === 0) {
       await searchRecruitments(searchParams);
@@ -147,6 +198,8 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
           onClose={handleCloseModal} 
           onSearch={handleSearch}
           initialCategory={categoryEnum}
+          selectedKeywords={selectedKeywords}
+          setSelectedKeywords={setSelectedKeywords}
         />
       )}
     </div>
