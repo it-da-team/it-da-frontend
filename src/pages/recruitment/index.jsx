@@ -121,20 +121,38 @@ function Recruitment() {
       {isHeaderSticky && !isMobile && (
         <div className="dynamic-sticky-header">
           <div className="sticky-header-content">
-            <select
-              className="category-dropdown"
-              value={label}
-              onChange={(e) => handleCategorySelect(e.target.value)}
-            >
-              {Object.keys(labelToEnum).map((catLabel) => (
-                <option key={catLabel} value={catLabel}>
-                  {catLabel}
-                </option>
-              ))}
-            </select>
-            <button className="filter-search-button" onClick={handleSearchClick}>
-              상세 필터 검색
-            </button>
+            <div className="sticky-header-left">
+              <span className="category-dropdown-title">기관 유형 선택하기</span>
+              <select
+                className="category-dropdown"
+                value={label}
+                onChange={(e) => handleCategorySelect(e.target.value)}
+              >
+                {Object.keys(labelToEnum).map((catLabel) => (
+                  <option key={catLabel} value={catLabel}>
+                    {catLabel}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="sticky-header-right">
+              <div className="sticky-header-tags">
+                {filterTags.length > 0 ? (
+                  filterTags.map((keyword, idx) => (
+                    <span key={idx} className="filter-tag sticky-tag">
+                      #{keyword}
+                    </span>
+                  ))
+                ) : (
+                  <span className="filter-tag-placeholder sticky-placeholder">
+                    선택된 필터가 없습니다.
+                  </span>
+                )}
+              </div>
+              <button className="filter-search-button" onClick={handleSearchClick}>
+                상세 필터 검색
+              </button>
+            </div>
           </div>
         </div>
       )}
