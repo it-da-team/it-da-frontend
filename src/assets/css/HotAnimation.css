@@ -1,0 +1,6 @@
+.hot-animation-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2%; /* 제목과의 간격을 아주 작게 설정 */
+} 

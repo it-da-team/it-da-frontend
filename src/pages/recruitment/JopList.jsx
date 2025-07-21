@@ -50,6 +50,12 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
     };
   }, []);
 
+  // 검색 결과 또는 전체 목록을 조회수(viewCount) 기준으로 정렬
+  const getSortedJobs = (jobs) => {
+    if (!jobs) return [];
+    return [...jobs].sort((a, b) => (b.viewCount || 0) - (a.viewCount || 0));
+  };
+
   // 검색이 실행되었을 때
   if (searchResults !== undefined) {
     if (searchLoading) return <p>검색 중...</p>;
@@ -61,16 +67,16 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
     );
 
     const filtered = type === "favorite"
-      ? favoriteJobs
-      : searchResults;
+      ? favoriteJobs // 관심 공고는 정렬에서 제외
+      : getSortedJobs(searchResults);
 
     return (
       <div className="jop-list-container">
         {type === "favorite" && <FavoriteGuide />}
         <div className="jop-list">
-          {filtered.map(job => (
+          {filtered.map((job, index) => ( // index 추가
             <div className="jop-list-item" key={job.id}>
-              <JopListItem job={job} />
+              <JopListItem job={job} index={index} />
             </div>
           ))}
         </div>
@@ -101,8 +107,8 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
   if (listError) return <p>에러 발생: {listError}</p>;
 
   const filtered = type === "favorite"
-    ? favoriteJobs
-    : jobsToShow;
+    ? favoriteJobs // 관심 공고는 정렬에서 제외
+    : getSortedJobs(jobsToShow);
 
   if (!filtered.length) {
     if (type === "favorite") {
@@ -127,9 +133,9 @@ export default function JopList({ type, categoryEnum, searchResults, loading: se
     <div className="jop-list-container">
       {type === "favorite" && <FavoriteGuide />}
       <div className="jop-list">
-        {filtered.map(job => (
+        {filtered.map((job, index) => ( // index 추가
           <div className="jop-list-item" key={job.id}>
-            <JopListItem job={job} />
+            <JopListItem job={job} index={index} />
           </div>
         ))}
       </div>

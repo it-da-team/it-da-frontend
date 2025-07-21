@@ -323,9 +323,8 @@
 
 .title-with-labels {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */ /* 이 속성을 제거하여 간격 문제를 해결합니다. */
   align-items: flex-start;
-  gap: 0.5rem;
 }
 
 .job-list-item__title {
@@ -340,7 +339,9 @@
 }
 
 .status-label.title-label {
-  /* 라벨이 줄어들지 않도록 설정 (선택 사항이지만 안전함) */
+  /* 이 속성이 라벨을 오른쪽 끝으로 밀어냅니다. */
+  margin-left: auto;
+  /* 기존 flex-shrink: 0; 속성은 유지하거나 추가해도 좋습니다. */
   flex-shrink: 0;
 }
 

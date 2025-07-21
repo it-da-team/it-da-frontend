@@ -32,24 +32,32 @@ function MainDetail() {
   const isMobile = useIsMobile();
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const loadData = async () => {
       try {
         setLoading(true);
-        const data = await fetchRecruitmentDetail(id);
+        const data = await fetchRecruitmentDetail(id, controller.signal);
         console.log("받은 상세 데이터:", data);
         setCompanyData(data);
         if (data) {
           setIsFavorite(isFavoriteRecruitment(data.id));
         }
       } catch (err) {
-        console.error("상세 데이터 로딩 에러:", err);
-        setError(err.message);
+        if (err.name !== 'CanceledError') { // 취소로 인한 에러는 무시
+          console.error("상세 데이터 로딩 에러:", err);
+          setError(err.message);
+        }
       } finally {
         setLoading(false);
       }
     };
 
     loadData();
+
+    return () => {
+      controller.abort(); // 컴포넌트 언마운트 시 또는 재호출 직전에 요청 취소
+    };
   }, [id]);
 
   const handleFavoriteToggle = async (newFavState) => {
