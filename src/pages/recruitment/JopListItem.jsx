@@ -5,6 +5,7 @@ import { addFavoriteRecruitment, removeFavoriteRecruitment, isFavoriteRecruitmen
 import "../../assets/css/RecruitmentListItem.css";
 import "../../assets/css/global.css";
 import { JobStatus } from "../../utils/enums";
+import { FaEye } from "react-icons/fa"; // FaEye 아이콘 import
 
 // 안전하게 렌더링하는 함수 추가
 function safeRender(field) {
@@ -102,20 +103,26 @@ export default function RecruitmentListItem({ job }) {
                 initialFavorite={isFavorite}
                 onToggle={updateFav}
               />
-              <span className="favorite-label">관심</span>
             </div>
           </div>
         </div>
         <div className="jop-item-type">
-          <span className="job-tag job-tag--primary">{safeRender(job.workType)}</span>
-          <span className="job-info-text">
-            {`${safeRender(job.region)} ${safeRender(job.district)} | ${safeRender(job.category)}`}
-          </span>
-          {parseInt(job.dDay, 10) >= 0 && parseInt(job.dDay, 10) !== 999 && (
+          <div className="jop-item-tags">
+            <span className="job-tag job-tag--primary">{safeRender(job.workType)}</span>
             <span className="job-info-text">
-              {`D - ${safeRender(job.dDay)}`}
+              {`${safeRender(job.region)} ${safeRender(job.district)} | ${safeRender(job.category)}`}
             </span>
-          )}
+            {parseInt(job.dDay, 10) >= 0 && parseInt(job.dDay, 10) !== 999 && (
+              <span className="job-info-text">
+                {`D - ${safeRender(job.dDay)}`}
+              </span>
+            )}
+          </div>
+          <div className="view-count-container">
+            <FaEye className="view-count-icon" />
+            <span className="view-count-label">조회</span>
+            <span className="view-count-number">{job.viewCount ?? 0}</span>
+          </div>
         </div>
       </div>
     );

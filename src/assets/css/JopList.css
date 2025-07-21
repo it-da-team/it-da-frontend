@@ -68,12 +68,13 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
+  padding: 0rem 0; /* 위아래 여백 추가 */
 }
 
 .main-jop-list {
   background: #f9f9f9;
   border-radius: 12px;
-  padding: 0.6rem 1.25rem;
+  padding:  5% 5%;
   margin-bottom: 0;
   transition: transform 0.2s;
   cursor: pointer;
@@ -100,8 +101,9 @@
 .jop-item-title h2 {
   font-size: 1.25rem;
   font-weight: 600;
+  margin-top: 0%;
   color: #333;
-  margin-bottom: 0.2rem;
+  margin-bottom: 1%;
   line-height: 1.2;
 }
 
@@ -109,6 +111,7 @@
   font-size: 1rem;
   color: #666;
   font-weight: 500;
+  margin-bottom: 2%;
   line-height: 1.2;
 }
 
@@ -116,21 +119,23 @@
 .jop-item-type {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.75rem;
-  margin-bottom: 0.4rem;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  margin-top: 0.5rem;
 }
 .jop-item-type::-webkit-scrollbar {
   display: none;
 }
 
+.jop-item-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 /* 주요 정보(직군) 강조 태그 */
 .job-tag--primary {
-  font-size: 5%; /* 0.9rem -> 0.85rem */
+  font-size: 10%; /* 0.9rem -> 0.85rem */
   font-weight: 600;
   color: #333;
   background: #E3F2FD; /* 연한 파랑 */
@@ -143,7 +148,7 @@
 
 /* 나머지 정보(지역, 기관 등) 텍스트 */
 .job-info-text {
-  font-size: 5%; /* 0.9rem -> 0.85rem */
+  font-size: 10%; /* 0.9rem -> 0.85rem */
   color: #777;
   white-space: nowrap;
   flex-shrink: 0;
@@ -153,27 +158,49 @@
 /* .jop-item-type h4 { ... } */
 /* .jop-item-type h4:nth-child(...) { ... } */
 
+/* --- 메타 정보 (관심/조회수) --- */
 .job-item-meta {
+  margin-left: 16px;
+  flex-shrink: 0;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.favorite-container {
+  width: 2rem;
+  height:  2rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   margin-top: 0;
-  padding-top: 0;
-  border-top: none;
-  min-width: 40px;
+  /* gap 속성 제거 */
 }
 
-.job-item-meta > div {
+.view-count-container {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
-  padding: 0.25rem;
+  gap: 0.3rem;
 }
 
-.job-item-meta > div:last-child {
-  font-size: 0.9rem;
-  color: #666;
+.view-count-icon {
+  font-size: 1rem;
+  color: #aaa;
+}
+
+.view-count-label,
+.favorite-label {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.view-count-number {
+  font-size: 0.8rem;
+  color: #888;
   font-weight: 500;
+  margin-left: -2px; /* '조회'와의 간격 미세 조정 */
 }
 
 /* 모바일 대응 */
