@@ -171,3 +171,54 @@ section.main-category--recruitment .main-category-list.active .category-icon-det
 .filter-search-button:hover {
   background-color: #ffcb4f;
 }
+
+@media (max-width: 700px) {
+  .dynamic-sticky-header {
+    top: 56px;
+    background: #ffffff; /* 연노랑 배경 */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    min-height: 48px;
+    border-bottom: 1px solid #ffffff;
+    padding: 0.5rem 0;
+    z-index: 300;
+  }
+  .sticky-header-content {
+    padding: 0 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 40px;
+  }
+  .category-dropdown {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid #ffe082;
+    background: #fff;
+    min-width: 110px;
+  }
+  .filter-search-button {
+    font-size: 1rem;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    background: #ffe082;
+    color: #333;
+    border: none;
+    font-weight: 600;
+    box-shadow: none;
+  }
+  .filter-search-button:active {
+    background: #ffd54f;
+  }
+  
+  /* 모바일에서 불필요한 요소 숨기기 */
+  .category-dropdown-title,
+  .sticky-header-tags,
+  .sticky-tag-placeholder {
+    display: none;
+  }
+
+  .sticky-header-left,
+  .sticky-header-right {
+    gap: 0.5rem;
+  }
+}

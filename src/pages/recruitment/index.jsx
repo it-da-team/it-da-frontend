@@ -20,36 +20,47 @@ function Recruitment() {
   const [tabIndex, setTabIndex] = useState(0);
   const [selectedKeywords, setSelectedKeywords] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
-  // --- 스크롤 감지를 위한 상태와 로직 추가 ---
+  // --- 스크롤 감지를 위한 상태와 로직 (모든 컨테이너 디버깅) ---
   const [isHeaderSticky, setIsHeaderSticky] = useState(false);
-  const categorySectionRef = useRef(null);
 
   useEffect(() => {
+    const containers = [
+      window,
+      document,
+      document.documentElement,
+      document.body,
+      document.querySelector('.main-container')
+    ].filter(Boolean);
+
     const handleScroll = () => {
-      if (window.innerWidth < 701) {
-        if (isHeaderSticky) setIsHeaderSticky(false);
-        return;
-      }
-      if (categorySectionRef.current) {
-        const shouldBeSticky = categorySectionRef.current.getBoundingClientRect().bottom < 72;
-        if (shouldBeSticky !== isHeaderSticky) {
-          setIsHeaderSticky(shouldBeSticky);
-        }
-      }
+      const scrollTop =
+        window.scrollY ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        (document.querySelector('.main-container')?.scrollTop ?? 0);
+      console.log('SCROLL DEBUG', { scrollTop });
+      const shouldBeSticky = scrollTop > 150;
+      if (shouldBeSticky && !isHeaderSticky) setIsHeaderSticky(true);
+      else if (!shouldBeSticky && isHeaderSticky) setIsHeaderSticky(false);
     };
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
+
+    containers.forEach(c => c.addEventListener('scroll', handleScroll));
+    handleScroll();
+
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      containers.forEach(c => c.removeEventListener('scroll', handleScroll));
     };
   }, [isHeaderSticky]);
-  // --- 여기까지 추가 ---
 
-  const handleSearchClick = () => setIsModalOpen(true);
+  const handleSearchClick = () => {
+    if (isMobile) {
+      setIsMobileFilterOpen(true);
+    } else {
+      setIsModalOpen(true);
+    }
+  };
   const handleCloseModal = () => setIsModalOpen(false);
 
   // 검색 실행 및 태그 갱신
@@ -91,22 +102,10 @@ function Recruitment() {
   };
 
   const handleModalCategorySelect = (catLabel) => {
-    setCategoryModalOpen(false);
     navigate(`/recruitment?category=${labelToEnum[catLabel]}`);
   };
 
-  // 카테고리 sticky 상태 관리
-  const [isCategorySticky, setIsCategorySticky] = useState(false);
-  const tabsBarRef = useRef();
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!tabsBarRef.current) return;
-      const rect = tabsBarRef.current.getBoundingClientRect();
-      setIsCategorySticky(rect.top <= 72); // 헤더 높이만큼
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // isCategorySticky와 tabsBarRef 관련 로직은 모두 제거되었습니다.
 
   const isMobile = useMediaQuery({ maxWidth: 700 });
 
@@ -116,9 +115,9 @@ function Recruitment() {
   );
 
   return (
-    <div className="main-container recruitment-page">
-      {/* --- 동적 고정 헤더 추가 --- */}
-      {isHeaderSticky && !isMobile && (
+    <>
+      {/* --- 동적 고정 헤더 (원래 로직으로 복원) --- */}
+      {isHeaderSticky && (
         <div className="dynamic-sticky-header">
           <div className="sticky-header-content">
             <div className="sticky-header-left">
@@ -156,48 +155,83 @@ function Recruitment() {
           </div>
         </div>
       )}
-      {/* --- 여기까지 추가 --- */}
 
-      {!isMobile && <Map label={label} />}
-      {/* 모바일 전용 UI: isMobile일 때만 렌더링 */}
-      {/* 모바일에서는 Map을 렌더링하지 않음. /region에서만 Map 사용 */}
-      {isMobile && (
-        <>
-          {/* 모바일 필터/조건 검색 바 */}
-          <div className="mobile-filter-bar">
-            <div className="mobile-filter-tags">
-              {filterTags.length > 0 ? (
-                filterTags.map((keyword, idx) => (
-                  <span key={idx} className="filter-tag">#{keyword}</span>
-                ))
-              ) : (
-                <span className="filter-tag filter-tag-placeholder">필터를 선택하세요</span>
-              )}
-            </div>
-            <button className="change-category-btn" onClick={() => setIsMobileFilterOpen(true)}>
-              변경하기
-            </button>
-          </div>
-          {/* 안내 문구 */}
-          <p className="mobile-search-hint">기관, 지역, 직무 등 모든 조건을 한 번에 변경할 수 있습니다.</p>
-          {/* 모바일 카테고리 변경 모달 */}
-          {categoryModalOpen && (
-            <div className="category-modal-backdrop" onClick={() => setCategoryModalOpen(false)}>
-              <div className="category-modal-content" onClick={e => e.stopPropagation()}>
-                <h4 style={{marginBottom: '1.2rem'}}>카테고리 선택</h4>
-                <MainCategory
-                  onCategorySelect={handleModalCategorySelect}
-                  selected={label}
-                  compact={true}
-                  variant="recruitment"
-                  iconClass="category-icon-detail"
-                />
-                <button className="change-category-btn" style={{marginTop: '1.5rem'}} onClick={() => setCategoryModalOpen(false)}>닫기</button>
+      <div className="main-container recruitment-page">
+        {!isMobile && <Map label={label} />}
+        
+        {/* 모바일 UI */}
+        {isMobile && (
+          <>
+            <div className="mobile-filter-bar">
+              <div className="mobile-filter-tags">
+                {filterTags.length > 0 ? (
+                  filterTags.map((keyword, idx) => (
+                    <span key={idx} className="filter-tag">#{keyword}</span>
+                  ))
+                ) : (
+                  <span className="filter-tag filter-tag-placeholder">필터를 선택하세요</span>
+                )}
               </div>
+              <button className="change-category-btn" onClick={() => setIsMobileFilterOpen(true)}>
+                변경하기
+              </button>
             </div>
-          )}
-          {/* 모바일 필터 모달 */}
-          {isMobileFilterOpen && (
+            {/* 안내 문구 */}
+            <p className="mobile-search-hint">기관, 지역, 직무 등 모든 조건을 한 번에 변경할 수 있습니다.</p>
+            {/* 모바일 카테고리 변경 모달 */}
+            {/* categoryModalOpen 관련 로직은 제거되었습니다. */}
+            {/* 모바일 필터 모달 */}
+            {isMobileFilterOpen && (
+              <div className="category-modal-backdrop" onClick={() => setIsMobileFilterOpen(false)}>
+                <div className="category-modal-content" onClick={e => e.stopPropagation()}>
+                  <h4 style={{marginBottom: '1.2rem'}}>필터/조건 검색</h4>
+                  <MainRecruitmentSearch
+                    onClose={() => setIsMobileFilterOpen(false)}
+                    onSearch={handleSearch}
+                    initialCategory={categoryEnum}
+                    selectedKeywords={selectedKeywords}
+                    setSelectedKeywords={setSelectedKeywords}
+                  />
+                  <button className="change-category-btn" style={{marginTop: '1.5rem'}} onClick={() => setIsMobileFilterOpen(false)}>닫기</button>
+                </div>
+              </div>
+            )}
+          </>
+        )}
+
+        {/* PC/태블릿 UI */}
+        {!isMobile && (
+          <section className="main-category main-category--recruitment compact">
+            <div className="main-category-list-fixed">
+              <MainCategory
+                variant="recruitment"
+                compact
+                selected={label}
+                onCategorySelect={handleCategorySelect}
+                iconClass="category-icon-detail"
+              />
+            </div>
+          </section>
+        )}
+
+        <div className="sticky-tabs-bar">
+          <MainRecruitmentListHeader
+            tabIndex={tabIndex}
+            setTabIndex={setTabIndex}
+            selectedKeywords={selectedKeywords}
+            onSearchClick={handleSearchClick}
+          />
+        </div>
+        
+        <MainRecruitmentList
+          categoryEnum={categoryEnum}
+          tabIndex={tabIndex}
+          selectedKeywords={selectedKeywords}
+        />
+
+        {/* 모달들 */}
+        {isMobile ? (
+          isMobileFilterOpen && (
             <div className="category-modal-backdrop" onClick={() => setIsMobileFilterOpen(false)}>
               <div className="category-modal-content" onClick={e => e.stopPropagation()}>
                 <h4 style={{marginBottom: '1.2rem'}}>필터/조건 검색</h4>
@@ -211,49 +245,20 @@ function Recruitment() {
                 <button className="change-category-btn" style={{marginTop: '1.5rem'}} onClick={() => setIsMobileFilterOpen(false)}>닫기</button>
               </div>
             </div>
-          )}
-        </>
-      )}
-      {/* PC/태블릿용 기존 UI */}
-      {/* 1. 카테고리 메뉴 */}
-      {!isMobile && (
-        <section ref={categorySectionRef} className="main-category main-category--recruitment compact">
-          <div className="main-category-list-fixed">
-            <MainCategory
-              variant="recruitment"
-              compact
-              selected={label}
-              onCategorySelect={handleCategorySelect}
-              iconClass="category-icon-detail"
+          )
+        ) : (
+          isModalOpen && (
+            <MainRecruitmentSearch
+              onClose={handleCloseModal}
+              onSearch={handleSearch}
+              initialCategory={categoryEnum}
+              selectedKeywords={selectedKeywords}
+              setSelectedKeywords={setSelectedKeywords}
             />
-          </div>
-        </section>
-      )}
-      {/* 2. 탭바 */}
-      <div className="sticky-tabs-bar" ref={tabsBarRef}>
-        <MainRecruitmentListHeader
-          tabIndex={tabIndex}
-          setTabIndex={setTabIndex}
-          selectedKeywords={selectedKeywords}
-          onSearchClick={handleSearchClick}
-        />
+          )
+        )}
       </div>
-      <MainRecruitmentList
-        categoryEnum={categoryEnum}
-        tabIndex={tabIndex}
-        selectedKeywords={selectedKeywords}
-      />
-      {/* 모바일이 아닐 때만 필터 검색 모달 렌더링 */}
-      {!isMobile && isModalOpen && (
-        <MainRecruitmentSearch
-          onClose={handleCloseModal}
-          onSearch={handleSearch}
-          initialCategory={categoryEnum}
-          selectedKeywords={selectedKeywords}
-          setSelectedKeywords={setSelectedKeywords}
-        />
-      )}
-    </div>
+    </>
   );
 }
 

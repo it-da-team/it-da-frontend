@@ -112,56 +112,46 @@
   line-height: 1.2;
 }
 
+/* --- 채용공고 리스트 태그 스타일 (개선) --- */
 .jop-item-type {
   display: flex;
-  flex-wrap: nowrap;
-  gap: 0.4rem;
-  margin-bottom: 0.4rem;
   align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+  flex-wrap: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
-
 .jop-item-type::-webkit-scrollbar {
   display: none;
 }
 
-.jop-item-type h4 {
-  font-size: 1rem;
+/* 주요 정보(직군) 강조 태그 */
+.job-tag--primary {
+  font-size: 5%; /* 0.9rem -> 0.85rem */
+  font-weight: 600;
   color: #333;
-  font-weight: 500;
-  padding: 0.25rem 0.6rem;
+  background: #E3F2FD; /* 연한 파랑 */
+  padding: 0.3rem 0.7rem;
   border-radius: 6px;
   line-height: 1.2;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-/* 지역 태그 */
-.jop-item-type h4:nth-child(1),
-.search-tag.region {
-  background: #E3F2FD;
+/* 나머지 정보(지역, 기관 등) 텍스트 */
+.job-info-text {
+  font-size: 5%; /* 0.9rem -> 0.85rem */
+  color: #777;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-/* 카테고리 태그 */
-.jop-item-type h4:nth-child(2),
-.search-tag.category {
-  background: #F3E5F5;
-}
-
-/* 직군 태그 */
-.jop-item-type h4:nth-child(3),
-.search-tag.job-type {
-  background: #E8F5E9;
-}
-
-/* D-day 태그 */
-.jop-item-type h4:nth-child(4),
-.search-tag.d-day {
-  background: #FFF3E0;
-}
+/* 기존 h4 선택자 스타일 제거 */
+/* .jop-item-type h4 { ... } */
+/* .jop-item-type h4:nth-child(...) { ... } */
 
 .job-item-meta {
   display: flex;
@@ -218,9 +208,9 @@
     gap: 0.4rem;
   }
 
-  .jop-item-type h4 {
-    font-size: 60%;
-    padding: 0.3rem 0.6rem;
+  .job-tag--primary,
+  .job-info-text {
+    font-size: 5%; /* 0.85rem -> 0.8rem */
   }
 }
 

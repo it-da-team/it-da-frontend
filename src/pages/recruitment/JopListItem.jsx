@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import FavoriteButton from "../../components/com/FavoriteButton";
+import HeartButton from "../../components/com/HeartButton";
 import { addFavoriteRecruitment, removeFavoriteRecruitment, isFavoriteRecruitment } from "../../utils/localStorage";
 import "../../assets/css/RecruitmentListItem.css";
 import "../../assets/css/global.css";
@@ -97,21 +97,25 @@ export default function RecruitmentListItem({ job }) {
             <h3>{job.companyName}</h3>
           </div>
           <div className="job-item-meta">
-            <div onClick={handleFavoriteClick}>
-              <FavoriteButton
+            <div className="favorite-container">
+              <HeartButton
                 initialFavorite={isFavorite}
                 onToggle={updateFav}
-                lottieSrc="https://lottie.host/eb195dde-1eb6-4032-b4e8-8dcb4c2f810e/xZfDm20WdP.lottie"
-                size={40}
               />
+              <span className="favorite-label">관심</span>
             </div>
           </div>
         </div>
         <div className="jop-item-type">
-          <h4>{`${safeRender(job.region)} ${safeRender(job.district)}`}</h4>
-          <h4>{safeRender(job.category)}</h4>
-          <h4>{safeRender(job.workType)}</h4>
-          {parseInt(job.dDay, 10) >= 0 && parseInt(job.dDay, 10) !== 999 && <h4>{`D - ${safeRender(job.dDay)}`}</h4>}
+          <span className="job-tag job-tag--primary">{safeRender(job.workType)}</span>
+          <span className="job-info-text">
+            {`${safeRender(job.region)} ${safeRender(job.district)} | ${safeRender(job.category)}`}
+          </span>
+          {parseInt(job.dDay, 10) >= 0 && parseInt(job.dDay, 10) !== 999 && (
+            <span className="job-info-text">
+              {`D - ${safeRender(job.dDay)}`}
+            </span>
+          )}
         </div>
       </div>
     );
