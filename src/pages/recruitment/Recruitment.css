@@ -74,12 +74,12 @@ section.main-category--recruitment .main-category-list.active .category-icon-det
 .sticky-tabs-bar {
   background: #fff;
   box-shadow: 0 4px 0 0 rgba(0,0,0,0.0);
-  max-width: 1300px;
+  max-width: 1200px; /* 1300px -> 1200px */
   width: 100%;
   margin-bottom: 1% !important;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 1rem; /* 기존 4rem에서 간소화 */
+  padding-top: 1rem;
 }
 .sticky-category-bar {
   background: #fff;
@@ -101,7 +101,7 @@ section.main-category--recruitment .main-category-list.active .category-icon-det
 }
 
 .sticky-header-content {
-  max-width: 1300px;
+  max-width: 1200px; /* 1300px -> 1200px */
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
