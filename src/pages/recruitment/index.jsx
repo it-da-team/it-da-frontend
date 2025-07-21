@@ -23,6 +23,32 @@ function Recruitment() {
   const [categoryModalOpen, setCategoryModalOpen] = useState(false);
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
 
+  // --- 스크롤 감지를 위한 상태와 로직 추가 ---
+  const [isHeaderSticky, setIsHeaderSticky] = useState(false);
+  const categorySectionRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.innerWidth < 701) {
+        if (isHeaderSticky) setIsHeaderSticky(false);
+        return;
+      }
+      if (categorySectionRef.current) {
+        const shouldBeSticky = categorySectionRef.current.getBoundingClientRect().bottom < 72;
+        if (shouldBeSticky !== isHeaderSticky) {
+          setIsHeaderSticky(shouldBeSticky);
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [isHeaderSticky]);
+  // --- 여기까지 추가 ---
+
   const handleSearchClick = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
@@ -91,6 +117,29 @@ function Recruitment() {
 
   return (
     <div className="main-container recruitment-page">
+      {/* --- 동적 고정 헤더 추가 --- */}
+      {isHeaderSticky && !isMobile && (
+        <div className="dynamic-sticky-header">
+          <div className="sticky-header-content">
+            <select
+              className="category-dropdown"
+              value={label}
+              onChange={(e) => handleCategorySelect(e.target.value)}
+            >
+              {Object.keys(labelToEnum).map((catLabel) => (
+                <option key={catLabel} value={catLabel}>
+                  {catLabel}
+                </option>
+              ))}
+            </select>
+            <button className="filter-search-button" onClick={handleSearchClick}>
+              상세 필터 검색
+            </button>
+          </div>
+        </div>
+      )}
+      {/* --- 여기까지 추가 --- */}
+
       {!isMobile && <Map label={label} />}
       {/* 모바일 전용 UI: isMobile일 때만 렌더링 */}
       {/* 모바일에서는 Map을 렌더링하지 않음. /region에서만 Map 사용 */}
@@ -148,9 +197,9 @@ function Recruitment() {
         </>
       )}
       {/* PC/태블릿용 기존 UI */}
-      {/* 1. 원래 위치(스크롤 전) */}
-      {!isMobile && !isCategorySticky && (
-        <section className="main-category main-category--recruitment compact">
+      {/* 1. 카테고리 메뉴 */}
+      {!isMobile && (
+        <section ref={categorySectionRef} className="main-category main-category--recruitment compact">
           <div className="main-category-list-fixed">
             <MainCategory
               variant="recruitment"
@@ -162,7 +211,7 @@ function Recruitment() {
           </div>
         </section>
       )}
-      {/* 2. 탭바(sticky) */}
+      {/* 2. 탭바 */}
       <div className="sticky-tabs-bar" ref={tabsBarRef}>
         <MainRecruitmentListHeader
           tabIndex={tabIndex}
@@ -170,22 +219,6 @@ function Recruitment() {
           selectedKeywords={selectedKeywords}
           onSearchClick={handleSearchClick}
         />
-        {/* 3. sticky 위치(스크롤 후) */}
-        {isCategorySticky && !isMobile && (
-          <div className="sticky-category-bar">
-            <section className="main-category main-category--recruitment compact">
-              <div className="main-category-list-fixed">
-                <MainCategory
-                  variant="recruitment"
-                  compact
-                  selected={label}
-                  onCategorySelect={handleCategorySelect}
-                  iconClass="category-icon-detail"
-                />
-              </div>
-            </section>
-          </div>
-        )}
       </div>
       <MainRecruitmentList
         categoryEnum={categoryEnum}

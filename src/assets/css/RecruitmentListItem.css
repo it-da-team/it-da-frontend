@@ -48,12 +48,54 @@
 
 /* 제목 (1행·1열) */
 .jop-item-title {
-  grid-column: 1;
-  grid-row: 1;
-  text-align: left;
-  margin: 0;
-  word-break: break-word;
-  margin-bottom: 0.1rem; 
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.job-title-container {
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* width: 0 대신 min-width: 0 사용 */
+}
+
+.title-with-labels {
+  display: flex;
+  align-items: center;
+  /* width와 flex-grow 속성 제거 */
+}
+
+.title-with-labels h2 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 8px; /* 라벨과의 간격 */
+  max-width: 220px; /* 제목의 최대 너비를 220px로 수정 */
+}
+
+.job-item-meta {
+  margin-left: 16px; /* 제목과의 간격 */
+  flex-shrink: 0; /* 즐겨찾기 버튼이 줄어들지 않도록 설정 */
+}
+
+/* 기존 h2, h3 스타일 */
+.jop-item-title h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.jop-item-title h3 {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+.status-label.title-label {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1;
+  flex-shrink: 0;
 }
 
 /* 세부 타입 (2행·1열), 가로 나열 */
@@ -76,4 +118,23 @@
   justify-content: space-between;
   align-items: flex-end;
   min-width: 60px;
+}
+
+.status-label {
+  font-weight: 700 !important;
+  color: rgb(255, 255, 255) !important;
+  border-radius: 6px;
+}
+
+.status-label.latest {
+  background-color: #8da0fa;
+}
+
+.status-label.always {
+  background-color: #f6b737;
+}
+
+.status-label.closed {
+  background: #7e7979;
+  text-decoration: line-through;
 }

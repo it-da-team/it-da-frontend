@@ -15,8 +15,12 @@ export default function useRecruitmentList(categoryEnum) {
 
     fetchRecruitmentsByCategory(categoryEnum)
       .then(responseData => {
-        console.log('받은 데이터:', responseData);
-        setData(responseData);
+        const processedData = responseData.map(item => ({
+          ...item,
+          dDay: item.dDay === null || item.dDay === undefined ? 999 : item.dDay,
+        }));
+        console.log('가공된 데이터:', processedData);
+        setData(processedData);
       })
       .catch((err) => {
         console.error('데이터 로딩 에러:', err);

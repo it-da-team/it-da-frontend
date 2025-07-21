@@ -4,6 +4,7 @@ import FavoriteButton from "../../components/com/FavoriteButton";
 import { addFavoriteRecruitment, removeFavoriteRecruitment, isFavoriteRecruitment } from "../../utils/localStorage";
 import "../../assets/css/RecruitmentListItem.css";
 import "../../assets/css/global.css";
+import { JobStatus } from "../../utils/enums";
 
 // 안전하게 렌더링하는 함수 추가
 function safeRender(field) {
@@ -12,6 +13,15 @@ function safeRender(field) {
   if (field && typeof field === "object" && "label" in field) return field.label;
   return "";
 }
+
+const isToday = (dateString) => {
+  if (!dateString) return false;
+  const today = new Date();
+  const date = new Date(dateString);
+  return date.getFullYear() === today.getFullYear() &&
+         date.getMonth() === today.getMonth() &&
+         date.getDate() === today.getDate();
+};
 
 export default function RecruitmentListItem({ job }) {
     const navigate = useNavigate();
@@ -73,8 +83,17 @@ export default function RecruitmentListItem({ job }) {
     return (
       <div className="main-jop-list" onClick={handleClick}>
         <div className="jop-item-title">
-          <div>
-            <h2>{job.title}</h2>
+          <div className="job-title-container">
+            <div className="title-with-labels">
+              <h2 className="job-list-item__title">{job.title}</h2>
+              {parseInt(job.dDay, 10) === 999 ? (
+                <span className="status-label title-label always">{JobStatus.ALWAYS}</span>
+              ) : parseInt(job.dDay, 10) < 0 ? (
+                <span className="status-label title-label closed">{JobStatus.CLOSED}</span>
+              ) : job.createAt && isToday(job.createAt) ? (
+                <span className="status-label title-label latest">{JobStatus.LATEST}</span>
+              ) : null}
+            </div>
             <h3>{job.companyName}</h3>
           </div>
           <div className="job-item-meta">
@@ -92,7 +111,7 @@ export default function RecruitmentListItem({ job }) {
           <h4>{`${safeRender(job.region)} ${safeRender(job.district)}`}</h4>
           <h4>{safeRender(job.category)}</h4>
           <h4>{safeRender(job.workType)}</h4>
-          <h4>{`D - ${safeRender(job.dDay)}`}</h4>
+          {parseInt(job.dDay, 10) >= 0 && parseInt(job.dDay, 10) !== 999 && <h4>{`D - ${safeRender(job.dDay)}`}</h4>}
         </div>
       </div>
     );

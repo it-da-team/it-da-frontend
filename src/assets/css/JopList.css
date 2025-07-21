@@ -299,4 +299,25 @@
   color: #888;
   font-size: small;
   font-weight: 500;
-} 
+}
+
+.job-list-item__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  /*
+  .job-list-item__title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; 
+  }
+  */
+}

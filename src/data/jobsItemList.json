@@ -130,5 +130,16 @@
     "title": "영재 교육 교사 모집",
     "isFavorite": false,
     "dDay": 22
+  },
+  {
+    "id": 13,
+    "companyName": "상시채용 테스트 기업",
+    "region": "서울",
+    "district": "강남구",
+    "category": { "label": "교육 회사", "value": "EDUCATION_COMPANY" },
+    "workType": "교육 기업",
+    "title": "언제나 열려있는 상시 채용",
+    "isFavorite": false,
+    "dDay": 999
   }
 ]

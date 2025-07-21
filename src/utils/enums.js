@@ -83,6 +83,12 @@ export const DutyType = {
   ETC: "기타"
 };
 
+export const JobStatus = {
+  LATEST: "최신 공고",
+  CLOSED: "마감",
+  ALWAYS: "상시채용",
+};
+
 // 역방향 매핑을 위한 유틸리티 함수
 export const getSubTypeByValue = (category, value) => {
   const subTypes = SubType[category];
