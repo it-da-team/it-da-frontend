@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import "../../assets/css/RecruitmentListItem.css";
 
-function HeartButton({ initialFavorite, onToggle }) {
-  const [isFavorite, setIsFavorite] = useState(initialFavorite);
+function HeartButton({ isFavorite, onToggle }) {
   const [animate, setAnimate] = useState(false);
 
   const handleClick = (e) => {
     e.stopPropagation();
     setAnimate(true);
     setTimeout(() => setAnimate(false), 300);
-    setIsFavorite((prev) => !prev);
     if (onToggle) onToggle(!isFavorite);
   };
 

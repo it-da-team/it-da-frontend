@@ -100,7 +100,7 @@ export default function RecruitmentListItem({ job }) {
           <div className="job-item-meta">
             <div className="favorite-container">
               <HeartButton
-                initialFavorite={isFavorite}
+                isFavorite={isFavorite}
                 onToggle={updateFav}
               />
             </div>
