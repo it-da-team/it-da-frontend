@@ -27,10 +27,22 @@ const isToday = (dateString) => {
          date.getDate() === today.getDate();
 };
 
+// 모바일 여부를 감지하는 훅
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  return isMobile;
+}
+
 export default function RecruitmentListItem({ job, index }) { // index prop 추가
     const navigate = useNavigate();
     const [isFavorite, setIsFavorite] = useState(false);
-  
+    const isMobile = useIsMobile(); // 모바일 감지 훅 사용
+
     // Lottie 기본 옵션
     const defaultOptions = {
       loop: true,
@@ -94,6 +106,8 @@ export default function RecruitmentListItem({ job, index }) { // index prop 추�
       setIsFavorite(newFav);
     };
 
+    const lottieSize = isMobile ? 22 : 30; // 모바일일 때 크기 22px, 아닐 때 30px
+
     return (
       <div className="main-jop-list" onClick={handleClick}>
         <div className="jop-item-title">
@@ -101,7 +115,7 @@ export default function RecruitmentListItem({ job, index }) { // index prop 추�
             <div className="title-with-labels">
               {index < 5 && (
                 <div className="hot-animation-container">
-                  <Lottie options={defaultOptions} height={30} width={30} />
+                  <Lottie options={defaultOptions} height={lottieSize} width={lottieSize} />
                 </div>
               )}
               <h2 className="job-list-item__title">{job.title}</h2>
