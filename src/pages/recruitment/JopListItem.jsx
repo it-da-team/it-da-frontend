@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import FavoriteButton from "../../components/com/FavoriteButton";
+import HeartButton from "../../components/com/HeartButton";
 import { addFavoriteRecruitment, removeFavoriteRecruitment, isFavoriteRecruitment } from "../../utils/localStorage";
 import "../../assets/css/RecruitmentListItem.css";
 import "../../assets/css/global.css";
+import { JobStatus } from "../../utils/enums";
+import { FaEye } from "react-icons/fa"; // FaEye 아이콘 import
 
 // 안전하게 렌더링하는 함수 추가
 function safeRender(field) {
@@ -12,6 +14,15 @@ function safeRender(field) {
   if (field && typeof field === "object" && "label" in field) return field.label;
   return "";
 }
+
+const isToday = (dateString) => {
+  if (!dateString) return false;
+  const today = new Date();
+  const date = new Date(dateString);
+  return date.getFullYear() === today.getFullYear() &&
+         date.getMonth() === today.getMonth() &&
+         date.getDate() === today.getDate();
+};
 
 export default function RecruitmentListItem({ job }) {
     const navigate = useNavigate();
@@ -73,26 +84,45 @@ export default function RecruitmentListItem({ job }) {
     return (
       <div className="main-jop-list" onClick={handleClick}>
         <div className="jop-item-title">
-          <div>
-            <h2>{job.title}</h2>
+          <div className="job-title-container">
+            <div className="title-with-labels">
+              <h2 className="job-list-item__title">{job.title}</h2>
+              {parseInt(job.dDay, 10) === 999 ? (
+                <span className="status-label title-label always">{JobStatus.ALWAYS}</span>
+              ) : parseInt(job.dDay, 10) < 0 ? (
+                <span className="status-label title-label closed">{JobStatus.CLOSED}</span>
+              ) : job.createAt && isToday(job.createAt) ? (
+                <span className="status-label title-label latest">{JobStatus.LATEST}</span>
+              ) : null}
+            </div>
             <h3>{job.companyName}</h3>
           </div>
           <div className="job-item-meta">
-            <div onClick={handleFavoriteClick}>
-              <FavoriteButton
-                initialFavorite={isFavorite}
+            <div className="favorite-container">
+              <HeartButton
+                isFavorite={isFavorite}
                 onToggle={updateFav}
-                lottieSrc="https://lottie.host/eb195dde-1eb6-4032-b4e8-8dcb4c2f810e/xZfDm20WdP.lottie"
-                size={40}
               />
             </div>
           </div>
         </div>
         <div className="jop-item-type">
-          <h4>{`${safeRender(job.region)} ${safeRender(job.district)}`}</h4>
-          <h4>{safeRender(job.category)}</h4>
-          <h4>{safeRender(job.workType)}</h4>
-          <h4>{`D - ${safeRender(job.dDay)}`}</h4>
+          <div className="jop-item-tags">
+            <span className="job-tag job-tag--primary">{safeRender(job.workType)}</span>
+            <span className="job-info-text">
+              {`${safeRender(job.region)} ${safeRender(job.district)} | ${safeRender(job.category)}`}
+            </span>
+            {parseInt(job.dDay, 10) >= 0 && parseInt(job.dDay, 10) !== 999 && (
+              <span className="job-info-text">
+                {`D - ${safeRender(job.dDay)}`}
+              </span>
+            )}
+          </div>
+          <div className="view-count-container">
+            <FaEye className="view-count-icon" />
+            <span className="view-count-label">조회</span>
+            <span className="view-count-number">{job.viewCount ?? 0}</span>
+          </div>
         </div>
       </div>
     );

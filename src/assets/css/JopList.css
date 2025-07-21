@@ -1,5 +1,7 @@
 .jop-list-container {
-  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  /* width: 100% 제거 */
 }
 
 .favorite-guide {
@@ -67,13 +69,14 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 1.5rem; /* 간격 늘리기 */
+  padding: 0.5rem 0;
 }
 
 .main-jop-list {
   background: #f9f9f9;
   border-radius: 12px;
-  padding: 0.6rem 1.25rem;
+  padding:  5% 5%;
   margin-bottom: 0;
   transition: transform 0.2s;
   cursor: pointer;
@@ -100,8 +103,9 @@
 .jop-item-title h2 {
   font-size: 1.25rem;
   font-weight: 600;
+  margin-top: 0%;
   color: #333;
-  margin-bottom: 0.2rem;
+  margin-bottom: 1%;
   line-height: 1.2;
 }
 
@@ -109,81 +113,96 @@
   font-size: 1rem;
   color: #666;
   font-weight: 500;
+  margin-bottom: 2%;
   line-height: 1.2;
 }
 
+/* --- 채용공고 리스트 태그 스타일 (개선) --- */
 .jop-item-type {
   display: flex;
-  flex-wrap: nowrap;
-  gap: 0.4rem;
-  margin-bottom: 0.4rem;
   align-items: center;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
 }
-
 .jop-item-type::-webkit-scrollbar {
   display: none;
 }
 
-.jop-item-type h4 {
-  font-size: 1rem;
+.jop-item-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* 주요 정보(직군) 강조 태그 */
+.job-tag--primary {
+  font-size: 10%; /* 0.9rem -> 0.85rem */
+  font-weight: 600;
   color: #333;
-  font-weight: 500;
-  padding: 0.25rem 0.6rem;
+  background: #E3F2FD; /* 연한 파랑 */
+  padding: 0.3rem 0.7rem;
   border-radius: 6px;
   line-height: 1.2;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-/* 지역 태그 */
-.jop-item-type h4:nth-child(1),
-.search-tag.region {
-  background: #E3F2FD;
+/* 나머지 정보(지역, 기관 등) 텍스트 */
+.job-info-text {
+  font-size: 10%; /* 0.9rem -> 0.85rem */
+  color: #777;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-/* 카테고리 태그 */
-.jop-item-type h4:nth-child(2),
-.search-tag.category {
-  background: #F3E5F5;
-}
+/* 기존 h4 선택자 스타일 제거 */
+/* .jop-item-type h4 { ... } */
+/* .jop-item-type h4:nth-child(...) { ... } */
 
-/* 직군 태그 */
-.jop-item-type h4:nth-child(3),
-.search-tag.job-type {
-  background: #E8F5E9;
-}
-
-/* D-day 태그 */
-.jop-item-type h4:nth-child(4),
-.search-tag.d-day {
-  background: #FFF3E0;
-}
-
+/* --- 메타 정보 (관심/조회수) --- */
 .job-item-meta {
+  margin-left: 16px;
+  flex-shrink: 0;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.favorite-container {
+  width: 2rem;
+  height:  2rem;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   margin-top: 0;
-  padding-top: 0;
-  border-top: none;
-  min-width: 40px;
+  /* gap 속성 제거 */
 }
 
-.job-item-meta > div {
+.view-count-container {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
-  padding: 0.25rem;
+  gap: 0.3rem;
 }
 
-.job-item-meta > div:last-child {
-  font-size: 0.9rem;
-  color: #666;
+.view-count-icon {
+  font-size: 1rem;
+  color: #aaa;
+}
+
+.view-count-label,
+.favorite-label {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.view-count-number {
+  font-size: 0.8rem;
+  color: #888;
   font-weight: 500;
+  margin-left: -2px; /* '조회'와의 간격 미세 조정 */
 }
 
 /* 모바일 대응 */
@@ -193,7 +212,7 @@
   }
 
   .main-jop-list {
-    padding: 0.75rem 1rem;
+    padding: 1rem 1rem;
   }
 
   .jop-item-title {
@@ -201,7 +220,7 @@
   }
 
   .jop-item-title h2 {
-    font-size: 80%;
+    font-size: 90%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -218,9 +237,9 @@
     gap: 0.4rem;
   }
 
-  .jop-item-type h4 {
-    font-size: 60%;
-    padding: 0.3rem 0.6rem;
+  .job-tag--primary,
+  .job-info-text {
+    font-size: 5%; /* 0.85rem -> 0.8rem */
   }
 }
 
@@ -299,4 +318,25 @@
   color: #888;
   font-size: small;
   font-weight: 500;
-} 
+}
+
+.job-list-item__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  /*
+  .job-list-item__title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%; 
+  }
+  */
+}
