@@ -48,6 +48,7 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   transition: box-shadow 0.2s, border-color 0.2s;
   cursor: pointer;
+  position: relative; /* 자식 요소의 absolute 위치를 위한 기준점 */
 }
 .main-jop-list:hover {
   border-color: #ffda7b;
@@ -223,25 +224,39 @@
   height: 100%;
 }
 
-/* --- 모바일 전용 (크기, 여백만 미세 조정) --- */
-@media (max-width: 700px) {
-  .main-jop-list {
-    padding: 1.2rem;
-  }
-  .jop-item-title h2 {
-    font-size: 1.1rem;
-  }
-  .jop-item-title h3 {
-    font-size: 0.9rem;
-  }
-  .jop-item-type h4 {
-    font-size: 0.85rem;
-  }
-  .favorite-container {
-    margin-top: 0rem !important;
-    width: 40px !important;
-    height: 40px !important;
-  }
+/* 모바일 및 태블릿 화면에 적용 */
 
+.jop-item-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
 }
+
+.jop-item-tags {
+  flex-grow: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 1rem; /* 아이콘과 겹치지 않도록 여백 추가 */
+}
+
+.view-count-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.view-count-container .heart-btn {
+  width: 20px;
+  height: 20px;
+}
+
+.view-count-icon {
+  font-size: 0.9rem;
+}
+
 

@@ -97,14 +97,6 @@ export default function RecruitmentListItem({ job }) {
             </div>
             <h3>{job.companyName}</h3>
           </div>
-          <div className="job-item-meta">
-            <div className="favorite-container">
-              <HeartButton
-                isFavorite={isFavorite}
-                onToggle={updateFav}
-              />
-            </div>
-          </div>
         </div>
         <div className="jop-item-type">
           <div className="jop-item-tags">
@@ -119,8 +111,11 @@ export default function RecruitmentListItem({ job }) {
             )}
           </div>
           <div className="view-count-container">
+            <HeartButton
+              isFavorite={isFavorite}
+              onToggle={updateFav}
+            />
             <FaEye className="view-count-icon" />
-            <span className="view-count-label">조회</span>
             <span className="view-count-number">{job.viewCount ?? 0}</span>
           </div>
         </div>
