@@ -20,10 +20,10 @@ export const fetchRecruitmentsByCategory = async (category) => {
     }
 };
 
-export const fetchRecruitmentDetail = async (id) => {
+export const fetchRecruitmentDetail = async (id, signal) => {
     try {
         console.log('상세 정보 요청 시작:', id);
-        const response = await axios.get(`/recruitment/detail/${id}`);
+        const response = await axios.get(`/recruitment/detail/${id}`, { signal });
         console.log('상세 정보 응답:', response.data);
         return response.data.data;
     } catch (error) {

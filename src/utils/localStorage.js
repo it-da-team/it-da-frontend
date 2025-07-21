@@ -10,7 +10,9 @@ export const getFavoriteRecruitments = () => {
 export const addFavoriteRecruitment = (recruitment) => {
   const favorites = getFavoriteRecruitments();
   if (!favorites.some(fav => fav.id === recruitment.id)) {
-    favorites.push(recruitment);
+    // 저장할 때 viewCount도 포함
+    const newFavorite = { ...recruitment, viewCount: recruitment.viewCount ?? 0 };
+    favorites.push(newFavorite);
     localStorage.setItem(FAVORITE_RECRUITMENTS_KEY, JSON.stringify(favorites));
     // 같은 창에서도 이벤트 발생시키기
     window.dispatchEvent(new StorageEvent('storage', {
