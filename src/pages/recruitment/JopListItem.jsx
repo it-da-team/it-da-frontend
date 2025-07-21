@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom";
 import HeartButton from "../../components/com/HeartButton";
 import { addFavoriteRecruitment, removeFavoriteRecruitment, isFavoriteRecruitment } from "../../utils/localStorage";
 import "../../assets/css/RecruitmentListItem.css";
+import "../../assets/css/HotAnimation.css"; // HOT 애니메이션 스타일 import
 import "../../assets/css/global.css";
 import { JobStatus } from "../../utils/enums";
 import { FaEye } from "react-icons/fa"; // FaEye 아이콘 import
+import Lottie from 'react-lottie'; // react-lottie import
+import hotAnimationData from '../../assets/lottie/hot.json'; // Lottie 파일 import
 
 // 안전하게 렌더링하는 함수 추가
 function safeRender(field) {
@@ -24,10 +27,20 @@ const isToday = (dateString) => {
          date.getDate() === today.getDate();
 };
 
-export default function RecruitmentListItem({ job }) {
+export default function RecruitmentListItem({ job, index }) { // index prop 추가
     const navigate = useNavigate();
     const [isFavorite, setIsFavorite] = useState(false);
   
+    // Lottie 기본 옵션
+    const defaultOptions = {
+      loop: true,
+      autoplay: true,
+      animationData: hotAnimationData,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid slice'
+      }
+    };
+
     // 하트 상태 업데이트 함수
     const updateFavoriteStatus = () => {
       const favoriteStatus = isFavoriteRecruitment(job.id);
@@ -86,6 +99,11 @@ export default function RecruitmentListItem({ job }) {
         <div className="jop-item-title">
           <div className="job-title-container">
             <div className="title-with-labels">
+              {index < 5 && (
+                <div className="hot-animation-container">
+                  <Lottie options={defaultOptions} height={30} width={30} />
+                </div>
+              )}
               <h2 className="job-list-item__title">{job.title}</h2>
               {parseInt(job.dDay, 10) === 999 ? (
                 <span className="status-label title-label always">{JobStatus.ALWAYS}</span>
