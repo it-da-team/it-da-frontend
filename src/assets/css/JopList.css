@@ -208,6 +208,10 @@
 
 /* 모바일 대응 */
 @media (max-width: 768px) {
+  .jop-list-container {
+    padding: 0 0rem; /* 모바일에서 좌우 여백을 줄여 카드 너비 확보 */
+  }
+
   .jop-list {
     grid-template-columns: 1fr;
   }
