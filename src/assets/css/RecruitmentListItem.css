@@ -142,7 +142,7 @@
 
 /* 기존 h2, h3 스타일 */
 .jop-item-title h2 {
-  font-size: 4%; /* 데스크탑은 조금 더 크게 */
+  font-size: 1.2rem; /* 데스크탑은 조금 더 크게 */
   font-weight: 700;
   color: #222222;
 }
