@@ -61,7 +61,7 @@
 }
 
 /* 태블릿 화면 (768px ~ 1023px) */
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1023px) {
     .category-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 1.5rem;
