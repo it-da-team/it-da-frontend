@@ -5,6 +5,28 @@ import StatsBar from './StatsBar';
 import Lottie from 'lottie-react';
 import graphDiagram from '../../assets/lottie/Graph Diagram Animation.json';
 import { useMediaQuery } from 'react-responsive';
+import { fetchRecruitmentsByProvince } from "../../api/recruitment/recruitmentApi";
+
+const SHORT_TO_FULL_REGION_MAP = {
+  서울: '서울특별시',
+  부산: '부산광역시',
+  대구: '대구광역시',
+  인천: '인천광역시',
+  광주: '광주광역시',
+  대전: '대전광역시',
+  울산: '울산광역시',
+  세종: '세종특별자치시',
+  경기: '경기도',
+  강원: '강원도',
+  충북: '충청북도',
+  충남: '충청남도',
+  전북: '전라북도',
+  전남: '전라남도',
+  경북: '경상북도',
+  경남: '경상남도',
+  제주: '제주특별자치도',
+};
+
 
 const regionStatsRaw = [
   { region: '서울', count: 32 },
@@ -29,7 +51,8 @@ const regionStatsRaw = [
 // regionStats에서 '전국' 항목을 제거하고 regionStatsRaw만 사용
 const regionStats = regionStatsRaw;
 
-function AnimatedBar({ value, max, delay = 0, region, fixed, setFixedIndex, index }) {
+
+function AnimatedBar({ value, max, delay = 0, region, fixed, setFixedIndex, index,onRegionClick }) {
   const [height, setHeight] = useState(0);
   const [count, setCount] = useState(0);
   const [hovered, setHovered] = useState(false);
@@ -73,8 +96,9 @@ function AnimatedBar({ value, max, delay = 0, region, fixed, setFixedIndex, inde
   }, [visible, value, max, delay]);
 
   const handleGoRegion = () => {
-    navigate(`/recruitment?region=${encodeURIComponent(region)}`);
+    onRegionClick(region); // ✅ 이렇게만 호출
   };
+  
 
   // Tooltip shows if hovered, tooltipHover, or fixed
   const showTooltip = hovered || tooltipHover || fixed;
@@ -130,9 +154,23 @@ function AnimatedBar({ value, max, delay = 0, region, fixed, setFixedIndex, inde
 }
 
 export default function RegionStatsSection() {
+  const navigate = useNavigate();
   const [fixedIndex, setFixedIndex] = useState(null);
   const maxCount = Math.max(...regionStats.map(r => r.count));
   const isMobile = useMediaQuery({ maxWidth: 700 });
+
+  const handleRegionClick = async (region) => {
+    try {
+      const fullRegion = SHORT_TO_FULL_REGION_MAP[region] || region;
+      const data = await fetchRecruitmentsByProvince(fullRegion);
+      navigate(`/recruitment?region=${encodeURIComponent(fullRegion)}`, {
+        state: data,
+      });
+    } catch (err) {
+      console.error("지역 요청 실패:", err);
+      alert("해당 지역 공고를 불러오는 데 실패했습니다.");
+    }
+  };
 
   // 상위 5개(공고 수 많은 순) 강조
   const sortedStats = [...regionStats].sort((a, b) => b.count - a.count);
@@ -149,7 +187,7 @@ export default function RegionStatsSection() {
             <div
               className={`region-stats-card${top5.includes(r.region) ? ' top' : ''}`}
               key={r.region}
-              onClick={() => window.location.href = `/recruitment?region=${encodeURIComponent(r.region)}`}
+              onClick={() => handleRegionClick(r.region, navigate)}
               style={{ cursor: 'pointer' }}
             >
               <span className="region-stats-card-region">{r.region}</span>
@@ -179,6 +217,7 @@ export default function RegionStatsSection() {
               fixed={fixedIndex === i}
               setFixedIndex={setFixedIndex}
               index={i}
+              onRegionClick={handleRegionClick}
             />
             <span className="region-label-vertical">{r.region}</span>
           </div>

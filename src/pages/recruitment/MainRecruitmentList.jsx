@@ -1,7 +1,7 @@
 // src/pages/recruitment/MainRecruitmentList.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { Tabs, TabList, Tab, TabPanel } from "react-tabs";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
 import "react-tabs/style/react-tabs.css";
 import "../../assets/css/MainRecruitmentList.css";
 import JopList from "./JopList";
@@ -9,6 +9,7 @@ import MainRecruitmentSearch from "../modal/MainRecruitmentSearch";
 import { useRecruitmentSearch } from "../../hooks/recruitment/useRecruitmentSearch";
 import { COMPANY_TYPE_KEYWORDS, TEACHER_DUTY_KEYWORDS, INSTITUTION_SUB_TYPE_KEYWORDS } from "../modal/constants/keywords";
 import { PROVINCE_FULLNAME_MAP } from "../modal/constants/keywords";
+
 
 // 스크롤 위치 복원 커스텀 훅
 function useScrollRestoration(deps) {
@@ -64,12 +65,17 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
   const [searchParams, setSearchParams] = useSearchParams();
   const { searchResults, loading, error, searchRecruitments } = useRecruitmentSearch(categoryEnum);
   const [localSelectedKeywords, localSetSelectedKeywords] = useState([]);
-
+  const location = useLocation(); // ✅ 함수 안에서 선언
+  const stateRecruitments = location.state || null;
   // props가 있으면 props 사용, 없으면 local state 사용
   const selectedKeywords = propSelectedKeywords !== undefined ? propSelectedKeywords : localSelectedKeywords;
   const setSelectedKeywords = propSetSelectedKeywords !== undefined ? propSetSelectedKeywords : localSetSelectedKeywords;
 
   console.log('MainRecruitmentList categoryEnum:', categoryEnum);
+
+  const recruitmentsToDisplay = tabIndex === 0
+  ? (stateRecruitments || searchResults)
+  : [];
 
   // 키워드 코드를 표시 값으로 변환
   const getDisplayValue = (keyword) => {
@@ -84,10 +90,9 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
     // 지역은 그대로 표시
     return keyword;
   };
-
-  // URL 쿼리 파라미터가 있으면 검색 실행
   useEffect(() => {
-    if (tabIndex !== 0) return; // 전체 공고 탭에서만 서버 요청
+    if (tabIndex !== 0 || stateRecruitments) return; // state가 있으면 요청 생략
+  
     const params = {};
     const keywords = [];
     searchParams.forEach((value, key) => {
@@ -105,25 +110,20 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
         if (value) keywords.push(value);
       }
     });
-
-    // 변환: 코드/풀네임이 있으면 한글/축약명으로 변환
+  
     const normalized = keywords.map(k => {
-      // 지역
       const short = Object.entries(PROVINCE_FULLNAME_MAP).find(([short, full]) => full === k);
       if (short) return short[0];
-      // 기관유형: 코드가 들어오면 라벨로 변환
       const companyLabel = Object.values(COMPANY_TYPE_KEYWORDS).includes(k)
         ? k
         : Object.entries(COMPANY_TYPE_KEYWORDS).find(([code, label]) => code === k)?.[1];
       if (companyLabel) return companyLabel;
-      // 직무
       const duty = Object.values(TEACHER_DUTY_KEYWORDS).includes(k) ? k : TEACHER_DUTY_KEYWORDS[k];
       if (duty) return duty;
       return k;
     });
     setSelectedKeywords(Array.from(new Set(normalized)));
-
-    // 검색 조건이 없으면 URL 파라미터 초기화하고 초기 카테고리로 돌아가기
+  
     if (Object.keys(params).length === 0) {
       const initialParams = new URLSearchParams();
       initialParams.set('category', categoryEnum);
@@ -133,7 +133,7 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
       searchRecruitments(params);
     }
   }, [searchParams, categoryEnum, tabIndex]);
-
+  
   // 카테고리(혹은 검색 등) 값이 바뀌어도 스크롤 위치 유지
   useScrollRestoration([categoryEnum]);
 
@@ -191,7 +191,11 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
       <JopList
         type={tabIndex === 0 ? "all" : "favorite"}
         categoryEnum={categoryEnum}
-        {...(tabIndex === 0 ? { searchResults, loading, error } : {})}
+        {...(tabIndex === 0 ? {
+          searchResults: recruitmentsToDisplay,     // ✅ 이 부분이 핵심
+          loading: stateRecruitments ? false : loading,
+          error
+        } : {})}
       />
       {isModalOpen && (
         <MainRecruitmentSearch 
