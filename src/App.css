@@ -339,11 +339,11 @@ body {
 /* 푸터 관련 변수 */
 :root {
   --footer-height: 140px;
-  --footer-bg: #f8f9fa;
+  --footer-bg: #ffffff;
   --footer-padding-top: 2rem;
   --footer-padding-bottom: 1rem;
   --footer-content-max: 1200px;
-  --footer-border-color: #e5e7eb;
+  --footer-border-color: #ffffff;
 }
 
 /* 푸터 스타일 - Sticky Footer의 핵심 */
@@ -366,9 +366,10 @@ body {
   max-width: var(--footer-content-max);
   width: 100%;
   margin: 0 auto;
+  margin-bottom: 3%;
   display: flex;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 15%;
   padding: 0 2rem;
 }
 

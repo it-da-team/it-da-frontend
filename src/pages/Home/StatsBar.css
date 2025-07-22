@@ -4,12 +4,11 @@
   align-items: center;
   justify-content: center;
   gap: 2.5rem;
-  background: #fffbe7;
-  border-radius: 1.2rem;
   box-shadow: 0 2px 12px 0 rgba(30,34,90,0.06);
   padding: 1.2rem 2.5rem;
+  margin-bottom: 7% !important;
   margin: 2.5rem auto 2.5rem auto;
-  max-width: 600px;
+  max-width: 50%;
 }
 .stats-item {
   display: flex;
@@ -18,13 +17,13 @@
   min-width: 120px;
 }
 .stats-label {
-  font-size: 1.28rem;
+  font-size: 1rem;
   color: #555;
   font-weight: 500;
   margin-bottom: 0.4rem;
 }
 .stats-count {
-  font-size: 2.7rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #ffb300;
   letter-spacing: -0.01em;

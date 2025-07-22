@@ -1,6 +1,6 @@
 import React from 'react';
 import './ComingSoon.css';
-import comingSoonImg from '../../assets/images/img1.png'; // 샘플 일러스트
+import comingSoonImg from '../../assets/images/logo1.jpg'; // 샘플 일러스트
 
 export default function ComingSoon() {
   return (

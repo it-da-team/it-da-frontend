@@ -167,6 +167,7 @@ export default function RegionStatsSection() {
         <Lottie animationData={graphDiagram} loop={true} style={{ width: 44, height: 44, display: 'inline-block', verticalAlign: 'middle', marginRight: '0.5rem', position: 'relative', top: '4px' }} />
         지역별 최신 공고 통계
       </h2>
+      <StatsBar />
       <div className="region-stats-graph-vertical">
         {regionStats.map((r, i) => (
           <div className="region-bar-col" key={r.region}>
