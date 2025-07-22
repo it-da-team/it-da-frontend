@@ -51,7 +51,7 @@
   margin-bottom: 5rem;
 }
 .main-section.last-section {
-  margin-bottom: 5rem;
+  margin-bottom: 0%;
 }
 .gap-hot-stat {
   margin-bottom: 5rem;
@@ -64,7 +64,9 @@
   opacity: 1;
   border: none;
   border-radius: 1.2rem;
-  margin: 5rem auto;
+  margin: 4% auto;
+  margin-bottom: 4%;
+  
   box-shadow: 0 2px 8px 0 rgba(30,34,90,0.07);
 }
 @media (max-width: 700px) {
@@ -72,7 +74,7 @@
     padding: 0 0.5rem;
   }
   .main-section {
-    margin-bottom: 2.2rem;
+    margin-bottom: 1% !important;
   }
   .main-section.last-section {
     margin-bottom: 2rem;
@@ -81,7 +83,8 @@
     margin-bottom: 0.4rem;
   }
   .divider-horizon {
-    margin: 2.2rem auto;
+    margin-bottom: 0;
+    margin-top: 10%;
   }
   .test-content, .long-content {
     padding: 1rem 0.2rem;

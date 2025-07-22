@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './RegionStatsSection.css';
 import { useNavigate } from 'react-router-dom';
+import StatsBar from './StatsBar';
 import Lottie from 'lottie-react';
 import graphDiagram from '../../assets/lottie/Graph Diagram Animation.json';
 import { useMediaQuery } from 'react-responsive';
@@ -142,6 +143,7 @@ export default function RegionStatsSection() {
     return (
       <section className="region-stats-section mobile">
         <h2 className="section-title">지역별 최신 공고 통계</h2>
+        <StatsBar />
         <div className="region-stats-card-list grid">
           {regionStats.map((r) => (
             <div
@@ -165,6 +167,7 @@ export default function RegionStatsSection() {
         <Lottie animationData={graphDiagram} loop={true} style={{ width: 44, height: 44, display: 'inline-block', verticalAlign: 'middle', marginRight: '0.5rem', position: 'relative', top: '4px' }} />
         지역별 최신 공고 통계
       </h2>
+      <StatsBar />
       <div className="region-stats-graph-vertical">
         {regionStats.map((r, i) => (
           <div className="region-bar-col" key={r.region}>

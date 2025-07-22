@@ -1,11 +1,13 @@
 import React from "react";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
-import img1 from '../../assets/images/img1.png';
+import img1 from '../../assets/images/logo1.jpg';
+import img2 from '../../assets/images/logo2.jpg';
+import img3 from '../../assets/images/logo3.jpg'
 import '../../assets/css/MainBanner.css';
 
 const images = [
-    img1
+    img1,img2,img3
 ];
 
 function MainBanner() {
@@ -15,8 +17,8 @@ function MainBanner() {
           options={{
             type        : 'loop',
             perPage     : 1,
-            width       : '100%',   // wrapper 가 100% 너비를 갖도록
-            heightRatio : 0.25,     // 높이를 너비의 25%로 (4:1 비율)
+            width       : '100%',
+            heightRatio : 0.25,          // ⭐ 중간 비율 추천값 (약 3.5:1 비율)
             autoplay    : true,
             pauseOnHover: true,
             pagination  : true,
@@ -25,7 +27,7 @@ function MainBanner() {
           }}
           aria-label="메인 배너"
         >
-          {[img1 /*, img2, img3, img4*/].map((src, i) => (
+          {images.map((src, i) => (
             <SplideSlide key={i}>
               <img src={src} alt={`배너 ${i+1}`} />
             </SplideSlide>

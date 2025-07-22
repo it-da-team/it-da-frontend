@@ -4,7 +4,7 @@
   padding: 2.5rem 2rem 0 2rem;
   text-align: center;
   position: relative;
-  margin-top: 2.2rem;
+  margin-top: 0%;
 }
 .hot-recruit-section::before {
   content: "";
@@ -28,7 +28,7 @@
 .hot-recruit-lottie {
   display: flex;
   align-items: center;
-  margin-right: 0.2rem;
+  margin-right: 0rem;
   position: relative;
   top: -10px;
 }
@@ -37,11 +37,13 @@
   display: flex;
   flex-direction: row;
   gap: 2.2rem;
+  max-width: 80%;
+  margin-left: 10%;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   margin-top: 4rem;
-  padding: 0.5rem 0;
+  padding: 0rem 0;
 }
 .hot-recruit-list::-webkit-scrollbar {
   display: none;
@@ -56,10 +58,10 @@
   border: 1.5px solid #ececec;
   box-shadow: 0 2px 12px 0 rgba(30,34,90,0.06);
   border-radius: 1.3rem;
-  min-width: 15rem;
+  min-width: 10rem;
   max-width: 20rem;
-  width: 100%;
-  height: 120px;
+  width: 80%;
+  height: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,7 +87,7 @@
   margin-bottom: 0.7rem;
 }
 .hot-job-title {
-  font-size: 1.45rem;
+  font-size: 100%;
   font-weight: 700;
   color: #232323;
   margin: 0 0 0.28rem 0;
@@ -93,7 +95,7 @@
   letter-spacing: -0.01em;
 }
 .hot-job-company {
-  font-size: 1.13rem;
+  font-size: 80%;
   color: #666;
   margin: 0;
   text-align: left;
@@ -104,13 +106,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.08rem;
   color: #888;
   margin-top: 0.2rem;
 }
 .hot-job-location {
   color: #888;
-  font-size: 1.08rem;
+  font-size: 80%;
 }
 .hot-job-dday {
   color: #ffb300;
@@ -128,15 +129,17 @@
 @media (max-width: 700px) {
   .hot-recruit-section {
     padding: 0 0.5rem;
-    margin-top: 1.2rem;
+    margin-top: 10%;
+    margin-bottom: 40%;
   }
   .hot-recruit-list {
+    margin-top: 4%;
     gap: 10px;
   }
   .hot-recruit-card {
     min-width: 10rem;
     max-width: 15re;
-    height: 80px;
+    height: 100%;
     padding: 0.7rem 0.5rem;
     border-radius: 0.7rem;
     font-size: 1rem;
@@ -154,7 +157,8 @@
     font-size: 0.3rem;
   }
   .hot-recruit-title {
-    /* font-size: 1.13rem; */
-    /* margin-bottom: 1.2rem; */
+    padding-left: 20%;
+    padding-right: 30%;
+    gap: 0%;
   }
 } 
