@@ -103,13 +103,13 @@
     margin-top: 20%;
   }
   .category-icon {
-    width: 40%;
-    height: 40%;
+    width: 50%;
+    height: 50%;
     border-radius: 20%;
     margin-bottom: 10%;
   }
   .category-label {
-    font-size: 0.8rem;
+    font-size: 5%;
     margin-bottom: 10%;
     font-weight: 600;
   }
