@@ -39,15 +39,8 @@
 @media (max-width: 700px) {
   .stats-bar {
     flex-direction: column;
-    gap: 1.2rem;
-    padding: 1rem 0.5rem;
     max-width: 100vw;
-  }
-  .stats-label {
-    font-size: 1.1rem;
-  }
-  .stats-count {
-    font-size: 2rem;
+    margin-bottom: 0;
   }
   .stats-divider {
     width: 80%;
@@ -120,9 +113,8 @@
     background: none;
     border: none;
     color: #232323;
-    font-size: 1.08rem;
+    font-size: 80%;
     font-weight: 600;
-    padding: 0.3rem 0.7rem;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: background 0.18s;

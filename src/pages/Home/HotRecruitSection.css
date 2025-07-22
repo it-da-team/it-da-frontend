@@ -128,24 +128,26 @@
 @media (max-width: 700px) {
   .hot-recruit-section {
     padding: 0 0.5rem;
-    margin-top: 1.2rem;
+    margin-top: 10%;
+    margin-bottom: 10%%;
   }
   .hot-recruit-list {
+    margin-top: 5%;
     gap: 10px;
   }
   .hot-recruit-card {
     min-width: 10rem;
     max-width: 15re;
-    height: 80px;
+    height: 100%;
     padding: 0.7rem 0.5rem;
     border-radius: 0.7rem;
     font-size: 1rem;
   }
   .hot-job-title {
-    font-size: 0.9rem;
+    font-size: 90%;
   }
   .hot-job-company {
-    font-size: 0.8rem;
+    font-size: 80%;
   }
   .hot-job-location{
     font-size: 0.8rem;
@@ -154,7 +156,8 @@
     font-size: 0.3rem;
   }
   .hot-recruit-title {
-    /* font-size: 1.13rem; */
-    /* margin-bottom: 1.2rem; */
+    padding-left: 20%;
+    padding-right: 30%;
+    gap: 0%;
   }
 } 

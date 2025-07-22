@@ -235,7 +235,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
-    margin-top: 3rem;
+    margin-top: 4%;
+    margin-bottom: 10% !important;
     padding: 0 2vw;
   }
   .region-stats-card {

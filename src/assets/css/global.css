@@ -105,7 +105,7 @@
     font-size: 1.5rem;
     font-weight: 700;
     color: #222;
-    margin-bottom: 4.2rem;
+    margin-bottom: 2%;
     letter-spacing: -0.01em;
     text-align: center;
     width: 100%;
@@ -113,10 +113,20 @@
     margin-right: auto;
     display: block;
   }
+
+  @media (max-width: 1000px) {
+    .section-title {
+      font-size: 1.5rem !important;
+      margin-top: 0;
+      margin-bottom: 2%;
+    }
+  }
+
   @media (max-width: 700px) {
     .section-title {
-      font-size: 1rem;
-      margin-bottom: 0rem;
+      margin-top: 10%;
+      margin-bottom: 5% !important;
+      font-size: 1rem !important;
     }
   }
   
