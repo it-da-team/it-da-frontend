@@ -3,10 +3,10 @@ import CountUp from 'react-countup';
 import './StatsBar.css';
 import { useMediaQuery } from 'react-responsive';
 
-export default function StatsBar() {
+export default function StatsBar({ today, total }) {
   // 예시 데이터 (실제 데이터로 교체 가능)
-  const todayCount = 12;
-  const totalCount = 324;
+  const todayCount = today;
+  const totalCount = total;
   const [start, setStart] = useState(false);
   const ref = useRef();
   const isMobile = useMediaQuery({ maxWidth: 700 });

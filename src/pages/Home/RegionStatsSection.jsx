@@ -6,6 +6,8 @@ import Lottie from 'lottie-react';
 import graphDiagram from '../../assets/lottie/Graph Diagram Animation.json';
 import { useMediaQuery } from 'react-responsive';
 import { fetchRecruitmentsByProvince } from "../../api/recruitment/recruitmentApi";
+import useProvinceRecruitmentCount from "../../hooks/recruitment/useRecruitmentChart"; // 실제 경로에 맞춰 조정
+
 
 const SHORT_TO_FULL_REGION_MAP = {
   서울: '서울특별시',
@@ -27,29 +29,10 @@ const SHORT_TO_FULL_REGION_MAP = {
   제주: '제주특별자치도',
 };
 
+const FULL_TO_SHORT_REGION_MAP = Object.fromEntries(
+  Object.entries(SHORT_TO_FULL_REGION_MAP).map(([short, full]) => [full, short])
+);
 
-const regionStatsRaw = [
-  { region: '서울', count: 32 },
-  { region: '부산', count: 14 },
-  { region: '대구', count: 8 },
-  { region: '인천', count: 11 },
-  { region: '광주', count: 7 },
-  { region: '대전', count: 6 },
-  { region: '울산', count: 5 },
-  { region: '세종', count: 3 },
-  { region: '경기', count: 28 },
-  { region: '강원', count: 4 },
-  { region: '충북', count: 5 },
-  { region: '충남', count: 6 },
-  { region: '전북', count: 5 },
-  { region: '전남', count: 4 },
-  { region: '경북', count: 7 },
-  { region: '경남', count: 8 },
-  { region: '제주', count: 2 },
-];
-
-// regionStats에서 '전국' 항목을 제거하고 regionStatsRaw만 사용
-const regionStats = regionStatsRaw;
 
 
 function AnimatedBar({ value, max, delay = 0, region, fixed, setFixedIndex, index,onRegionClick }) {
@@ -152,12 +135,13 @@ function AnimatedBar({ value, max, delay = 0, region, fixed, setFixedIndex, inde
     </div>
   );
 }
-
 export default function RegionStatsSection() {
+  const { counts: regionStats,totalCount, todayCount,loading, error } = useProvinceRecruitmentCount();
   const navigate = useNavigate();
   const [fixedIndex, setFixedIndex] = useState(null);
-  const maxCount = Math.max(...regionStats.map(r => r.count));
   const isMobile = useMediaQuery({ maxWidth: 700 });
+  
+  const maxCount = Math.max(...regionStats.map(r => r.count), 1);
 
   const handleRegionClick = async (region) => {
     try {
@@ -172,25 +156,30 @@ export default function RegionStatsSection() {
     }
   };
 
-  // 상위 5개(공고 수 많은 순) 강조
+  // 정렬된 데이터
   const sortedStats = [...regionStats].sort((a, b) => b.count - a.count);
-  const top5 = sortedStats.slice(0, 5).map(r => r.region);
+  const top5 = sortedStats.slice(0, 5).map(r => r.province || r.region);
 
+  if (loading) return <div>로딩 중...</div>;
+  if (error) return <div>에러 발생: {error}</div>;
+
+  // 모바일
   if (isMobile) {
-    // 모바일: 2열 그리드, 상위 5개 강조
     return (
       <section className="region-stats-section mobile">
         <h2 className="section-title">지역별 최신 공고 통계</h2>
-        <StatsBar />
+        <StatsBar today={todayCount} total={totalCount} />
         <div className="region-stats-card-list grid">
           {regionStats.map((r) => (
             <div
-              className={`region-stats-card${top5.includes(r.region) ? ' top' : ''}`}
-              key={r.region}
-              onClick={() => handleRegionClick(r.region, navigate)}
+              className={`region-stats-card${top5.includes(r.province) ? ' top' : ''}`}
+              key={r.province}
+              onClick={() => handleRegionClick(r.province)}
               style={{ cursor: 'pointer' }}
             >
-              <span className="region-stats-card-region">{r.region}</span>
+              <span className="region-stats-card-region">
+                {FULL_TO_SHORT_REGION_MAP[r.province] || r.province}
+              </span>
               <span className="region-stats-card-count">{r.count}건</span>
             </div>
           ))}
@@ -199,30 +188,33 @@ export default function RegionStatsSection() {
     );
   }
 
+  // PC
   return (
     <section className="region-stats-section">
       <h2 className="section-title">
         <Lottie animationData={graphDiagram} loop={true} style={{ width: 44, height: 44, display: 'inline-block', verticalAlign: 'middle', marginRight: '0.5rem', position: 'relative', top: '4px' }} />
         지역별 최신 공고 통계
       </h2>
-      <StatsBar />
+      <StatsBar today={todayCount} total={totalCount} />
       <div className="region-stats-graph-vertical">
         {regionStats.map((r, i) => (
-          <div className="region-bar-col" key={r.region}>
+          <div className="region-bar-col" key={r.province}>
             <AnimatedBar
               value={r.count}
               max={maxCount}
               delay={i * 120}
-              region={r.region}
+              region={r.province}
               fixed={fixedIndex === i}
               setFixedIndex={setFixedIndex}
               index={i}
               onRegionClick={handleRegionClick}
             />
-            <span className="region-label-vertical">{r.region}</span>
+           <span className="region-label-vertical">
+            {FULL_TO_SHORT_REGION_MAP[r.province] || r.province}
+          </span>
           </div>
         ))}
       </div>
     </section>
   );
-} 
+}

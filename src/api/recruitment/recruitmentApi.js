@@ -36,11 +36,15 @@ export const fetchFilteredRecruitments = async (filterDto) => {
     }
 };
 
-
 export const fetchRecruitmentsByProvince = async (province) => {
     const response = await axios.post('/recruitment/province', null, {
       params: { province },
     });
+    return response.data.data || [];
+  };
+  
+export const fetchRecruitmentsChart = async () => {
+    const response = await axios.get('/recruitment/province/count');
     return response.data.data || [];
   };
   
