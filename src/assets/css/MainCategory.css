@@ -9,7 +9,7 @@
 .main-category-list-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  max-width: 70%;
+  max-width: 80%;
   margin: 0 auto;
   justify-items: center;
   list-style: none;
@@ -97,19 +97,19 @@
   .main-category-list-wrapper {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(4, auto);
-    gap: 0.5%;
+    gap: 10%;
   }
   .main-category-list{
-    margin-top: 10%;
+    margin-top: 20%;
   }
   .category-icon {
-    width: 35%;
-    height: 35%;
+    width: 50%;
+    height: 50%;
     border-radius: 20%;
     margin-bottom: 10%;
   }
   .category-label {
-    font-size: 0.8rem;
+    font-size: 5%;
     margin-bottom: 10%;
     font-weight: 600;
   }
