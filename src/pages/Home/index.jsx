@@ -22,7 +22,6 @@ function Home() {
     
       <div className="divider-horizon" />
       <div className="main-section">
-        <HotRecruitSection />
       </div>
     </div>
   );

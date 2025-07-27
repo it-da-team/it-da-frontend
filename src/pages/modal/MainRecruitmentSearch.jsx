@@ -19,6 +19,16 @@ import {
 } from "./constants/keywords";
 
 export function MainRecruitmentSearch({ onClose, onSearch, initialCategory, selectedKeywords = [], setSelectedKeywords = () => {} }) {
+  // 모달 열릴 때 body에 modal-open 클래스 추가
+  useEffect(() => {
+    document.body.classList.add('modal-open');
+    
+    // 모달 닫힐 때 클래스 제거
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, []);
+
   // 기관 유형만 추출
   const selectedCompanyTypes = selectedKeywords.filter(
     k => Object.values(COMPANY_TYPE_KEYWORDS).includes(k)

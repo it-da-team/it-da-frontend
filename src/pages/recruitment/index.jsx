@@ -13,7 +13,9 @@ import { PROVINCE_FULLNAME_MAP, COMPANY_TYPE_KEYWORDS, TEACHER_DUTY_KEYWORDS } f
 function Recruitment() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const categoryEnum = searchParams.get("category") ?? "KINDERGARTEN";
+  // 홈에서 지역 검색으로 온 경우 "ALL", 아니면 기본값 사용
+  const regionParam = searchParams.get("region");
+  const categoryEnum = searchParams.get("category") ?? (regionParam ? "ALL" : "KINDERGARTEN");
   const label = enumToLabel[categoryEnum] ?? "유치원";
 
   // 탭, 키워드, 검색 모달 상태

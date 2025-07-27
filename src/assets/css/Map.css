@@ -216,7 +216,15 @@
     margin: 3rem auto;    /* 센터 정렬 유지 */
     width: calc(100% - 1rem);  /* 좌우 마진을 0.5rem씩 줄임 */
   }
-
+  .mobile-search-form {
+    display: flex;
+    flex-direction: column;
+    font-size: small !important;
+    gap: 12px;
+    width: 100%;
+    max-height: none;
+    overflow: visible;
+  }
   .map-left-panel {
     display: none;
   }
@@ -386,6 +394,9 @@
     text-align: center;
     padding: 0.5rem;
   }
+  .mobile-search-form{
+    min-height: 100px;
+  }
 }
 
 /* 필터 패널 */
@@ -453,11 +464,12 @@
     max-width: 650px;
     min-height: 405px;
     height: 405px;
+  
     /* max-height: 500px; */
     background: #fff;
     border-radius: 1.1rem;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.09);
-    overflow: hidden;
+    overflow: visible;
     display: flex;
     align-items: stretch;
     justify-content: center;
@@ -715,15 +727,25 @@
 }
 .map-dropdown,
 .map-filters {
-  min-height: 120px !important;
+  min-height: 1px !important;
 }
 
 @media (max-width: 1000px) {
   .mobile-map-header {
-   padding-left: 0 !important;
+   padding-right: 0% !important;
+   padding-left: 0% !important;
   }
   .map-area-mobile{
+    width: 100% !important;
     background-color: #fff !important;
+  }
+ 
+  .filter-modal{
+    width: 90% !important;
+    position: fixed !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%,0%) !important;
   }
 }
 
@@ -753,9 +775,10 @@
   background: #fff;
   border-radius: 1.1rem;
   box-shadow: 0 8px 24px rgba(0,0,0,0.07);
-  padding: 2rem 1.5rem;
-  height: 405px;
-  min-height: 405px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -814,7 +837,7 @@
 
 .map-desktop-map-section {
   flex: 1;
-  min-width: 650px;
+  min-width: 550px!;
   background: #fff;
   border-radius: 1.1rem;
   box-shadow: 0 8px 24px rgba(0,0,0,0.07);
@@ -823,5 +846,5 @@
   align-items: stretch;
   justify-content: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 }

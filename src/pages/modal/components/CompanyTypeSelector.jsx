@@ -5,9 +5,9 @@ import { COMPANY_TYPE_KEYWORDS } from "../constants/keywords";
 export default function CompanyTypeSelector({ selectedItems = [], onChange, onKeywordChange, selectedKeywords = [], setSelectedKeywords = () => {} }) {
   const companyTypes = [
     "교육 회사",
-    "아동 센터/학원",
+    "아동 센터",
     "방문 교사",
-    "특별활동 센터",
+    "특별활동",
     "어린이집",
     "유치원"
   ];

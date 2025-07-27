@@ -366,6 +366,7 @@ body {
   max-width: var(--footer-content-max);
   width: 100%;
   margin: 0 auto;
+  margin-top: 50%;
   margin-bottom: 3%;
   display: flex;
   justify-content: space-between;
