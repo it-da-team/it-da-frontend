@@ -11,15 +11,15 @@ export const COMPANY_TYPE_KEYWORDS = {
 // 기관 서브 유형 키워드
 export const INSTITUTION_SUB_TYPE_KEYWORDS = {
   // 유치원
-  PUBLIC_KINDERGARTEN: "국공립 유치원",
-  PRIVATE_KINDERGARTEN: "사립 유치원",
+  PUBLIC_KINDERGARTEN: "국공립",
+  PRIVATE_KINDERGARTEN: "사립",
   // 어린이집
-  PUBLIC_DAYCARE: "국공립 어린이집",
-  PRIVATE_DAYCARE: "사립 어린이집",
-  HOME_DAYCARE: "가정 어린이집",
-  WORKPLACE_DAYCARE: "직장 어린이집",
-  CORPORATE_DAYCARE: "법인/단체 어린이집",
-  COOPERATIVE_DAYCARE: "협동 어린이집",
+  PUBLIC_DAYCARE: "국공립",
+  PRIVATE_DAYCARE: "사립",
+  HOME_DAYCARE: "가정",
+  WORKPLACE_DAYCARE: "직장",
+  CORPORATE_DAYCARE: "법인/단체",
+  COOPERATIVE_DAYCARE: "협동",
   // 공통
   ANY: "무관"
 };
@@ -33,7 +33,7 @@ export const TEACHER_DUTY_KEYWORDS = {
   NURI_CLASS: "누리반",
   EXTENDED_CLASS: "연장반",
   AFTER_SCHOOL: "방과후",
-  SUPPORT_STAFF: "조리사/차량/행정",
+  SUPPORT_STAFF: "조리사/차량",
   NEW_TEACHER: "신입"
 };
 

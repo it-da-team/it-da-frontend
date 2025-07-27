@@ -4,13 +4,31 @@ import { FaHome, FaMapMarkerAlt, FaComments, FaUser } from 'react-icons/fa';
 
 function BottomNav() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 700);
     };
+    
+    // 모달 상태 감지
+    const checkModalState = () => {
+      setIsModalOpen(document.body.classList.contains('modal-open'));
+    };
+    
+    // MutationObserver로 body 클래스 변화 감지
+    const observer = new MutationObserver(checkModalState);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    
+    // 초기 상태 확인
+    checkModalState();
+    
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      observer.disconnect();
+    };
   }, []);
 
   const navItems = [
@@ -21,23 +39,31 @@ function BottomNav() {
     
   ];
 
+  // 모달이 열렸으면 BottomNav 숨기기
+  if (isModalOpen) {
+    return null;
+  }
+
   return (
-    <nav style={{
-      position: 'fixed',
-      left: 0,
-      right: 0,
-      bottom: 0,
-      height: 64,
-      background: '#fff',
-      borderTop: '1.5px solid #eee',
-      display: 'flex',
-      justifyContent: 'space-around',
-      alignItems: 'center',
-      zIndex: 2000,
-      boxShadow: '0 -4px 16px rgba(0,0,0,0.07)',
-      padding: '0 2vw',
-      touchAction: 'manipulation',
-    }}>
+    <nav 
+      className="bottom-nav"
+      style={{
+        position: 'fixed',
+        left: 0,
+        right: 0,
+        bottom: 0,
+        height: 64,
+        background: '#fff',
+        borderTop: '1.5px solid #eee',
+        display: 'flex',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        zIndex: 2000,
+        boxShadow: '0 -4px 16px rgba(0,0,0,0.07)',
+        padding: '0 2vw',
+        touchAction: 'manipulation',
+      }}
+    >
       {navItems.map(item => (
         <NavLink
           key={item.to}

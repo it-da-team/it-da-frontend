@@ -450,3 +450,34 @@
   }
 }
   
+/* 모달 열렸을 때 body 스크롤 방지 */
+body.modal-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* 모바일에서 모달 열렸을 때 추가 처리 */
+@media (max-width: 768px) {
+  body.modal-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+    /* iOS Safari에서 주소창 숨김 방지 */
+    -webkit-overflow-scrolling: auto !important;
+  }
+  
+  /* 모달이 열렸을 때 하단 네비게이션 바 숨김 */
+  body.modal-open .bottom-nav {
+    display: none !important;
+  }
+  
+  /* 모바일 필터 모달 강제 스크롤 */
+  body.modal-open .mobile-filter-modal {
+    overflow-y: scroll !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
+  

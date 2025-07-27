@@ -10,6 +10,7 @@ import iconCompany from "../../assets/images/icon/iconBook-removebg-preview.png"
 import iconHomeTeacher from "../../assets/images/icon/iconTeature-removebg-preview.png";
 import iconActivityCenter from "../../assets/images/icon/iconMusic-removebg-preview.png";
 import iconCenter from "../../assets/images/icon/iconPuz-removebg-preview.png";
+import iconAll from "../../assets/images/icon/con.png"; // 전체 아이콘
 
 const categories = [
   { label: "유치원", image: iconKindergarten },
@@ -18,6 +19,7 @@ const categories = [
   { label: "아동 센터/학원", image: iconCenter },
   { label: "방문 교사", image: iconHomeTeacher },
   { label: "특별활동 센터", image: iconActivityCenter },
+  { label: "전체", image: iconAll }
 ];
 
 function MainCategory({ onCategorySelect, selected, compact = false, variant = "home", iconClass = "category-icon" }) {

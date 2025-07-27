@@ -63,6 +63,20 @@ function Map() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
   const [isTablet, setIsTablet] = useState(window.innerWidth > 700 && window.innerWidth <= 1023);
 
+  // 모바일 필터 모달 열릴 때 body에 modal-open 클래스 추가
+  useEffect(() => {
+    if (isFilterOpen) {
+      document.body.classList.add('modal-open');
+    } else {
+      document.body.classList.remove('modal-open');
+    }
+    
+    // 컴포넌트 언마운트 시 클래스 제거
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, [isFilterOpen]);
+
   // 디버깅용 로그
   console.log("searchResults:", searchResults);
 
@@ -138,6 +152,36 @@ function Map() {
           <h2 className="search-title mobile-search-title">지역별 채용공고</h2>
           <button className="filter-btn mobile-filter-btn" onClick={() => setIsFilterOpen(true)}>필터</button>
         </div>
+        {isLoading && (
+          <div style={{
+            background: '#fff3cd',
+            border: '1px solid #ffeaa7',
+            borderRadius: '8px',
+            padding: '12px 16px',
+            margin: '0 1rem 1rem 1rem',
+            color: '#856404',
+            fontSize: '0.9rem',
+            textAlign: 'center',
+            fontWeight: '500'
+          }}>
+            해당 지역의 모든 채용공고를 검색 중입니다...
+          </div>
+        )}
+        {error && (
+          <div style={{
+            background: '#f8d7da',
+            border: '1px solid #f5c6cb',
+            borderRadius: '8px',
+            padding: '12px 16px',
+            margin: '0 1rem 1rem 1rem',
+            color: '#721c24',
+            fontSize: '0.9rem',
+            textAlign: 'center',
+            fontWeight: '500'
+          }}>
+            검색 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.
+          </div>
+        )}
         <section className="mobile-map-section">
           <SearchMap markers={searchResults} />
         </section>
@@ -179,8 +223,6 @@ function Map() {
             </button>
           </div>
         )}
-        {isLoading && <div className="loading">검색 중...</div>}
-        {error && <div className="error">{error}</div>}
         {/* 필터 모달 (슬라이드업) */}
         {isFilterOpen && (
           <div className="filter-modal mobile-filter-modal">
@@ -229,6 +271,38 @@ function Map() {
 
   return (
     <div className="map-area-desktop">
+      {isLoading && (
+        <div style={{
+          background: '#fff3cd',
+          border: '1px solid #ffeaa7',
+          borderRadius: '8px',
+          padding: '12px 16px',
+          margin: '0 auto 1rem auto',
+          maxWidth: '1200px',
+          color: '#856404',
+          fontSize: '0.9rem',
+          textAlign: 'center',
+          fontWeight: '500'
+        }}>
+          해당 지역의 모든 채용공고를 검색 중입니다...
+        </div>
+      )}
+      {error && (
+        <div style={{
+          background: '#f8d7da',
+          border: '1px solid #f5c6cb',
+          borderRadius: '8px',
+          padding: '12px 16px',
+          margin: '0 auto 1rem auto',
+          maxWidth: '1200px',
+          color: '#721c24',
+          fontSize: '0.9rem',
+          textAlign: 'center',
+          fontWeight: '500'
+        }}>
+          검색 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.
+        </div>
+      )}
       <div className="map-desktop-container">
         <section className="map-desktop-section">
           <h2 className="search-title map-desktop-search-title">지역별 채용공고</h2>
@@ -304,8 +378,6 @@ function Map() {
         <section className="map-desktop-map-section">
           <SearchMap markers={searchResults} />
         </section>
-        {isLoading && <div className="loading">검색 중...</div>}
-        {error && <div className="error">{error}</div>}
         {/* 데스크탑에서만 모달 렌더링 */}
         {!isMobile && (
           <SearchResultModal 

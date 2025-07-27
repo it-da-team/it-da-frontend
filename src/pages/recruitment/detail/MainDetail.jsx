@@ -102,7 +102,19 @@ function MainDetail() {
           )}
         </div>
         <div className="divider" />
-        <SimilarJobSection />
+        {/* <SimilarJobSection /> */}
+        <div style={{
+          padding: '2rem',
+          height: '10rem',
+          textAlign: 'center',
+          background: '#f9f9f9',
+          borderRadius: '8px',
+          margin: '1rem 0',
+          color: '#6c757d'
+        }}>
+          <h3 style={{ marginBottom: '0.5rem', fontSize: '1.2rem' }}>비슷한 공고</h3>
+          <p style={{ margin: 0, fontSize: '0.9rem' }}>준비중인 기능입니다.</p>
+        </div>
       </div>
     </div>
   );

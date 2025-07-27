@@ -275,7 +275,7 @@
 .company-type-list {
 
   display: grid;
-  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  grid-template-columns: repeat(1, minmax(120px, 1fr));
   gap: 0.8rem;
 }
 .company-type-list .list-button {
@@ -291,6 +291,39 @@
   }
   .company-type-guide {
     text-align: left !important;
+  }
+  .list-button{
+    padding: 0.7rem 0rem;
+    border-radius: 12px;
+    border: 1.5px solid #ccc;
+    background: #f5f5f5;
+    font-size: 4%;
+    font-weight: 500;
+    color: #333;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    transition: all 0.18s cubic-bezier(.4,0,.2,1);
+
+  }
+ 
+  .company-type-list {
+    display: flex;
+    margin-top: 4%;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0.8rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .modal-content {
+    background-color: white;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 100%;
+    width: 90%;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
   }
 }
   
