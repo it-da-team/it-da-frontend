@@ -2,6 +2,7 @@ import logo from './logo.svg'
 import './App.css'
 import {BrowserRouter, Routes, Route } from 'react-router-dom'
 import { defineConfig } from '@chakra-ui/react'
+import { useEffect } from 'react'
 import Recruitment from './pages/recruitment'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
@@ -27,6 +28,39 @@ const config = defineConfig({
 });
 
 function App() {
+  // iOS Safari 뷰포트 높이 보정
+  useEffect(() => {
+    const setVH = () => {
+      const vh = window.innerHeight * 0.01;
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
+      document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`);
+    };
+
+    // 초기 설정
+    setVH();
+
+    // 리사이즈 시 업데이트 (throttling 적용)
+    let ticking = false;
+    const handleResize = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setVH();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('resize', handleResize, { passive: true });
+    // iOS에서 orientation 변경 시에도 대응
+    window.addEventListener('orientationchange', handleResize, { passive: true });
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
+  }, []);
+
   return (
     <BrowserRouter>
       <ScrollToTop />

@@ -11,7 +11,7 @@ import { COMPANY_TYPE_KEYWORDS, TEACHER_DUTY_KEYWORDS, INSTITUTION_SUB_TYPE_KEYW
 import { PROVINCE_FULLNAME_MAP } from "../modal/constants/keywords";
 
 
-// 스크롤 위치 복원 커스텀 훅
+// 스크롤 위치 복원 커스텀 훅 (성능 최적화)
 function useScrollRestoration(deps) {
   const scrollY = useRef(window.scrollY);
 
@@ -23,8 +23,17 @@ function useScrollRestoration(deps) {
   }, deps);
 
   useEffect(() => {
-    // deps가 바뀐 후에 스크롤 위치 복원
-    window.scrollTo(0, scrollY.current);
+    // deps가 바뀐 후에 스크롤 위치 복원 (부드럽게)
+    const scrollOptions = {
+      top: scrollY.current,
+      left: 0,
+      behavior: 'auto' // 즉시 복원
+    };
+    
+    // requestAnimationFrame으로 렌더링 완료 후 실행
+    requestAnimationFrame(() => {
+      window.scrollTo(scrollOptions);
+    });
   }, deps);
 }
 
@@ -63,15 +72,13 @@ export function MainRecruitmentListHeader({ tabIndex, setTabIndex, selectedKeywo
 export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKeywords: propSelectedKeywords, setSelectedKeywords: propSetSelectedKeywords }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
-  const { searchResults, loading, error, searchRecruitments } = useRecruitmentSearch(categoryEnum);
+  const { searchResults, loading, error, searchRecruitments } = useRecruitmentSearch();
   const [localSelectedKeywords, localSetSelectedKeywords] = useState([]);
   const location = useLocation(); // ✅ 함수 안에서 선언
   const stateRecruitments = location.state || null;
   // props가 있으면 props 사용, 없으면 local state 사용
   const selectedKeywords = propSelectedKeywords !== undefined ? propSelectedKeywords : localSelectedKeywords;
   const setSelectedKeywords = propSetSelectedKeywords !== undefined ? propSetSelectedKeywords : localSetSelectedKeywords;
-
-  console.log('MainRecruitmentList categoryEnum:', categoryEnum);
 
   const recruitmentsToDisplay = tabIndex === 0
   ? (stateRecruitments || searchResults)
@@ -90,49 +97,58 @@ export default function MainRecruitmentList({ categoryEnum, tabIndex, selectedKe
     // 지역은 그대로 표시
     return keyword;
   };
-  useEffect(() => {
+    useEffect(() => {
     if (tabIndex !== 0 || stateRecruitments) return; // state가 있으면 요청 생략
-  
-    const params = {};
-    const keywords = [];
-    searchParams.forEach((value, key) => {
-      if (
-        key === 'category' ||
-        key === 'region' ||
-        key === 'dutyTypes' ||
-        key === 'province' ||
-        key === 'companyWorkType'
-      ) {
-        params[key] = value.split(',');
-        keywords.push(...value.split(','));
-      } else {
-        params[key] = value;
-        if (value) keywords.push(value);
-      }
-    });
-  
-    const normalized = keywords.map(k => {
-      const short = Object.entries(PROVINCE_FULLNAME_MAP).find(([short, full]) => full === k);
-      if (short) return short[0];
-      const companyLabel = Object.values(COMPANY_TYPE_KEYWORDS).includes(k)
-        ? k
-        : Object.entries(COMPANY_TYPE_KEYWORDS).find(([code, label]) => code === k)?.[1];
-      if (companyLabel) return companyLabel;
-      const duty = Object.values(TEACHER_DUTY_KEYWORDS).includes(k) ? k : TEACHER_DUTY_KEYWORDS[k];
-      if (duty) return duty;
-      return k;
-    });
-    setSelectedKeywords(Array.from(new Set(normalized)));
-  
-    if (Object.keys(params).length === 0) {
-      const initialParams = new URLSearchParams();
-      initialParams.set('category', categoryEnum);
-      setSearchParams(initialParams);
-      searchRecruitments({ category: [categoryEnum] });
-    } else {
+
+    // URL에서 카테고리 파라미터를 직접 확인
+    const urlCategory = searchParams.get('category');
+    
+    if (urlCategory) {
+      // URL에 카테고리가 있으면 해당 카테고리로 검색
+      const params = { category: [urlCategory] };
+      
+      // 다른 파라미터들도 처리
+      searchParams.forEach((value, key) => {
+        if (key !== 'category') {
+          if (
+            key === 'region' ||
+            key === 'dutyTypes' ||
+            key === 'province' ||
+            key === 'companyWorkType'
+          ) {
+            params[key] = value.split(',');
+          } else {
+            params[key] = value;
+          }
+        }
+      });
+      
+      // 키워드 처리
+      const keywords = [];
+      Object.entries(params).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          keywords.push(...value);
+        } else if (value) {
+          keywords.push(value);
+        }
+      });
+      
+      const normalized = keywords.map(k => {
+        const short = Object.entries(PROVINCE_FULLNAME_MAP).find(([short, full]) => full === k);
+        if (short) return short[0];
+        const companyLabel = Object.values(COMPANY_TYPE_KEYWORDS).includes(k)
+          ? k
+          : Object.entries(COMPANY_TYPE_KEYWORDS).find(([code, label]) => code === k)?.[1];
+        if (companyLabel) return companyLabel;
+        const duty = Object.values(TEACHER_DUTY_KEYWORDS).includes(k) ? k : TEACHER_DUTY_KEYWORDS[k];
+        if (duty) return duty;
+        return k;
+      });
+      setSelectedKeywords(Array.from(new Set(normalized)));
+      
       searchRecruitments(params);
     }
-  }, [searchParams, categoryEnum, tabIndex]);
+  }, [searchParams, tabIndex]);
   
   // 카테고리(혹은 검색 등) 값이 바뀌어도 스크롤 위치 유지
   useScrollRestoration([categoryEnum]);

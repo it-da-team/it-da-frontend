@@ -95,7 +95,7 @@ export default function MapDropdown({ province, city, district, onProvinceChange
     control: (base, state) => ({
       ...base,
       minHeight: 44,
-      fontSize: '1.1rem',
+      fontSize: '60%',
       borderRadius: 8,
       borderColor: state.isFocused ? '#FFB300' : '#FFC107',
       boxShadow: state.isFocused ? '0 0 0 2px #FFF3E0' : 'none',
@@ -107,7 +107,7 @@ export default function MapDropdown({ province, city, district, onProvinceChange
     menu: base => ({ ...base, zIndex: 20, maxHeight: 250, overflowY: 'auto' }),
     option: (base, state) => ({
       ...base,
-      fontSize: '1.1rem',
+      fontSize: '60%',
       color: state.isSelected ? '#FF6F00' : '#222',
       background: state.isSelected ? '#FFF8E1' : state.isFocused ? '#FFFDE7' : '#fff',
       fontWeight: state.isSelected ? 700 : 400,
@@ -115,9 +115,9 @@ export default function MapDropdown({ province, city, district, onProvinceChange
       overflow: 'hidden',
       textOverflow: 'ellipsis',
     }),
-    placeholder: base => ({ ...base, color: '#bbb', fontWeight: 400, fontSize: '1.1rem' }),
-    singleValue: base => ({ ...base, color: '#222', fontWeight: 500, fontSize: '1.1rem' }),
-    groupHeading: base => ({ ...base, color: '#888', fontSize: '1.1rem', fontWeight: 600, padding: '4px 8px' }),
+    placeholder: base => ({ ...base, color: '#bbb', fontWeight: 400, fontSize: '60%' }),
+    singleValue: base => ({ ...base, color: '#222', fontWeight: 500, fontSize: '60%' }),
+    groupHeading: base => ({ ...base, color: '#888', fontSize: '60%', fontWeight: 600, padding: '4px 8px' }),
   };
 
   return (
@@ -194,11 +194,11 @@ export default function MapDropdown({ province, city, district, onProvinceChange
       {/* 최근 선택 UX */}
       {recent.length > 0 && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 13, color: '#888', marginTop: 4, marginBottom: 0 }}>
-          <span style={{ fontWeight: 600, color: '#FFB300', fontSize: 13, display: 'flex', alignItems: 'center', gap: 2 }}>
+          <span style={{ fontWeight: 600, color: '#FFB300', fontSize: 13, display: 'flex', alignItems: 'center', gap: 2 ,width: '100px'}}>
             <svg width="15" height="15" viewBox="0 0 20 20" fill="none" style={{marginRight:2}}><circle cx="10" cy="10" r="9" stroke="#FFB300" strokeWidth="2" fill="#FFF8E1"/><path d="M10 5v5l3 3" stroke="#FFB300" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
             최근 선택
           </span>
-          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
             {recent.map(r => (
               <span key={r.value} style={{
                 background: '#FFF8E1',
