@@ -7,8 +7,16 @@ function BottomNav() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 700);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsMobile(window.innerWidth <= 700);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
     
     // 모달 상태 감지
@@ -23,7 +31,8 @@ function BottomNav() {
     // 초기 상태 확인
     checkModalState();
     
-    window.addEventListener('resize', handleResize);
+    // passive 옵션으로 성능 향상
+    window.addEventListener('resize', handleResize, { passive: true });
     
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -61,7 +70,11 @@ function BottomNav() {
         zIndex: 2000,
         boxShadow: '0 -4px 16px rgba(0,0,0,0.07)',
         padding: '0 2vw',
+        paddingBottom: 'max(0px, env(safe-area-inset-bottom))',
         touchAction: 'manipulation',
+        transform: 'translateZ(0)',
+        backfaceVisibility: 'hidden',
+        willChange: 'transform',
       }}
     >
       {navItems.map(item => (

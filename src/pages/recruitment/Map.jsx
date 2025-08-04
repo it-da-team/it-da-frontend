@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import CountUp from "react-countup";
 import Select from "react-select";
 import { fetchMapRecruitments, sendTotalRecruitments } from "../../api/recruitment/recruitmentMapApi";
@@ -57,11 +57,14 @@ function Map() {
   const [district, setDistrict] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [delayedLoading, setDelayedLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [hasSearched, setHasSearched] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 700);
   const [isTablet, setIsTablet] = useState(window.innerWidth > 700 && window.innerWidth <= 1023);
+  const loadingTimeoutRef = useRef(null);
 
   // 모바일 필터 모달 열릴 때 body에 modal-open 클래스 추가
   useEffect(() => {
@@ -81,12 +84,31 @@ function Map() {
   console.log("searchResults:", searchResults);
 
   useEffect(() => {
+    let ticking = false;
+    
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 700);
-      setIsTablet(window.innerWidth > 700 && window.innerWidth <= 1023);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setIsMobile(window.innerWidth <= 700);
+          setIsTablet(window.innerWidth > 700 && window.innerWidth <= 1023);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
-    window.addEventListener("resize", handleResize);
+    
+    // passive 옵션으로 성능 향상
+    window.addEventListener("resize", handleResize, { passive: true });
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // 컴포넌트 언마운트 시 loading timeout 정리
+  useEffect(() => {
+    return () => {
+      if (loadingTimeoutRef.current) {
+        clearTimeout(loadingTimeoutRef.current);
+      }
+    };
   }, []);
 
   // 카테고리 선택 핸들러
@@ -104,6 +126,12 @@ function Map() {
     // city, district는 선택 옵션이므로 체크하지 않음
     setIsLoading(true);
     setError(null);
+    setHasSearched(true);
+
+    // 1초 후에 로딩 표시
+    loadingTimeoutRef.current = setTimeout(() => {
+      setDelayedLoading(true);
+    }, 1000);
 
     try {
       const searchParams = {
@@ -141,7 +169,13 @@ function Map() {
     } catch (error) {
       setError("검색 중 오류가 발생했습니다.");
     } finally {
+      // 타이머 정리
+      if (loadingTimeoutRef.current) {
+        clearTimeout(loadingTimeoutRef.current);
+        loadingTimeoutRef.current = null;
+      }
       setIsLoading(false);
+      setDelayedLoading(false);
     }
   };
 
@@ -152,7 +186,7 @@ function Map() {
           <h2 className="search-title mobile-search-title">지역별 채용공고</h2>
           <button className="filter-btn mobile-filter-btn" onClick={() => setIsFilterOpen(true)}>필터</button>
         </div>
-        {isLoading && (
+        {delayedLoading && (
           <div style={{
             background: '#fff3cd',
             border: '1px solid #ffeaa7',
@@ -165,6 +199,21 @@ function Map() {
             fontWeight: '500'
           }}>
             해당 지역의 모든 채용공고를 검색 중입니다...
+          </div>
+        )}
+        {isTablet && searchResults.length === 0 && !delayedLoading && !error && hasSearched && (
+          <div style={{
+            background: '#FFF8E1',
+            border: '1px solid #FFECB3',
+            borderRadius: '8px',
+            padding: '12px 16px',
+            margin: '0 1rem 1rem 1rem',
+            color: '#E65100',
+            fontSize: '0.9rem',
+            textAlign: 'center',
+            fontWeight: '500'
+          }}>
+            앗! 조건에 맞는 채용공고가 아직 없어요. 다른 지역이나 기관 유형을 선택해보세요.
           </div>
         )}
         {error && (
@@ -214,7 +263,7 @@ function Map() {
             </div>
           </div>
         )}
-        {isMobile && searchResults && searchResults.length === 0 && !isLoading && !error && (
+        {isMobile && searchResults && searchResults.length === 0 && !delayedLoading && !error && (
           <div className="empty-list-guide">
             <p>앗! 조건에 맞는 채용공고가 아직 없어요.</p>
             <p className="empty-list-sub">필터를 조정하면 다양한 지역의 공고를 확인할 수 있어요.</p>
@@ -271,7 +320,7 @@ function Map() {
 
   return (
     <div className="map-area-desktop">
-      {isLoading && (
+      {delayedLoading && (
         <div style={{
           background: '#fff3cd',
           border: '1px solid #ffeaa7',
@@ -285,6 +334,22 @@ function Map() {
           fontWeight: '500'
         }}>
           해당 지역의 모든 채용공고를 검색 중입니다...
+        </div>
+      )}
+      {searchResults.length === 0 && !delayedLoading && !error && hasSearched && (
+        <div style={{
+          background: '#FFF8E1',
+          border: '1px solid #FFECB3',
+          borderRadius: '8px',
+          padding: '12px 16px',
+          margin: '0 auto 1rem auto',
+          maxWidth: '1200px',
+          color: '#E65100',
+          fontSize: '0.9rem',
+          textAlign: 'center',
+          fontWeight: '500'
+        }}>
+          앗! 조건에 맞는 채용공고가 아직 없어요. 다른 지역이나 기관 유형을 선택해보세요.
         </div>
       )}
       {error && (

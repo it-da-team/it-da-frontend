@@ -11,7 +11,7 @@ import { COMPANY_TYPE_KEYWORDS, TEACHER_DUTY_KEYWORDS, INSTITUTION_SUB_TYPE_KEYW
 import { PROVINCE_FULLNAME_MAP } from "../modal/constants/keywords";
 
 
-// 스크롤 위치 복원 커스텀 훅
+// 스크롤 위치 복원 커스텀 훅 (성능 최적화)
 function useScrollRestoration(deps) {
   const scrollY = useRef(window.scrollY);
 
@@ -23,8 +23,17 @@ function useScrollRestoration(deps) {
   }, deps);
 
   useEffect(() => {
-    // deps가 바뀐 후에 스크롤 위치 복원
-    window.scrollTo(0, scrollY.current);
+    // deps가 바뀐 후에 스크롤 위치 복원 (부드럽게)
+    const scrollOptions = {
+      top: scrollY.current,
+      left: 0,
+      behavior: 'auto' // 즉시 복원
+    };
+    
+    // requestAnimationFrame으로 렌더링 완료 후 실행
+    requestAnimationFrame(() => {
+      window.scrollTo(scrollOptions);
+    });
   }, deps);
 }
 

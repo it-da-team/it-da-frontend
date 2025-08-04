@@ -18,7 +18,6 @@ const categories = [
   { label: "교육 회사", image: iconCompany },
   { label: "아동 센터/학원", image: iconCenter },
   { label: "방문 교사", image: iconHomeTeacher },
-  { label: "특별활동 센터", image: iconActivityCenter },
   { label: "전체", image: iconAll }
 ];
 

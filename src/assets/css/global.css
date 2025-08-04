@@ -1,3 +1,62 @@
+/* --- Mobile Performance Optimization --- */
+/* GPU 가속 및 iOS Safari 최적화 */
+:root {
+  --vh: 1vh;
+  --app-height: 100vh;
+}
+
+/* Fixed 요소들 GPU 가속 */
+.header,
+.bottom-nav,
+.modal,
+.filter-modal,
+.mobile-filter-modal,
+.search-result-modal {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* 스크롤 컨테이너 최적화 */
+.scroll-container,
+.main-recruitment-list,
+.job-list,
+.mobile-search-results-list,
+.recruitment-list,
+.map-area {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scroll-behavior: smooth;
+}
+
+/* iOS 터치 최적화 */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+/* 입력 요소는 선택 가능하게 */
+input,
+textarea,
+button,
+select,
+[contenteditable="true"] {
+  -webkit-user-select: auto;
+  user-select: auto;
+}
+
+/* 성능 최적화를 위한 containment */
+.recruitment-list-item,
+.job-list-item,
+.category-item {
+  contain: layout style paint;
+  transform: translateZ(0);
+}
+
 /* --- Global Layout --- */
 .layout-container {
   width: 90%;
@@ -7,6 +66,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  min-height: var(--app-height);
 }
 .layout-main {
   flex: 1; /* 헤더,푸터를 제외한 나머지 공간 모두 차지 */
