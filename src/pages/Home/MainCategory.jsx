@@ -35,11 +35,12 @@ function MainCategory({ onCategorySelect, selected, compact = false, variant = "
             {categories.map((cat, i) => (
               <li
                 key={i}
-                onClick={() =>
+                onClick={() => {
+                  const categoryEnum = labelToEnum[cat.label];
                   compact
                     ? onCategorySelect?.(cat.label)
-                    : navigate(`/recruitment?category=${labelToEnum[cat.label]}`)
-                }
+                    : navigate(`/recruitment?category=${categoryEnum}`)
+                }}
               >
                 <MainCategoryList
                   label={cat.label}
